@@ -1,8 +1,6 @@
 Getting Started With IRProductBundle
 ====================================
 
-....
-
 ## Prerequisites
 
 This version of the bundle requires Symfony 2.3+.
@@ -53,19 +51,13 @@ public function registerBundles()
 
 ### Step 3: Create your Product class
 
-The bundle provides base classes which are already mapped for most fields
-to make it easier to create your entity. Here is how you use it:
-
-1. Extend the base `Product` class
-2. Map the `id` field. It must be protected as it is inherited from the parent class.
-
 **Warning:**
 
 > If you override the __construct() method in your Product class, be sure
 > to call parent::__construct(), as the base Product class depends on
 > this to initialize some fields.
 
-**a) Doctrine ORM Product class**
+##### Annotations
 
 ``` php
 <?php
@@ -96,10 +88,44 @@ class Product extends BaseProduct
     }
 }
 ```
+
+##### yaml
+
+```php
+<?php
+// src/Acme/ProductBundle/Entity/Product.php
+
+namespace Acme\ProductBundle\Entity;
+
+use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
+
+/**
+ * Product
+ */
+class Product extends BaseProduct
+{
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
+}
+```
+``` yaml
+# src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.yml
+Acme\ProductBundle\Entity\User:
+    type:  entity
+    table: acme_product
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+```
+
 ### Step 4: Configure the IRProductBundle
 
-Add the following configuration to your `config.yml` file according to which type
-of datastore you are using.
+Add the following configuration to your `config.yml` file:
 
 ``` yaml
 # app/config/config.yml
@@ -107,16 +133,6 @@ ir_product:
     db_driver: orm # orm is the only available driver for the moment 
     product_class: Acme\ProductBundle\Entity\Product
 ```
-
-Only two configuration values are required to use the bundle:
-
-* The type of datastore you are using (`orm`).
-* The fully qualified class name (FQCN) of the `Product` class which you created in Step 3.
-
-> When using one of the Doctrine implementation, you need either to use the
-> `auto_mapping` option of the corresponding bundle (done by default for
-> DoctrineBundle in the standard distribution) or to activate the mapping
-> for IRProductBundle otherwise the base mapping will be ignored.
 
 ### Step 5: Import IRProductBundle routing files
 
@@ -129,13 +145,6 @@ ir_product:
     prefix: /admin/products
 ```
 
-Or if you prefer XML:
-
-``` xml
-<!-- app/config/routing.xml -->
-<import resource="@IRProductBundle/Resources/config/routing/product.xml" prefix="/admin/products" />
-```
-
 ### Step 6: Update your database schema
 
 For ORM run the following command.
@@ -143,5 +152,3 @@ For ORM run the following command.
 ``` bash
 $ php app/console doctrine:schema:update --force
 ```
-
-### Next Steps
