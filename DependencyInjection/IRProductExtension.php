@@ -61,18 +61,7 @@ class IRProductExtension extends Extension
         $loader->load('product.xml');
         
         $container->setParameter('ir_product.form.name.product', $config['form']['name']);
-        $container->setParameter('ir_product.form.type.product', $config['form']['type']);
-        
-        // Load the product form type according to the concret product model        
-        if (class_exists($productClass)) {
-            $reflection = new \ReflectionClass($productClass);
-
-            if ($reflection->implementsInterface('\IR\Bundle\ProductBundle\Model\VariableProductInterface')) {
-                $container->getDefinition('ir_product.form.type.product')
-                    ->setClass($container->getParameter('ir_product.form.type.variable_product.class'))
-                ;
-            }
-        }        
+        $container->setParameter('ir_product.form.type.product', $config['form']['type']);   
     }      
     
     private function loadVariant(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
