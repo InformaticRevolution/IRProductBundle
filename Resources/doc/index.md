@@ -147,7 +147,7 @@ ir_product:
 
 ### Step 6: Update your database schema
 
-For ORM run the following command.
+For ORM run the following command:
 
 ``` bash
 $ php app/console doctrine:schema:update --force
