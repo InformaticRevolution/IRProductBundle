@@ -136,7 +136,7 @@ ir_product:
 
 ### Step 5: Import IRProductBundle routing files
 
-In YAML:
+Add the following configuration to your `routing.yml` file:
 
 ``` yaml
 # app/config/routing.yml
