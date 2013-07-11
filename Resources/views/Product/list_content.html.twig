@@ -1,0 +1,47 @@
+{% trans_default_domain 'ir_product' %}
+
+<div class="page-header">
+    <h1>{{ 'product.list.title'|trans }}</h1>
+</div>
+
+<div class="well">
+    <a href="{{ path('ir_product_new') }}" class="btn btn-primary">
+        <i class="icon-plus icon-white"></i> {{ 'product.list.button.new'|trans }}
+    </a>
+</div>
+
+{% if products|length %}
+    <table class="table table-bordered">
+        <colgroup>
+            <col style="width: 99%" />
+            <col style="width: 1%" />
+        </colgroup>        
+        <thead>
+            <tr>
+                <th>{{ 'product.list.column.name'|trans }}</th>
+                <th>{{ 'product.list.column.actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ path('ir_product_edit', {'id': product.id}) }}" class="btn">
+                            <i class="icon-pencil"></i>
+                        </a>
+                        <a href="{{ path('ir_product_delete', {'id': product.id}) }}" class="btn btn-danger">
+                            <i class="icon-trash icon-white"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <div class="well">
+        {{ 'product.list.no_products'|trans }}
+    </div>
+{% endif %}

@@ -1,0 +1,67 @@
+# Product
+product: 
+    list:
+        title: Products
+        column:
+            name: Name
+            actions: Actions
+        button: 
+            new: Add product
+        no_products: You haven't added any products yet.  
+    new:
+        save: Save
+        cancel: Cancel
+    edit:
+        save: Save
+        cancel: Cancel         
+    flash:
+        created: The product has been successfully created
+        updated: The product has been successfully updated
+        deleted: The product has been successfully deleted
+
+# Variant
+variant:
+    flash:
+        created: The variant has been successfully created
+        updated: The variant has been successfully updated
+        deleted: The variant has been successfully deleted
+        
+# Option
+option:
+    list:
+        title: Options
+        column:
+            name: Name
+            public_name: Public name
+            actions: Actions
+        button: 
+            new: Add option
+        no_options: You haven't added any options yet    
+    new:
+        save: Save
+        cancel: Cancel
+    edit:
+        save: Save
+        cancel: Cancel   
+    flash:
+        created: The option has been successfully created
+        updated: The option has been successfully updated
+        deleted: The option has been successfully deleted 
+
+# Form field labels
+form:   
+    product:
+        name : "Name :"
+        description: "Description :"
+        master_variant: "Master variant :"
+        variants: "Variants :"
+        options: "Options :"
+    variant:
+        sku: "Stock keeping unit :"
+        options: "Options :"
+    option:
+        name: "Name :"
+        public_name: "Public name :"
+        values: "Values :"
+    option_value:
+        value: "Value :"

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services 
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+  
+    <parameters>
+        <parameter key="ir_product.manager.option.class">IR\Bundle\ProductBundle\Doctrine\OptionManager</parameter>
+        <parameter key="ir_product.form.type.option_choice.class">IR\Bundle\ProductBundle\Form\Type\OptionEntityChoiceType</parameter>
+    </parameters>
+
+    <services>
+        <service id="ir_product.manager.option.default" class="%ir_product.manager.option.class%" public="false">
+            <argument type="service" id="ir_product.entity_manager" />
+            <argument>%ir_product.model.option.class%</argument>
+        </service>          
+    </services>  
+
+</container>

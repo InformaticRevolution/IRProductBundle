@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services 
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="ir_product.form.type.variant.class">IR\Bundle\ProductBundle\Form\Type\VariantType</parameter>
+    </parameters>
+
+    <services>
+        <service id="ir_product.form.variant" factory-service="form.factory" factory-method="createNamed" class="Symfony\Component\Form\Form">
+            <argument>%ir_product.form.name.variant%</argument>
+            <argument>%ir_product.form.type.variant%</argument>
+        </service> 
+        
+        <service id="ir_product.form.type.variant" class="%ir_product.form.type.variant.class%">
+            <argument>%ir_product.model.variant.class%</argument>
+            <tag name="form.type" alias="ir_product_variant" />
+        </service>    
+    </services>
+
+</container>

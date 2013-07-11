@@ -1,0 +1,22 @@
+ir_product:
+    product:
+        name:
+            not_blank: Veuillez entrer un nom
+            min_length: Le nom doit comporter au moins {{ limit }} caractères
+            max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
+            
+    option:
+        name:
+            not_blank: Veuillez entrer un nom
+            min_length: Le nom doit comporter au moins {{ limit }} caractères
+            max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
+            
+        public_name:
+            not_blank: Veuillez entrer un nom public
+            min_length: Le nom public doit comporter au moins {{ limit }} caractères
+            max_length: Le nom public ne doit pas comporter plus de {{ limit }} caractères  
+            
+    option_value:
+        value:
+            not_blank: Veuillez entrer une valeur
+            max_length: La valeur ne doit pas comporter plus de {{ limit }} caractères              

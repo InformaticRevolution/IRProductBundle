@@ -1,0 +1,8 @@
+{% trans_default_domain 'ir_product' %}
+
+<form action="{{ path('ir_product_variant_new', {'productId': product.id} ) }}" {{ form_enctype(form) }} method="POST">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <input type="submit" value="{{ 'variant.new.save'|trans }}" class="btn btn-large btn-primary" />
+    </div>        
+</form>

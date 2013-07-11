@@ -1,0 +1,67 @@
+# Product
+product: 
+    list:
+        title: Produits
+        column:
+            name: Nom
+            actions: Actions
+        button: 
+            new: Ajouter un produit
+        no_products: Aucun produit pour le moment.  
+    new:
+        save: Enregistrer
+        cancel: Annuler
+    edit:
+        save: Enregistrer
+        cancel: Annuler  
+    flash:
+        created: Le produit a été créé
+        updated: Le produit a été mis à jour
+        deleted: Le produit a été supprimé
+        
+# Variant
+variant:
+    flash:
+        created: La variante a été créée
+        updated: La variante a été mise à jour
+        deleted: La variante a été supprimée 
+        
+# Option
+option:
+    list:
+        title: Options
+        column:
+            name: Nom
+            public_name: Nom public
+            actions: Actions
+        button: 
+            new: Ajouter une option
+        no_options: Aucune option pour le moment.   
+    new:
+        save: Enregistrer
+        cancel: Annuler
+    edit:
+        save: Enregistrer
+        cancel: Annuler 
+    flash:
+        created: L'option a été créée
+        updated: L'option a été mise à jour
+        deleted: L'option a été supprimée 
+
+# Form field labels
+form:  
+    product:
+        name : "Nom :"
+        description: "Description :"
+        master_variant: "Variante principale :"
+        variants: "Variantes :"
+        options: "Options :"
+    variant:
+        sku: "Unité de gestion des stocks :"
+        options: "Options :"
+    option:
+        name: "Nom :"
+        public_name: "Nom public :"
+        values: "Valeurs :"
+    option_value:
+        value: "Valeur :"

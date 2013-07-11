@@ -1,0 +1,10 @@
+{% trans_default_domain 'ir_product' %}
+
+<form action="{{ path('ir_product_edit', {'id': product.id} ) }}" {{ form_enctype(form) }} method="POST">
+    {{ form_widget(form) }}
+    <div class="form-actions">
+        <input type="submit" value="{{ 'product.edit.save'|trans }}" class="btn btn-large btn-primary" />
+       &nbsp;
+       <a href="{{ path('ir_product_list') }}" class="btn btn-large">{{ 'product.edit.cancel'|trans }}</a>         
+    </div>         
+</form>

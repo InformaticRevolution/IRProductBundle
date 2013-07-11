@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services 
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="ir_product.form.type.option.class">IR\Bundle\ProductBundle\Form\Type\OptionType</parameter>
+        <parameter key="ir_product.form.type.option_value.class">IR\Bundle\ProductBundle\Form\Type\OptionValueType</parameter>
+        <parameter key="ir_product.form.type.option_value_choice.class">IR\Bundle\ProductBundle\Form\Type\OptionValueChoiceType</parameter>
+        
+        
+        
+        <parameter key="ir_product.form.type.product_options.class">IR\Bundle\ProductBundle\Form\Type\ProductOptionsType</parameter> 
+    </parameters>
+
+    <services>
+        <service id="ir_product.form.option" factory-service="form.factory" factory-method="createNamed" class="Symfony\Component\Form\Form">
+            <argument>%ir_product.form.name.option%</argument>
+            <argument>%ir_product.form.type.option%</argument>
+        </service> 
+
+        <service id="ir_product.form.type.option" class="%ir_product.form.type.option.class%">
+            <argument>%ir_product.model.option.class%</argument>
+            <tag name="form.type" alias="ir_product_option" />
+        </service>   
+        
+        <!-- Option Choice Type -->
+      
+        <service id="ir_product.form.type.option_choice" class="%ir_product.form.type.option_choice.class%">
+            <argument>%ir_product.model.option.class%</argument>
+            <tag name="form.type" alias="ir_product_option_choice" />
+        </service>           
+        
+        <!-- Option Value Type -->
+        
+        <service id="ir_product.form.type.option_value" class="%ir_product.form.type.option_value.class%">
+            <argument>%ir_product.model.option_value.class%</argument>
+            <tag name="form.type" alias="ir_product_option_value" />
+        </service>   
+        
+         <!-- Option Value Choice Type -->
+        
+        <service id="ir_product.form.type.option_value_choice" class="%ir_product.form.type.option_value_choice.class%">
+            <tag name="form.type" alias="ir_product_option_value_choice" />
+        </service>         
+        
+        
+        
+        
+        
+        <!-- Product Options Type -->
+        
+        <service id="ir_product.form.type.product_options" class="%ir_product.form.type.product_options.class%">
+            <tag name="form.type" alias="ir_product_product_options" />
+        </service>           
+    </services>
+
+</container>

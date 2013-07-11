@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping 
+                                        http://symfony.com/schema/dic/constraint-mapping/constraint-mapping-1.0.xsd">
+
+    <class name="IR\Bundle\ProductBundle\Model\Product">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">ir_product.product.name.not_blank</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="minMessage">ir_product.product.name.min_length</option>
+                <option name="maxMessage">ir_product.product.name.max_length</option>
+            </constraint>
+        </property>   
+    </class>
+
+    <class name="IR\Bundle\ProductBundle\Model\VariableProduct">        
+        <property name="masterVariant">
+            <constraint name="Valid" />
+        </property>       
+        
+        <property name="variants">
+            <constraint name="Valid" />
+        </property>         
+    </class>
+
+    <class name="IR\Bundle\ProductBundle\Model\Option">
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">ir_product.option.name.not_blank</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="minMessage">ir_product.option.name.min_length</option>
+                <option name="maxMessage">ir_product.option.name.max_length</option>
+            </constraint>
+        </property>
+        
+        <property name="publicName">
+            <constraint name="NotBlank">
+                <option name="message">ir_product.option.public_name.not_blank</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">255</option>
+                <option name="minMessage">ir_product.option.public_name.min_length</option>
+                <option name="maxMessage">ir_product.option.public_name.max_length</option>
+            </constraint>
+        </property>
+        
+        <property name="values">
+            <constraint name="Valid" />
+        </property>          
+    </class> 
+    
+    <class name="IR\Bundle\ProductBundle\Model\OptionValue">
+        <property name="value">
+            <constraint name="NotBlank">
+                <option name="message">ir_product.option_value.value.not_blank</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="max">255</option>
+                <option name="maxMessage">ir_product.option_value.value.max_length</option>
+            </constraint>
+        </property>      
+    </class>        
+    
+</constraint-mapping>        
