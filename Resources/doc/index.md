@@ -89,7 +89,7 @@ class Product extends BaseProduct
 }
 ```
 
-##### yaml
+##### Yaml
 
 ```php
 <?php
