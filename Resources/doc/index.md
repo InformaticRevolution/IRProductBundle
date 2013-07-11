@@ -89,7 +89,7 @@ class Product extends BaseProduct
 }
 ```
 
-##### Yaml
+##### Yaml or Xml
 
 ```php
 <?php
@@ -111,6 +111,9 @@ class Product extends BaseProduct
     }
 }
 ```
+
+In YAML:
+
 ``` yaml
 # src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.yml
 Acme\ProductBundle\Entity\User:
@@ -121,6 +124,25 @@ Acme\ProductBundle\Entity\User:
             type: integer
             generator:
                 strategy: AUTO
+```
+
+In XML:
+
+``` xml
+<!-- src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Acme\ProductBundle\Model\Product" table="acme_product">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id> 
+    </entity>
+    
+</doctrine-mapping>
 ```
 
 ### Step 4: Configure the IRProductBundle
