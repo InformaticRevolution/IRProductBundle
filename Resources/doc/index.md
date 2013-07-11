@@ -13,6 +13,7 @@ This version of the bundle requires Symfony 2.3+.
 4. Configure the IRProductBundle
 5. Import IRProductBundle routing
 6. Update your database schema
+7. Enable the doctrine extensions
 
 ### Step 1: Download IRProductBundle using composer
 
@@ -173,4 +174,32 @@ For ORM run the following command:
 
 ``` bash
 $ php app/console doctrine:schema:update --force
+```
+
+### Step 7: Enable the doctrine extensions
+
+**a) Enable the stof doctrine extensions bundle in the kernel**
+
+``` php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+    );
+}
+```
+
+**b) Enable the slug and timestampable extensions in the config file**
+
+``` yaml
+# app/config/config.yml
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+            timestampable: true
 ```
