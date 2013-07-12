@@ -53,14 +53,6 @@ abstract class Variant implements VariantInterface
     
     
     /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->options = new ArrayCollection();
-    }    
-    
-    /**
      * {@inheritdoc}
      */  
     public function getId()
@@ -109,7 +101,7 @@ abstract class Variant implements VariantInterface
      */
     public function getOptions()
     {
-        return $this->options;
+        return $this->options ?: $this->options = new ArrayCollection();
     }
 
     /**
@@ -118,7 +110,7 @@ abstract class Variant implements VariantInterface
     public function addOption(OptionValueInterface $option)
     {
         if (!$this->hasOption($option)) {
-            $this->options->add($option);
+            $this->getOptions()->add($option);
         }
         
         return $this;
@@ -130,7 +122,7 @@ abstract class Variant implements VariantInterface
     public function removeOption(OptionValueInterface $option)
     {
         if ($this->hasOption($option)) {
-            $this->options->removeElement($option);
+            $this->getOptions()->removeElement($option);
         }
         
         return $this;
@@ -141,7 +133,7 @@ abstract class Variant implements VariantInterface
      */
     public function hasOption(OptionValueInterface $option)
     {
-        return $this->options->contains($option);
+        return $this->getOptions()->contains($option);
     }    
     
     /**
