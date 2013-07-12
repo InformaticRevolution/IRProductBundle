@@ -3,7 +3,7 @@ Using Options With IRProductBundle
 
 1. Create your classes
 2. Define the Product-Option relation
-3. Configure the Options
+3. Configure the options
 4. Import the routing file
 5. Update your database schema
 
@@ -286,7 +286,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 3: Configure the Options
+### Step 3: Configure the options
 
 Add the following configuration to your `config.yml` file:
 

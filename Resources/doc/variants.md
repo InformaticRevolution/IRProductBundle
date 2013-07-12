@@ -3,7 +3,7 @@ Using Variants With IRProductBundle
 
 1. Create your Variant class
 2. Define the Product-Variant relation
-3. Configure the Variants
+3. Configure the variants
 4. Import the routing file
 5. Update your database schema
 
@@ -175,7 +175,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 3: Configure the Variants
+### Step 3: Configure the variants
 
 Add the following configuration to your `config.yml` file:
 
