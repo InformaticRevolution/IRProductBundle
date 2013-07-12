@@ -155,7 +155,7 @@ In XML:
 
 ### Step 4: Configure the IRProductBundle
 
-Add the following configuration to your `config.yml` file:
+Add the bundle minimum configuration to your `config.yml` file:
 
 ``` yaml
 # app/config/config.yml
@@ -177,7 +177,7 @@ ir_product:
 
 ### Step 6: Update your database schema
 
-For ORM run the following command:
+Run the following command:
 
 ``` bash
 $ php app/console doctrine:schema:update --force

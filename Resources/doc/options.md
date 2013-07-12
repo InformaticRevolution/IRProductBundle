@@ -1,28 +1,14 @@
 Using Options With IRProductBundle
 ==================================
 
-1. Enable the options
-2. Create your OptionValue class
-3. Create your Option class
-4. Define the Product-Option relation
-5. Import the option routing file
+1. Create your OptionValue class
+2. Create your Option class
+3. Define the Product-Option relation
+4. Configure the Options
+5. Import the routing file
 6. Update your database schema
 
-### Step 1: Enable the options
-
-Add the following configuration to your `config.yml` file in order to enable the options:
-
-``` yaml
-# app/config/config.yml
-ir_product:
-    db_driver: orm
-    product_class: Acme\ProductBundle\Entity\Product
-    option:
-        option_class: Acme\ProductBundle\Entity\Option
-        option_value_class: Acme\ProductBundle\Entity\OptionValue
-```
-
-### Step 2: Create your OptionValue class
+### Step 1: Create your OptionValue class
 
 ##### Annotations
 ``` php
@@ -100,7 +86,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 3: Create your Option class
+### Step 2: Create your Option class
 
 **Warning:**
 
@@ -212,7 +198,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 4: Define the Product-Option relation
+### Step 3: Define the Product-Option relation
 
 ##### Annotations
 
@@ -340,7 +326,35 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 5: Import the option routing file
+### Step 4: Configure the Options
+
+Add the following configuration to your `config.yml` file:
+
+**a) Add the option configuration**
+
+``` yaml
+# app/config/config.yml
+ir_product:
+    db_driver: orm
+    product_class: Acme\ProductBundle\Entity\Product
+    option:
+        option_class: Acme\ProductBundle\Entity\Option
+        option_value_class: Acme\ProductBundle\Entity\OptionValue
+```
+
+**b) Add the OptionInterface path to the RTEL
+
+``` yaml
+# app/config/config.yml
+doctrine:
+    # ....
+    orm:
+        # ....
+        resolve_target_entities:
+            IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
+```
+
+### Step 5: Import the routing file
 
 Add the following configuration to your `routing.yml` file:
 
@@ -354,7 +368,7 @@ ir_product_option:
 
 ### Step 6: Update your database schema
 
-For ORM run the following command:
+Run the following command:
 
 ``` bash
 $ php app/console doctrine:schema:update --force
