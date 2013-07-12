@@ -16,7 +16,7 @@ namespace IR\Bundle\ProductBundle\Model;
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class Product implements ProductInterface
+abstract class Product implements ProductInterface, OptionableInterface
 {
     /**
      * @var mixed
@@ -37,6 +37,11 @@ abstract class Product implements ProductInterface
      * @var string
      */
     protected $description;
+    
+    /**
+     * @var Collection
+     */
+    protected $options;    
     
     /**
      * @var \Datetime
@@ -110,6 +115,46 @@ abstract class Product implements ProductInterface
         
         return $this;
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options ?: $this->options = new ArrayCollection();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function addOption(OptionInterface $option)
+    {
+        if (!$this->hasOption($option)) {
+            $this->getOptions()->add($option);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOption(OptionInterface $option)
+    {
+        if ($this->hasOption($option)) {
+            $this->getOptions()->removeElement($option);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption(OptionInterface $option)
+    {
+        return $this->getOptions()->contains($option);
+    }    
     
     /**
      * {@inheritdoc}
