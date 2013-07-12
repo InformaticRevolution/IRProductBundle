@@ -11,8 +11,8 @@ Using Variants With IRProductBundle
 
 ##### Annotations
 ``` php
-// src/Acme/ProductBundle/Entity/Variant.php
 <?php
+// src/Acme/ProductBundle/Entity/Variant.php
 
 namespace Acme\ProductBundle\Entity;
 
@@ -90,8 +90,8 @@ In XML:
 ##### Annotations
 
 ``` php
-// src/Acme/ProductBundle/Entity/Product.php
 <?php
+// src/Acme/ProductBundle/Entity/Product.php
 
 namespace Acme\ProductBundle\Entity;
 

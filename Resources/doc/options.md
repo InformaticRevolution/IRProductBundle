@@ -13,8 +13,8 @@ Using Options With IRProductBundle
 
 ##### Annotations
 ``` php
-// src/Acme/ProductBundle/Entity/OptionValue.php
 <?php
+// src/Acme/ProductBundle/Entity/OptionValue.php
 
 namespace Acme\ProductBundle\Entity;
 
@@ -91,8 +91,8 @@ In XML:
 
 ##### Annotations
 ``` php
-// src/Acme/ProductBundle/Entity/Option.php
 <?php
+// src/Acme/ProductBundle/Entity/Option.php
 
 namespace Acme\ProductBundle\Entity;
 
@@ -181,8 +181,8 @@ In XML:
 ##### Annotations
 
 ``` php
-// src/Acme/ProductBundle/Entity/Product.php
 <?php
+// src/Acme/ProductBundle/Entity/Product.php
 
 namespace Acme\ProductBundle\Entity;
 
