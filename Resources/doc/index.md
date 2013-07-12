@@ -117,7 +117,7 @@ In YAML:
 
 ``` yaml
 # src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.yml
-Acme\ProductBundle\Entity\User:
+Acme\ProductBundle\Entity\Product:
     type:  entity
     table: acme_product
     id:
@@ -137,7 +137,7 @@ In XML:
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="Acme\ProductBundle\Model\Product" table="acme_product">
+    <entity name="Acme\ProductBundle\Entity\Product" table="acme_product">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id> 
@@ -203,3 +203,8 @@ stof_doctrine_extensions:
             sluggable: true
             timestampable: true
 ```
+
+### Next Steps
+
+- [Using the options](options.md)
+- [Using the variants](variants.md)
