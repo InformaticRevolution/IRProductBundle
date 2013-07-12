@@ -52,12 +52,6 @@ public function registerBundles()
 
 ### Step 3: Create your Product class
 
-**Warning:**
-
-> If you override the __construct() method in your Product class, be sure
-> to call parent::__construct(), as the base Product class depends on
-> this to initialize some fields.
-
 ##### Annotations
 
 ``` php
@@ -81,16 +75,6 @@ class Product extends BaseProduct
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-
-    /**
-     * Constructor
-     */  
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
@@ -109,14 +93,6 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
-    /**
-     * Constructor
-     */  
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 

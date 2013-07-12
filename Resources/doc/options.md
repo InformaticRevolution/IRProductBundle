@@ -232,16 +232,6 @@ class Product extends BaseProduct
      * )
      */
     protected $options;
-
-
-    /**
-     * Constructor
-     */  
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
@@ -260,14 +250,6 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
-    /**
-     * Constructor
-     */  
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
