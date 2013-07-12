@@ -1,9 +1,16 @@
 Using Options With IRProductBundle
 ==================================
 
-### Configure the Options
+1. Enable the Options
+2. Create your OptionValue class
+3. Create your Option class
+4. Define the Product-Option relation
+5. Import the routing for the OptionController
+6. Update your database schema
 
-Add the following configuration to your `config.yml` file:
+### Step 1: Enable the Options
+
+Add the following configuration to your `config.yml` file in order to enable the options:
 
 ``` yaml
 # app/config/config.yml
@@ -15,7 +22,7 @@ ir_product:
         option_value_class: Acme\ProductBundle\Entity\OptionValue
 ```
 
-### The OptionValue class
+### Step 2: Create your OptionValue class
 
 ##### Annotations
 ``` php
@@ -93,7 +100,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### The Option class
+### Step 3: Create your Option class
 
 **Warning:**
 
@@ -205,7 +212,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Defining the Product-Option relation
+### Step 4: Define the Product-Option relation
 
 ##### Annotations
 
@@ -333,7 +340,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Enabling the routing for the OptionController
+### Step 5: Import the routing for the OptionController
 
 Add the following configuration to your `routing.yml` file:
 
@@ -343,4 +350,12 @@ ir_product_option:
     resource: "@IRProductBundle/Resources/config/routing/option.xml"
     prefix: /admin/products/options
 
+```
+
+### Step 6: Update your database schema
+
+For ORM run the following command:
+
+``` bash
+$ php app/console doctrine:schema:update --force
 ```
