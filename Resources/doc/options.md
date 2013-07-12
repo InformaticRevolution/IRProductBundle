@@ -1,14 +1,15 @@
 Using Options With IRProductBundle
 ==================================
 
-1. Create your OptionValue class
-2. Create your Option class
-3. Define the Product-Option relation
-4. Configure the Options
-5. Import the routing file
-6. Update your database schema
+1. Create your classes
+2. Define the Product-Option relation
+3. Configure the Options
+4. Import the routing file
+5. Update your database schema
 
-### Step 1: Create your OptionValue class
+### Step 1: Create your classes
+
+**a) Create your OptionValue class**
 
 ##### Annotations
 ``` php
@@ -37,7 +38,7 @@ class OptionValue extends BaseOptionValue
 
 ##### Yaml or Xml
 
-```php
+``` php
 <?php
 // src/Acme/ProductBundle/Entity/OptionValue.php
 
@@ -86,7 +87,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 2: Create your Option class
+**b) Create your Option class**
 
 ##### Annotations
 ``` php
@@ -120,7 +121,7 @@ class Option extends BaseOption
 
 ##### Yaml or Xml
 
-```php
+``` php
 <?php
 // src/Acme/ProductBundle/Entity/Option.php
 
@@ -175,7 +176,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 3: Define the Product-Option relation
+### Step 2: Define the Product-Option relation
 
 ##### Annotations
 
@@ -285,7 +286,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Step 4: Configure the Options
+### Step 3: Configure the Options
 
 Add the following configuration to your `config.yml` file:
 
@@ -313,7 +314,7 @@ doctrine:
             IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
 ```
 
-### Step 5: Import the routing file
+### Step 4: Import the routing file
 
 Add the following configuration to your `routing.yml` file:
 
@@ -325,7 +326,7 @@ ir_product_option:
 
 ```
 
-### Step 6: Update your database schema
+### Step 5: Update your database schema
 
 Run the following command:
 

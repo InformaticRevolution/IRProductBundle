@@ -80,7 +80,7 @@ class Product extends BaseProduct
 
 ##### Yaml or Xml
 
-```php
+``` php
 <?php
 // src/Acme/ProductBundle/Entity/Product.php
 

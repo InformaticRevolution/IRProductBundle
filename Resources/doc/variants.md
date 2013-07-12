@@ -1,20 +1,13 @@
 Using Variants With IRProductBundle
 ===================================
 
-### Configure the Variants
+1. Create your Variant class
+2. Define the Product-Variant relation
+3. Configure the Variants
+4. Import the routing file
+5. Update your database schema
 
-Add the following configuration to your `config.yml` file:
-
-``` yaml
-# app/config/config.yml
-ir_product:
-    db_driver: orm
-    product_class: Acme\ProductBundle\Entity\Product
-    variant:
-        variant_class: Acme\ProductBundle\Entity\Variant
-```
-
-### The Variant class
+### Step 1: Create your Variant class
 
 ##### Annotations
 ``` php
@@ -43,7 +36,7 @@ class Variant extends BaseVariant
 
 ##### Yaml or Xml
 
-```php
+``` php
 <?php
 // src/Acme/ProductBundle/Entity/Variant.php
 
@@ -56,11 +49,6 @@ use IR\Bundle\ProductBundle\Model\Variant as BaseVariant;
  */
 class Variant extends BaseVariant
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
@@ -97,7 +85,7 @@ In XML:
 </doctrine-mapping>
 ```
 
-### Defining the Product-Variant relation
+### Step 2: Define the Product-Variant relation
 
 ##### Annotations
 
@@ -145,11 +133,6 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
@@ -186,13 +169,40 @@ In XML:
             <generator strategy="AUTO" />
         </id>
 
-        <one-to-many field="variants" target-entity="Variant" mapped-by="product" />
+        <one-to-many field="variants" target-entity="Variant" mapped-by="product"/>
     </entity>
     
 </doctrine-mapping>
 ```
 
-### Enabling the routing for the VariantController
+### Step 3: Configure the Variants
+
+Add the following configuration to your `config.yml` file:
+
+**a) Add the variant configuration**
+
+``` yaml
+# app/config/config.yml
+ir_product:
+    db_driver: orm # orm is the only available driver for the moment 
+    product_class: Acme\ProductBundle\Entity\Product
+    variant:
+        variant_class: Acme\ProductBundle\Entity\Variant
+```
+
+**b) Add the ProductInterface path to the RTEL**
+
+``` yaml
+# app/config/config.yml
+doctrine:
+    # ....
+    orm:
+        # ....
+        resolve_target_entities:
+            IR\Bundle\ProductBundle\Model\ProductInterface: Acme\ProductBundle\Entity\Product
+```    
+
+### Step 4: Import the routing file
 
 Add the following configuration to your `routing.yml` file:
 
@@ -202,4 +212,12 @@ ir_product_variant:
     resource: "@IRProductBundle/Resources/config/routing/variant.xml"
     prefix: /admin/products/variants
 
+```
+
+### Step 5: Update your database schema
+
+Run the following command:
+
+``` bash
+$ php app/console doctrine:schema:update --force
 ```
