@@ -342,7 +342,7 @@ ir_product:
         option_value_class: Acme\ProductBundle\Entity\OptionValue
 ```
 
-**b) Add the OptionInterface path to the RTEL
+**b) Add the OptionInterface path to the RTEL**
 
 ``` yaml
 # app/config/config.yml
