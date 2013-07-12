@@ -122,6 +122,11 @@ class Option extends BaseOption
      * @ORM\GeneratedValue(strategy="AUTO")
      */
      protected $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="OptionValue", mappedBy="option")
+     */
+    protected $values;
 }
 ```
 
@@ -160,6 +165,10 @@ Acme\ProductBundle\Entity\Option:
             type: integer
             generator:
                 strategy: AUTO
+    oneToMany:
+        values:
+            targetEntity: OptionValue
+            mappedBy: option
 ```
 
 In XML:
@@ -176,6 +185,8 @@ In XML:
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id> 
+        
+        <one-to-many field="values" target-entity="OptionValue" mapped-by="option"/>
     </entity>
     
 </doctrine-mapping>
@@ -209,7 +220,7 @@ class Product extends BaseProduct
 
     /**
      * @ORM\ManyToMany(targetEntity="Option")
-     * @ORM\JoinTable(name="ir_product_product_option",
+     * @ORM\JoinTable(name="ir_product_products_options",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
      * )
@@ -257,7 +268,7 @@ Acme\ProductBundle\Entity\Product:
         groups:
             targetEntity: Option
             joinTable:
-                name: ir_product_product_option
+                name: ir_product_products_options
                 joinColumns:
                     product_id:
                         referencedColumnName: id
@@ -282,7 +293,7 @@ In XML:
         </id>
 
         <many-to-many field="options" target-entity="Option">
-            <join-table name="sylius_product_option">
+            <join-table name="ir_product_products_options">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" />
                 </join-columns>
