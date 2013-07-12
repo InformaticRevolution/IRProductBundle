@@ -82,6 +82,10 @@ class Product extends BaseProduct
      */
     protected $id;
 
+
+    /**
+     * Constructor.
+     */  
     public function __construct()
     {
         parent::__construct();
@@ -105,6 +109,9 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
+    /**
+     * Constructor.
+     */  
     public function __construct()
     {
         parent::__construct();

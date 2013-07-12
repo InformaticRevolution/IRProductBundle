@@ -57,11 +57,6 @@ use IR\Bundle\ProductBundle\Model\OptionValue as BaseOptionValue;
  */
 class OptionValue extends BaseOptionValue
 {
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 }
 ```
 
@@ -100,6 +95,12 @@ In XML:
 
 ### The Option class
 
+**Warning:**
+
+> If you override the __construct() method in your Option class, be sure
+> to call parent::__construct(), as the base Option class depends on
+> this to initialize some fields.
+
 ##### Annotations
 ``` php
 // src/Acme/ProductBundle/Entity/Option.php
@@ -127,6 +128,15 @@ class Option extends BaseOption
      * @ORM\OneToMany(targetEntity="OptionValue", mappedBy="option")
      */
     protected $values;
+
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -145,6 +155,9 @@ use IR\Bundle\ProductBundle\Model\Option as BaseOption;
  */
 class Option extends BaseOption
 {
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         parent::__construct();
