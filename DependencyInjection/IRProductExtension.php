@@ -38,6 +38,7 @@ class IRProductExtension extends Extension
             $loader->load(sprintf('%s.xml', $basename));
         }            
         
+        $container->setParameter('ir_product.db_driver', $config['db_driver']);
         $container->setParameter('ir_product.model.product.class', $config['product_class']);
         $container->setParameter('ir_product.template.engine', $config['template']['engine']);
         

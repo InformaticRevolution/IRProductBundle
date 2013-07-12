@@ -14,6 +14,7 @@ namespace IR\Bundle\ProductBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use IR\Bundle\ProductBundle\DependencyInjection\Compiler\ValidationPass;
 
 /**
  * This bundle provides simple architecture for products management.
@@ -29,6 +30,7 @@ class IRProductBundle extends Bundle
     {
         parent::build($container);
         
+        $container->addCompilerPass(new ValidationPass());
         $this->addRegisterMappingsPass($container);
     }    
     

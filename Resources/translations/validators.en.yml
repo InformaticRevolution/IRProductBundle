@@ -10,6 +10,7 @@ ir_product:
             not_blank: Please enter a name 
             min_length: The name must be at least {{ limit }} characters long
             max_length: The name cannot be longer than {{ limit }} characters
+            already_used: This option already exists
             
         public_name:
             not_blank: Please enter a public name 
