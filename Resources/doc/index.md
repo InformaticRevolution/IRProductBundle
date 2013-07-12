@@ -84,7 +84,7 @@ class Product extends BaseProduct
 
 
     /**
-     * Constructor.
+     * Constructor
      */  
     public function __construct()
     {
@@ -110,7 +110,7 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
 class Product extends BaseProduct
 {
     /**
-     * Constructor.
+     * Constructor
      */  
     public function __construct()
     {

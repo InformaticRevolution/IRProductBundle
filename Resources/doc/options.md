@@ -130,7 +130,7 @@ class Option extends BaseOption
     protected $values;
 
     /**
-     * Constructor.
+     * Constructor
      */  
     public function __construct()
     {
@@ -156,7 +156,7 @@ use IR\Bundle\ProductBundle\Model\Option as BaseOption;
 class Option extends BaseOption
 {
     /**
-     * Constructor.
+     * Constructor
      */
     public function __construct()
     {
