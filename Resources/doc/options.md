@@ -284,7 +284,7 @@ Acme\ProductBundle\Entity\Product:
             generator:
                 strategy: AUTO
     manyToMany:
-        groups:
+        options:
             targetEntity: Option
             joinTable:
                 name: acme_product_products_options
