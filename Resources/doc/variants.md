@@ -28,7 +28,7 @@ use IR\Bundle\ProductBundle\Model\Variant as BaseVariant;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ir_product_variant")
+ * @ORM\Table(name="acme_product_variant")
  */
 class Variant extends BaseVariant
 {
@@ -112,7 +112,7 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ir_product")
+ * @ORM\Table(name="acme_product")
  */
 class Product extends BaseProduct
 {
@@ -159,7 +159,7 @@ In YAML:
 # src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.yml
 Acme\ProductBundle\Entity\Product:
     type:  entity
-    table: ir_product
+    table: acme_product
     id:
         id:
             type: integer

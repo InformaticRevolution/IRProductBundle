@@ -29,7 +29,7 @@ use IR\Bundle\ProductBundle\Model\OptionValue as BaseOptionValue;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ir_product_option_value")
+ * @ORM\Table(name="acme_product_option_value")
  */
 class OptionValue extends BaseOptionValue
 {
@@ -113,7 +113,7 @@ use IR\Bundle\ProductBundle\Model\Option as BaseOption;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ir_product_option")
+ * @ORM\Table(name="acme_product_option")
  */
 class Option extends BaseOption
 {
@@ -220,7 +220,7 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="ir_product")
+ * @ORM\Table(name="acme_product")
  */
 class Product extends BaseProduct
 {
@@ -233,12 +233,22 @@ class Product extends BaseProduct
 
     /**
      * @ORM\ManyToMany(targetEntity="Option")
-     * @ORM\JoinTable(name="ir_product_products_options",
+     * @ORM\JoinTable(name="acme_product_products_options",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
      * )
      */
     protected $options;
+
+
+    /**
+     * Constructor
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -257,6 +267,9 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
+    /**
+     * Constructor
+     */  
     public function __construct()
     {
         parent::__construct();
@@ -271,7 +284,7 @@ In YAML:
 # src/Acme/ProductBundle/Resources/config/doctrine/Product.orm.yml
 Acme\ProductBundle\Entity\Product:
     type:  entity
-    table: ir_product
+    table: acme_product
     id:
         id:
             type: integer
@@ -281,7 +294,7 @@ Acme\ProductBundle\Entity\Product:
         groups:
             targetEntity: Option
             joinTable:
-                name: ir_product_products_options
+                name: acme_product_products_options
                 joinColumns:
                     product_id:
                         referencedColumnName: id
@@ -306,7 +319,7 @@ In XML:
         </id>
 
         <many-to-many field="options" target-entity="Option">
-            <join-table name="ir_product_products_options">
+            <join-table name="acme_product_products_options">
                 <join-columns>
                     <join-column name="product_id" referenced-column-name="id" />
                 </join-columns>
