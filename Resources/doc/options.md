@@ -63,6 +63,7 @@ class OptionValue extends BaseOptionValue
         // your own logic
     }
 }
+```
 
 In YAML:
 
