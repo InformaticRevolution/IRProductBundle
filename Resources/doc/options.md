@@ -335,7 +335,7 @@ Add the following configuration to your `config.yml` file:
 ``` yaml
 # app/config/config.yml
 ir_product:
-    db_driver: orm
+    db_driver: orm # orm is the only available driver for the moment 
     product_class: Acme\ProductBundle\Entity\Product
     option:
         option_class: Acme\ProductBundle\Entity\Option
