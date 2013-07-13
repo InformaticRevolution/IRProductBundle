@@ -1,6 +1,8 @@
 Using Options With IRProductBundle
 ==================================
 
+## Installation
+
 1. Create your classes
 2. Define the Product-Option relation
 3. Configure the options
