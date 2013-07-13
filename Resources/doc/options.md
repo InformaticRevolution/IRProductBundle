@@ -115,7 +115,7 @@ class Option extends BaseOption
      protected $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="OptionValue", mappedBy="option")
+     * @ORM\OneToMany(targetEntity="OptionValue", mappedBy="option", cascade={"all"}, orphanRemoval=true)
      */
     protected $values;
 }
@@ -155,6 +155,8 @@ Acme\ProductBundle\Entity\Option:
         values:
             targetEntity: OptionValue
             mappedBy: option
+            cascade: [ all ]
+            orphanRemoval: true
 ```
 
 In XML:
@@ -172,7 +174,11 @@ In XML:
             <generator strategy="AUTO" />
         </id> 
         
-        <one-to-many field="values" target-entity="OptionValue" mapped-by="option"/>
+        <one-to-many field="values" target-entity="OptionValue" mapped-by="option" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>            
+        </one-to-many>
     </entity>
     
 </doctrine-mapping>
