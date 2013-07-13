@@ -1,6 +1,12 @@
 Using Variants With IRProductBundle
 ===================================
 
+## Prerequisites
+
+You need to configure the options(options.md) as the variants have strong dependency on them.
+
+## Installation
+
 1. Create your Variant class
 2. Define the Product-Variant relation
 3. Configure the variants
@@ -31,6 +37,15 @@ class Variant extends BaseVariant
      * @ORM\GeneratedValue(strategy="AUTO")
      */
      protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="OptionValue")
+     * @ORM\JoinTable(name="acme_product_variants_options",
+     *      joinColumns={@ORM\JoinColumn(name="variant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id")}
+     * )
+     */
+    protected $options;
 }
 ```
 
@@ -64,6 +79,17 @@ Acme\ProductBundle\Entity\Variant:
             type: integer
             generator:
                 strategy: AUTO
+    manyToMany:
+      options:
+        targetEntity: OptionValue
+        joinTable:
+          name: acme_product_variants_options
+          joinColumns:
+            variant_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            option_value_id:
+              referencedColumnName: id 
 ```
 
 In XML:
@@ -80,6 +106,17 @@ In XML:
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO" />
         </id> 
+
+        <many-to-many field="options" target-entity="OptionValue">
+            <join-table name="acme_product_variants_options">
+                <join-columns>
+                    <join-column name="variant_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="option_value_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
     </entity>
     
 </doctrine-mapping>
@@ -110,6 +147,15 @@ class Product extends BaseProduct
      * @ORM\generatedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Option")
+     * @ORM\JoinTable(name="acme_product_products_options",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
+     * )
+     */
+    protected $options;
 
     /**
      * @ORM\OneToMany(targetEntity="Variant", mappedBy="product")
@@ -148,6 +194,17 @@ Acme\ProductBundle\Entity\Product:
             type: integer
             generator:
                 strategy: AUTO
+    manyToMany:
+        options:
+            targetEntity: Option
+            joinTable:
+                name: acme_product_products_options
+                joinColumns:
+                    product_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    option_id:
+                        referencedColumnName: id
     oneToMany:
         variants:
             targetEntity: Variant
@@ -169,6 +226,17 @@ In XML:
             <generator strategy="AUTO" />
         </id>
 
+        <many-to-many field="options" target-entity="Option">
+            <join-table name="acme_product_products_options">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="option_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
+
         <one-to-many field="variants" target-entity="Variant" mapped-by="product"/>
     </entity>
     
@@ -186,6 +254,9 @@ Add the following configuration to your `config.yml` file:
 ir_product:
     db_driver: orm # orm is the only available driver for the moment 
     product_class: Acme\ProductBundle\Entity\Product
+    option:
+        option_class: Acme\ProductBundle\Entity\Option
+        option_value_class: Acme\ProductBundle\Entity\OptionValue
     variant:
         variant_class: Acme\ProductBundle\Entity\Variant
 ```
@@ -199,6 +270,7 @@ doctrine:
     orm:
         # ....
         resolve_target_entities:
+            IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
             IR\Bundle\ProductBundle\Model\ProductInterface: Acme\ProductBundle\Entity\Product
 ```    
 
