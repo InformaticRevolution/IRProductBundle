@@ -31,9 +31,11 @@ option:
             new: Add option
         no_options: You haven't added any options yet    
     new:
+        title: Add an option
         save: Save
         cancel: Cancel
     edit:
+        title: Edit an option
         save: Save
         cancel: Cancel   
     flash:

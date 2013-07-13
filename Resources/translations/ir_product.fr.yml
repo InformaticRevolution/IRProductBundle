@@ -31,9 +31,11 @@ option:
             new: Ajouter une option
         no_options: Aucune option pour le moment.   
     new:
+        title: Ajouter une option
         save: Enregistrer
         cancel: Annuler
     edit:
+        title: Modifier une option
         save: Enregistrer
         cancel: Annuler 
     flash:
