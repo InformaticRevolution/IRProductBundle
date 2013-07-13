@@ -6,7 +6,6 @@
 
     <parameters>
         <parameter key="ir_product.form.type.product.class">IR\Bundle\ProductBundle\Form\Type\ProductType</parameter>
-        <parameter key="ir_product.form.type.variable_product.class">IR\Bundle\ProductBundle\Form\Type\VariableProductType</parameter>
     </parameters>
 
     <services>
