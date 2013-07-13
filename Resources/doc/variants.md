@@ -3,7 +3,7 @@ Using Variants With IRProductBundle
 
 ## Prerequisites
 
-You need to configure the options(options.md) as the variants have strong dependency on them.
+You need to configure the [options](options.md) as the variants have strong dependency on them.
 
 ## Installation
 
