@@ -51,7 +51,7 @@ class ProductType extends AbstractType
             ->add('description', null, array(
                 'label' => 'form.product.description',
                 'translation_domain' => 'ir_product',
-            ))            
+            ))   
         ;
     }
    

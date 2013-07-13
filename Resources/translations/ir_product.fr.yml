@@ -19,13 +19,6 @@ product:
         updated: Le produit a été mis à jour
         deleted: Le produit a été supprimé
         
-# Variant
-variant:
-    flash:
-        created: La variante a été créée
-        updated: La variante a été mise à jour
-        deleted: La variante a été supprimée 
-        
 # Option
 option:
     list:
@@ -46,7 +39,14 @@ option:
     flash:
         created: L'option a été créée
         updated: L'option a été mise à jour
-        deleted: L'option a été supprimée 
+        deleted: L'option a été supprimée         
+        
+# Variant
+variant:
+    flash:
+        created: La variante a été créée
+        updated: La variante a été mise à jour
+        deleted: La variante a été supprimée
 
 # Form field labels
 form:  
@@ -54,14 +54,14 @@ form:
         name : "Nom :"
         description: "Description :"
         master_variant: "Variante principale :"
+        options: "Options :"
         variants: "Variantes :"
-        options: "Options :"
-    variant:
-        sku: "Unité de gestion des stocks :"
-        options: "Options :"
     option:
         name: "Nom :"
         public_name: "Nom public :"
-        values: "Valeurs :"
+        values: "Valeurs :" 
     option_value:
-        value: "Valeur :"
+        value: "Valeur :"        
+    variant:
+        sku: "Unité de gestion des stocks :"
+        options: "Options :"

@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IR\Bundle\ProductBundle\Form\EventListener\BuildVariableProductFormListener;
 
 /**
- * Product type.
+ * Variable product type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

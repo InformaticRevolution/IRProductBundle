@@ -48,12 +48,12 @@ class IRProductExtension extends Extension
             $this->loadProduct($config['product'], $container, $loader, $config['product_class']);
         }          
         
-        if (!empty($config['variant'])) {
-            $this->loadVariant($config['variant'], $container, $loader, $config['db_driver']);
-        }                  
-        
         if (!empty($config['option'])) {
             $this->loadOption($config['option'], $container, $loader, $config['db_driver']);
+        }        
+        
+        if (!empty($config['variant'])) {
+            $this->loadVariant($config['variant'], $container, $loader, $config['db_driver']);
         }
     }
     
@@ -64,18 +64,6 @@ class IRProductExtension extends Extension
         $container->setParameter('ir_product.form.name.product', $config['form']['name']);
         $container->setParameter('ir_product.form.type.product', $config['form']['type']);   
     }      
-    
-    private function loadVariant(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
-    {        
-        $loader->load('variant.xml');
-        $loader->load(sprintf('driver/%s/variant.xml', $dbDriver));
-        
-        $container->setParameter('ir_product.model.variant.class', $config['variant_class']);
-        $container->setParameter('ir_product.form.name.variant', $config['form']['name']);
-        $container->setParameter('ir_product.form.type.variant', $config['form']['type']);
-        
-        $container->setAlias('ir_product.manager.variant', $config['variant_manager']);
-    }     
     
     private function loadOption(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
     {        
@@ -88,5 +76,17 @@ class IRProductExtension extends Extension
         $container->setParameter('ir_product.form.type.option', $config['form']['type']);   
         
         $container->setAlias('ir_product.manager.option', $config['option_manager']);
+    }    
+    
+    private function loadVariant(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
+    {        
+        $loader->load('variant.xml');
+        $loader->load(sprintf('driver/%s/variant.xml', $dbDriver));
+        
+        $container->setParameter('ir_product.model.variant.class', $config['variant_class']);
+        $container->setParameter('ir_product.form.name.variant', $config['form']['name']);
+        $container->setParameter('ir_product.form.type.variant', $config['form']['type']);
+        
+        $container->setAlias('ir_product.manager.variant', $config['variant_manager']);
     }       
 }

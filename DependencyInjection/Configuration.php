@@ -49,11 +49,15 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('product_class')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('product_manager')->defaultValue('ir_product.manager.product.default')->end()                
             ->end()
+            ->validate()
+                ->ifTrue(function($v){ return !empty($v['variant']) && empty($v['option']); })
+                ->thenInvalid('The child node "option" must be configured when using "variants".')
+            ->end()
         ;            
 
-        $this->addProductSection($rootNode);
-        $this->addVariantSection($rootNode);
+        $this->addProductSection($rootNode);  
         $this->addOptionSection($rootNode);
+        $this->addVariantSection($rootNode);
         $this->addTemplateSection($rootNode);
         
         return $treeBuilder;
@@ -74,28 +78,6 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('ir_product_form')->end()               
                             ->end()
                         ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    }     
-    
-    private function addVariantSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('variant')
-                    ->canBeUnset()
-                    ->children()
-                        ->scalarNode('variant_class')->isRequired()->cannotBeEmpty()->end()      
-                        ->scalarNode('variant_manager')->defaultValue('ir_product.manager.variant.default')->end()
-                        ->arrayNode('form')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->scalarNode('type')->defaultValue('ir_product_variant')->end()
-                                ->scalarNode('name')->defaultValue('ir_product_variant_form')->end()               
-                            ->end()
-                        ->end()                   
                     ->end()
                 ->end()
             ->end()
@@ -123,8 +105,30 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
-    } 
+    }  
     
+    private function addVariantSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('variant')
+                    ->canBeUnset()
+                    ->children()
+                        ->scalarNode('variant_class')->isRequired()->cannotBeEmpty()->end()      
+                        ->scalarNode('variant_manager')->defaultValue('ir_product.manager.variant.default')->end()
+                        ->arrayNode('form')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('type')->defaultValue('ir_product_variant')->end()
+                                ->scalarNode('name')->defaultValue('ir_product_variant_form')->end()               
+                            ->end()
+                        ->end()                   
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }     
+        
     private function addTemplateSection(ArrayNodeDefinition $node)
     {
         $node

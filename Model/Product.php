@@ -11,6 +11,9 @@
 
 namespace IR\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Abstract product implementation.
  *
@@ -37,7 +40,7 @@ abstract class Product implements ProductInterface, OptionableInterface
      * @var string
      */
     protected $description;
-    
+   
     /**
      * @var Collection
      */
@@ -119,6 +122,14 @@ abstract class Product implements ProductInterface, OptionableInterface
     /**
      * {@inheritdoc}
      */
+    public function hasOptions()
+    {
+        return !$this->getOptions()->isEmpty();        
+    }        
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getOptions()
     {
         return $this->options ?: $this->options = new ArrayCollection();
@@ -154,8 +165,8 @@ abstract class Product implements ProductInterface, OptionableInterface
     public function hasOption(OptionInterface $option)
     {
         return $this->getOptions()->contains($option);
-    }    
-    
+    }     
+
     /**
      * {@inheritdoc}
      */   

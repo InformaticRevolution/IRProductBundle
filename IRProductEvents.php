@@ -39,27 +39,6 @@ final class IRProductEvents
      */
     const PRODUCT_DELETE_COMPLETED = 'ir_product.product.delete.completed';  
     
-    /**
-     * The VARIANT_CREATE_COMPLETED event occurs after saving the variant in the variant creation process.
-     *
-     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
-     */
-    const VARIANT_CREATE_COMPLETED = 'ir_product.variant.create.completed';
-    
-    /**
-     * The VARIANT_EDIT_COMPLETED event occurs after saving the variant in the variant edit process.
-     *
-     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
-     */
-    const VARIANT_EDIT_COMPLETED = 'ir_product.variant.edit.completed';    
-    
-    /**
-     * The VARIANT_DELETE_COMPLETED event occurs after deleting the variant.
-     *
-     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
-     */
-    const VARIANT_DELETE_COMPLETED = 'ir_product.variant.delete.completed';      
-    
    /**
     * The OPTION_CREATE_COMPLETED event occurs after saving the option in the option creation process.
     *
@@ -80,4 +59,25 @@ final class IRProductEvents
      * The event listener method receives a IR\Bundle\ProductBundle\Event\OptionEvent instance.
      */
     const OPTION_DELETE_COMPLETED = 'ir_customizable_product.option.delete.completed';    
+    
+    /**
+     * The VARIANT_CREATE_COMPLETED event occurs after saving the variant in the variant creation process.
+     *
+     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
+     */
+    const VARIANT_CREATE_COMPLETED = 'ir_product.variant.create.completed';
+    
+    /**
+     * The VARIANT_EDIT_COMPLETED event occurs after saving the variant in the variant edit process.
+     *
+     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
+     */
+    const VARIANT_EDIT_COMPLETED = 'ir_product.variant.edit.completed';    
+    
+    /**
+     * The VARIANT_DELETE_COMPLETED event occurs after deleting the variant.
+     *
+     * The event listener method receives a IR\Bundle\ProductBundle\Event\VariantEvent instance.
+     */
+    const VARIANT_DELETE_COMPLETED = 'ir_product.variant.delete.completed';
 }

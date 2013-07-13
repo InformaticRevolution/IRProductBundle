@@ -19,6 +19,13 @@ namespace IR\Bundle\ProductBundle\Model;
 interface OptionableInterface
 {
     /**
+     * Checks whether product has one ore more options.
+     *
+     * @return Boolean
+     */
+    public function hasOptions();
+    
+    /**
      * Returns all options.
      *
      * @return \Traversable
@@ -50,5 +57,5 @@ interface OptionableInterface
      *
      * @return Boolean
      */
-    public function hasOption(OptionInterface $option);  
+    public function hasOption(OptionInterface $option);    
 }
