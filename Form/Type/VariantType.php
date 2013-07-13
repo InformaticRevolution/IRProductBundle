@@ -45,10 +45,6 @@ class VariantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sku', null, array(   
-                'label' => 'form.variant.sku',
-                'translation_domain' => 'ir_product',
-            )) 
             ->addEventSubscriber(new BuildVariantFormListener())
         ;
     }

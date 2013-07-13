@@ -40,23 +40,7 @@ interface VariantInterface
      * @return VariantInterface
      */
     public function setProduct(ProductInterface $product = null);    
- 
-    /**
-     * Returns the stock keeping unit.
-     *
-     * @return string
-     */
-    public function getSku();    
-    
-    /**
-     * Sets the stock keeping unit.
-     *
-     * @param string $sku
-     * 
-     * @return VariantInterface
-     */
-    public function setSku($sku);    
-    
+
     /**
      * Returns all options.
      *

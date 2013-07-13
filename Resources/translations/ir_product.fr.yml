@@ -63,5 +63,4 @@ form:
     option_value:
         value: "Valeur :"        
     variant:
-        sku: "Unité de gestion des stocks :"
         options: "Options :"

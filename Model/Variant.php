@@ -32,11 +32,6 @@ abstract class Variant implements VariantInterface
     protected $product;    
 
     /**
-     * @var string
-     */
-    protected $sku;    
-    
-    /**
      * @var Collection
      */
     protected $options;    

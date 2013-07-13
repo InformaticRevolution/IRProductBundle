@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class Product implements ProductInterface, OptionableInterface
+abstract class Product implements ProductInterface, OptionableInterface, VariableInterface
 {
     /**
      * @var mixed
@@ -45,6 +45,11 @@ abstract class Product implements ProductInterface, OptionableInterface
      * @var Collection
      */
     protected $options;    
+    
+    /**
+     * @var Collection
+     */
+    protected $variants;    
     
     /**
      * @var \Datetime
@@ -167,6 +172,63 @@ abstract class Product implements ProductInterface, OptionableInterface
         return $this->getOptions()->contains($option);
     }     
 
+    /**
+     * {@inheritdoc}
+     */  
+    public function getMasterVariant()
+    {
+    }  
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setMasterVariant(VariantInterface $variant)
+    {
+        return $this;
+    }    
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getVariants()
+    { 
+        return $this->variants ?: $this->variants = new ArrayCollection();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function addVariant(VariantInterface $variant)
+    {
+        if (!$this->hasVariant($variant)) {
+            $variant->setProduct($this);
+            $this->getVariants()->add($variant);
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function removeVariant(VariantInterface $variant)
+    {
+        if ($this->hasVariant($variant)) {
+            $this->getVariants()->removeElement($variant);
+            $variant->setProduct(null);
+        }        
+        
+        return $this;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVariant(VariantInterface $variant)
+    {
+        return $this->getVariants()->contains($variant);
+    }      
+    
     /**
      * {@inheritdoc}
      */   
