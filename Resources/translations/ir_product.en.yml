@@ -47,6 +47,14 @@ option:
 
 # Variant
 variant:
+    new:
+        title: Add a variant
+        save: Save
+        cancel: Cancel
+    edit:
+        title: Modify a variant
+        save: Save
+        cancel: Cancel  
     flash:
         created: The variant has been successfully created
         updated: The variant has been successfully updated
