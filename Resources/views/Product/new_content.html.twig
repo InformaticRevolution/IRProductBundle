@@ -1,10 +1,14 @@
 {% trans_default_domain 'ir_product' %}
 
+<div class="page-header">
+    <h1>{{ 'product.new.title'|trans }}</h1>
+</div>
+
 <form action="{{ path('ir_product_new') }}" {{ form_enctype(form) }} method="POST">
-    {{ form_widget(form) }}
+    {% include 'IRProductBundle:Product:form.html.twig' %}
     <div class="form-actions">
         <input type="submit" value="{{ 'product.new.save'|trans }}" class="btn btn-large btn-primary" />
        &nbsp;
        <a href="{{ path('ir_product_list') }}" class="btn btn-large">{{ 'product.new.cancel'|trans }}</a>         
-    </div>        
+    </div> 
 </form>

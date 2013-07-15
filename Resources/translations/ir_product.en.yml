@@ -9,11 +9,13 @@ product:
             new: Add product
         no_products: You haven't added any products yet.  
     new:
+        title: Add a product
         save: Save
         cancel: Cancel
     edit:
+        title: Edit a product
         save: Save
-        cancel: Cancel         
+        cancel: Cancel           
     flash:
         created: The product has been successfully created
         updated: The product has been successfully updated

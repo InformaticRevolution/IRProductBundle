@@ -9,11 +9,13 @@ product:
             new: Ajouter un produit
         no_products: Aucun produit pour le moment.  
     new:
+        title: Ajouter un produit
         save: Enregistrer
         cancel: Annuler
     edit:
+        title: Modifier un produit
         save: Enregistrer
-        cancel: Annuler  
+        cancel: Annuler 
     flash:
         created: Le produit a été créé
         updated: Le produit a été mis à jour
