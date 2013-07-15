@@ -158,7 +158,7 @@ class Product extends BaseProduct
     protected $options;
 
     /**
-     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     protected $variants;
 }
@@ -209,6 +209,8 @@ Acme\ProductBundle\Entity\Product:
         variants:
             targetEntity: Variant
             mappedBy: product
+            cascade: [ all ]
+            orphanRemoval: true
 ```
 
 In XML:
@@ -237,7 +239,11 @@ In XML:
             </join-table>
         </many-to-many>
 
-        <one-to-many field="variants" target-entity="Variant" mapped-by="product"/>
+        <one-to-many field="variants" target-entity="Variant" mapped-by="product" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>            
+        </one-to-many>
     </entity>
     
 </doctrine-mapping>
