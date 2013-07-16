@@ -50,6 +50,10 @@ class UniqueVariantValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'IR\Bundle\ProductBundle\Model\VariantInterface');
         }
         
+        if ($value->isMaster()) {
+            return;
+        }
+        
         $variants = $this->variantManager->findVariantsByProductWithOptions($value->getProduct());
             
         foreach ($variants as $variant) {
