@@ -32,6 +32,11 @@ abstract class Variant implements VariantInterface
     protected $product;    
 
     /**
+     * @var Boolean
+     */
+    protected $master;    
+    
+    /**
      * @var Collection
      */
     protected $options;    
@@ -47,6 +52,15 @@ abstract class Variant implements VariantInterface
     protected $updatedAt;       
     
     
+    /**
+     * Constructor.
+     */    
+    public function __construct() 
+    {
+        $this->master = false;
+        $this->options = new ArrayCollection();
+    }
+
     /**
      * {@inheritdoc}
      */  
@@ -76,27 +90,27 @@ abstract class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getSku()
+    public function isMaster()
     {
-        return $this->sku;
+        return $this->master;
     }
-    
+
     /**
      * {@inheritdoc}
      */
-    public function setSku($sku)
+    public function setMaster($master)
     {
-        $this->sku = $sku;
-        
+        $this->master = (Boolean) $master;
+
         return $this;
-    }    
+    } 
     
     /**
      * {@inheritdoc}
      */
     public function getOptions()
     {
-        return $this->options ?: $this->options = new ArrayCollection();
+        return $this->options;
     }
 
     /**
@@ -105,7 +119,7 @@ abstract class Variant implements VariantInterface
     public function addOption(OptionValueInterface $option)
     {
         if (!$this->hasOption($option)) {
-            $this->getOptions()->add($option);
+            $this->options->add($option);
         }
         
         return $this;
@@ -117,7 +131,7 @@ abstract class Variant implements VariantInterface
     public function removeOption(OptionValueInterface $option)
     {
         if ($this->hasOption($option)) {
-            $this->getOptions()->removeElement($option);
+            $this->options->removeElement($option);
         }
         
         return $this;
@@ -128,7 +142,7 @@ abstract class Variant implements VariantInterface
      */
     public function hasOption(OptionValueInterface $option)
     {
-        return $this->getOptions()->contains($option);
+        return $this->options->contains($option);
     }    
     
     /**

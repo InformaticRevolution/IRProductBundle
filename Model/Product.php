@@ -177,6 +177,11 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */  
     public function getMasterVariant()
     {
+        foreach ($this->getVariants() as $variant) {
+            if ($variant->isMaster()) {
+                return $variant;
+            }
+        }        
     }  
     
     /**
@@ -184,6 +189,15 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function setMasterVariant(VariantInterface $variant)
     {
+        if ($this->hasVariant($variant)) {
+            return $this;
+        }        
+        
+        $variant->setProduct($this);
+        $variant->setMaster(true);
+        
+        $this->getVariants()->add($variant);
+        
         return $this;
     }    
     
@@ -192,7 +206,11 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function getVariants()
     { 
-        return $this->variants ?: $this->variants = new ArrayCollection();
+        $variants ?: $this->variants = new ArrayCollection();
+        
+        return $variants->filter(function (VariantInterface $variant) {
+            return !$variant->isMaster();
+        });        
     }
     
     /**
