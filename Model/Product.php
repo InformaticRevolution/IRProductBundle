@@ -206,7 +206,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function getVariants()
     { 
-        $variants ?: $this->variants = new ArrayCollection();
+        $variants = $this->variants ?: $this->variants = new ArrayCollection();
         
         return $variants->filter(function (VariantInterface $variant) {
             return !$variant->isMaster();
