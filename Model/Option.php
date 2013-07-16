@@ -53,6 +53,14 @@ abstract class Option implements OptionInterface
     
        
     /**
+     * Constructor.
+     */    
+    public function __construct() 
+    {
+        $this->values = new ArrayCollection();
+    }        
+    
+    /**
      * {@inheritdoc}
      */  
     public function getId()
@@ -101,7 +109,7 @@ abstract class Option implements OptionInterface
      */
     public function getValues()
     {
-        return $this->values ?: $this->values = new ArrayCollection();
+        return $this->values;
     }
 
     /**
@@ -111,7 +119,7 @@ abstract class Option implements OptionInterface
     {
         if (!$this->hasValue($value)) {
             $value->setOption($this);
-            $this->getValues()->add($value);
+            $this->values->add($value);
         }
         
         return $this;
@@ -123,7 +131,7 @@ abstract class Option implements OptionInterface
     public function removeValue(OptionValueInterface $value)
     {
         if ($this->hasValue($value)) {
-            $this->getValues()->removeElement($value);
+            $this->values->removeElement($value);
             $value->setOption(null);
         }
         
@@ -135,7 +143,7 @@ abstract class Option implements OptionInterface
      */
     public function hasValue(OptionValueInterface $value)
     {
-        return $this->getValues()->contains($value);
+        return $this->values->contains($value);
     } 
     
     /**

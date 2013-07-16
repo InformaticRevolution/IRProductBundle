@@ -63,6 +63,15 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     
         
     /**
+     * Constructor.
+     */    
+    public function __construct() 
+    {
+        $this->options = new ArrayCollection();
+        $this->variants = new ArrayCollection();
+    }    
+    
+    /**
      * {@inheritdoc}
      */  
     public function getId()
@@ -129,7 +138,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function hasOptions()
     {
-        return !$this->getOptions()->isEmpty();        
+        return !$this->options->isEmpty();        
     }        
     
     /**
@@ -137,7 +146,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function getOptions()
     {
-        return $this->options ?: $this->options = new ArrayCollection();
+        return $this->options;
     }
     
     /**
@@ -146,7 +155,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function addOption(OptionInterface $option)
     {
         if (!$this->hasOption($option)) {
-            $this->getOptions()->add($option);
+            $this->options->add($option);
         }
         
         return $this;
@@ -158,7 +167,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function removeOption(OptionInterface $option)
     {
         if ($this->hasOption($option)) {
-            $this->getOptions()->removeElement($option);
+            $this->options->removeElement($option);
         }
         
         return $this;
@@ -169,7 +178,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function hasOption(OptionInterface $option)
     {
-        return $this->getOptions()->contains($option);
+        return $this->options->contains($option);
     }     
 
     /**
@@ -177,7 +186,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */  
     public function getMasterVariant()
     {
-        foreach ($this->getVariants() as $variant) {
+        foreach ($this->variants as $variant) {
             if ($variant->isMaster()) {
                 return $variant;
             }
@@ -195,8 +204,8 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
         
         $variant->setProduct($this);
         $variant->setMaster(true);
-        
-        $this->getVariants()->add($variant);
+
+        $this->variants->add($variant);
         
         return $this;
     }    
@@ -205,10 +214,8 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      * {@inheritdoc}
      */
     public function getVariants()
-    { 
-        $variants = $this->variants ?: $this->variants = new ArrayCollection();
-        
-        return $variants->filter(function (VariantInterface $variant) {
+    {        
+        return $this->variants->filter(function (VariantInterface $variant) {
             return !$variant->isMaster();
         });        
     }
@@ -220,7 +227,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     {
         if (!$this->hasVariant($variant)) {
             $variant->setProduct($this);
-            $this->getVariants()->add($variant);
+            $this->variants->add($variant);
         }
         
         return $this;
@@ -232,7 +239,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function removeVariant(VariantInterface $variant)
     {
         if ($this->hasVariant($variant)) {
-            $this->getVariants()->removeElement($variant);
+            $this->variants->removeElement($variant);
             $variant->setProduct(null);
         }        
         
@@ -244,7 +251,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function hasVariant(VariantInterface $variant)
     {
-        return $this->getVariants()->contains($variant);
+        return $this->variants->contains($variant);
     }      
     
     /**
