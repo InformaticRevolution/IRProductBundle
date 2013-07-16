@@ -40,16 +40,19 @@ class BuildVariantFormListener implements EventSubscriberInterface
         $variant = $event->getData();
         $form = $event->getForm();
 
-        if (null === $variant /*|| $variant->getId()*/) {
+        if (null === $variant) {
             return;
         }
 
         $product = $variant->getProduct();
         
+        // We should only be able to select options during the creation process.
+        $disabled = null !== $variant->getId();        
+        
         if (null !== $product && $product->hasOptions()) {
-            // We should only be able to select the options during the creation process.
             $form->add('options', 'ir_product_product_options', array(
                 'product' => $product,
+                'disabled' => $disabled,
                 'label' => 'form.variant.options',
                 'translation_domain' => 'ir_product',
             ));
