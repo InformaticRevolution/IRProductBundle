@@ -16,18 +16,16 @@
                 <option name="maxMessage">ir_product.product.name.max_length</option>
             </constraint>
         </property>   
-    </class>
-
-    <class name="IR\Bundle\ProductBundle\Model\VariableProduct">        
+       
         <getter property="masterVariant">
             <constraint name="Valid" />
-        </getter>       
-        
+        </getter>        
+       
         <getter property="variants">
             <constraint name="Valid" />
-        </getter>         
+        </getter>        
     </class>
-    
+
     <class name="IR\Bundle\ProductBundle\Model\Option">
         <property name="name">
             <constraint name="NotBlank">
