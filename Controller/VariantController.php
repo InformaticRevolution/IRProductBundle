@@ -40,13 +40,14 @@ class VariantController extends ContainerAware
         /* @var $variantManager \IR\Bundle\ProductBundle\Manager\VariantManagerInterface */
         $variantManager = $this->container->get('ir_product.manager.variant');
         $variant = $variantManager->createVariant();
-        $product->addVariant($variant);
+        $variant->setProduct($product);
         
         $form = $this->container->get('ir_product.form.variant'); 
         $form->setData($variant);
         $form->handleRequest($request);
         
         if ($form->isValid()) {
+            $product->addVariant($variant);
             $this->container->get('ir_product.manager.product')->updateProduct($product);
             
             /* @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */

@@ -12,6 +12,7 @@
 namespace IR\Bundle\ProductBundle\Manager;
 
 use IR\Bundle\ProductBundle\Model\VariantInterface;
+use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
  * Variant manager interface.
@@ -35,6 +36,17 @@ interface VariantManagerInterface
      * @return VariantInterface|null
      */
     public function findVariantBy(array $criteria);    
+    
+    /**
+     * Finds variants by product.
+     * 
+     * This method should also loads the options associated to each variant.
+     * 
+     * @param ProductInterface $product
+     * 
+     * @return \Traversable
+     */
+    public function findVariantsByProductWithOptions(ProductInterface $product);    
     
     /**
      * Returns the variant's fully qualified class name.

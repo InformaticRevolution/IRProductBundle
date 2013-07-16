@@ -12,6 +12,7 @@
 namespace IR\Bundle\ProductBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use IR\Bundle\ProductBundle\Model\ProductInterface;
 use IR\Bundle\ProductBundle\Manager\VariantManager as AbstractVariantManager;
 
 /**
@@ -54,6 +55,14 @@ class VariantManager extends AbstractVariantManager
     {
         return $this->repository->findOneBy($criteria);
     }      
+    
+    /**
+     * {@inheritDoc}
+     */    
+    public function findVariantsByProductWithOptions(ProductInterface $product)
+    {
+        return $this->repository->findByProductJoinedWithOptions($product->getId());
+    }
     
     /**
      * {@inheritDoc}

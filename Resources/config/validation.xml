@@ -27,7 +27,7 @@
             <constraint name="Valid" />
         </property>         
     </class>
-
+    
     <class name="IR\Bundle\ProductBundle\Model\Option">
         <property name="name">
             <constraint name="NotBlank">
@@ -69,5 +69,11 @@
             </constraint>
         </property>      
     </class>        
+    
+    <class name="IR\Bundle\ProductBundle\Model\Variant">
+        <constraint name="IR\Bundle\ProductBundle\Validator\Constraints\UniqueVariant">
+            <option name="message">ir_product.variant.options.not_unique</option>
+        </constraint>
+    </class>       
     
 </constraint-mapping>        

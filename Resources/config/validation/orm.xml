@@ -7,7 +7,7 @@
     <class name="IR\Bundle\ProductBundle\Model\Option">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">name</option>
-            <option name="message">ir_product.option.name.already_used</option>
+            <option name="message">ir_product.option.name.not_unique</option>
         </constraint>
     </class>
 

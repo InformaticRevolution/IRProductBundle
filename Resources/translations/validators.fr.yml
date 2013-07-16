@@ -10,7 +10,7 @@ ir_product:
             not_blank: Veuillez entrer un nom
             min_length: Le nom doit comporter au moins {{ limit }} caractères
             max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
-            already_used: Cette option existe déjà
+            not_unique: Cette option existe déjà
             
         public_name:
             not_blank: Veuillez entrer un nom public
@@ -20,4 +20,8 @@ ir_product:
     option_value:
         value:
             not_blank: Veuillez entrer une valeur
-            max_length: La valeur ne doit pas comporter plus de {{ limit }} caractères              
+            max_length: La valeur ne doit pas comporter plus de {{ limit }} caractères        
+            
+    variant:
+        options: 
+            not_unique: Cette variante existe déjà            
