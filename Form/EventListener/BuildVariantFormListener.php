@@ -40,7 +40,7 @@ class BuildVariantFormListener implements EventSubscriberInterface
         $variant = $event->getData();
         $form = $event->getForm();
 
-        if (null === $variant || $variant->getId()) {
+        if (null === $variant /*|| $variant->getId()*/) {
             return;
         }
 
