@@ -19,13 +19,13 @@
     </class>
 
     <class name="IR\Bundle\ProductBundle\Model\VariableProduct">        
-        <property name="masterVariant">
+        <getter name="masterVariant">
             <constraint name="Valid" />
-        </property>       
+        </getter>       
         
-        <property name="variants">
+        <getter name="variants">
             <constraint name="Valid" />
-        </property>         
+        </getter>         
     </class>
     
     <class name="IR\Bundle\ProductBundle\Model\Option">
