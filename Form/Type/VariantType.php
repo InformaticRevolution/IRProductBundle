@@ -44,9 +44,9 @@ class VariantType extends AbstractType
      */     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->addEventSubscriber(new BuildVariantFormListener())
-        ;
+        if (!$options['master']) {
+            $builder->addEventSubscriber(new BuildVariantFormListener());
+        }        
     }
 
     /**
@@ -57,6 +57,7 @@ class VariantType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention' => 'variant', 
+            'master' => false,
         ));        
     }    
     

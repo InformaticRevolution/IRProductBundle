@@ -31,6 +31,7 @@ class VariableProductType extends ProductType
         
         $builder
             ->add('masterVariant', 'ir_product_variant', array(
+                'master' => true,
                 'label' => 'form.product.master_variant',
                 'translation_domain' => 'ir_product',                
             ))        
