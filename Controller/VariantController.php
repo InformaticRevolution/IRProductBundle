@@ -105,7 +105,7 @@ class VariantController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');          
         $dispatcher->dispatch(IRProductEvents::VARIANT_DELETE_COMPLETED, new VariantEvent($variant));
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $variant->getProduct()->getId())));    
+        return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId())));    
     }           
     
     /**
