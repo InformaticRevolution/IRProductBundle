@@ -91,6 +91,12 @@ In XML:
 
 **b) Create your Option class**
 
+**Warning:**
+
+> If you override the __construct() method in your Option class, be sure
+> to call parent::__construct(), as the base Option class depends on
+> this to initialize some fields.
+
 ##### Annotations
 ``` php
 <?php
@@ -118,6 +124,16 @@ class Option extends BaseOption
      * @ORM\OneToMany(targetEntity="OptionValue", mappedBy="option", cascade={"all"}, orphanRemoval=true)
      */
     protected $values;
+
+
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -136,6 +152,14 @@ use IR\Bundle\ProductBundle\Model\Option as BaseOption;
  */
 class Option extends BaseOption
 {
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -218,6 +242,16 @@ class Product extends BaseProduct
      * )
      */
     protected $options;
+
+
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -236,6 +270,14 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 

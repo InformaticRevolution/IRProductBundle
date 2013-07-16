@@ -15,6 +15,12 @@ You need to complete the [option configuration](options.md) before to start this
 
 ### Step 1: Create your Variant class
 
+**Warning:**
+
+> If you override the __construct() method in your Variant class, be sure
+> to call parent::__construct(), as the base Variant class depends on
+> this to initialize some fields.
+
 ##### Annotations
 ``` php
 <?php
@@ -46,6 +52,16 @@ class Variant extends BaseVariant
      * )
      */
     protected $options;
+
+
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -64,6 +80,14 @@ use IR\Bundle\ProductBundle\Model\Variant as BaseVariant;
  */
 class Variant extends BaseVariant
 {
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -161,6 +185,16 @@ class Product extends BaseProduct
      * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     protected $variants;
+
+
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
@@ -179,6 +213,14 @@ use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
  */
 class Product extends BaseProduct
 {
+    /**
+     * Constructor.
+     */  
+    public function __construct()
+    {
+        parent::__construct();
+        // your own logic
+    }
 }
 ```
 
