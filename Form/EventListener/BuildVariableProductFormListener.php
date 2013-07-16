@@ -41,29 +41,17 @@ class BuildVariableProductFormListener implements EventSubscriberInterface
         $product = $event->getData();
         $form = $event->getForm();
 
-        if (null === $product) {
+        if (null === $product || $product->getId()) {
             return;
         }
         
-        if (!$product->getId()) {            
-            // We should only be able to select options during the creation process.
-            $form->add('options', 'ir_product_option_choice', array(
-                'required' => false,
-                'multiple' => true,
-                'by_reference' => false,
-                'label' => 'form.product.options',
-                'translation_domain' => 'ir_product',
-            ));                 
-        }
-        else if ($product->hasOptions()) {
-            $form->add('variants', 'collection', array(
-                'type' => 'ir_product_variant',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'form.product.variants',
-                'translation_domain' => 'ir_product',
-            ));            
-        }
+        // We should only be able to select options during the creation process.
+        $form->add('options', 'ir_product_option_choice', array(
+            'required' => false,
+            'multiple' => true,
+            'by_reference' => false,
+            'label' => 'form.product.options',
+            'translation_domain' => 'ir_product',
+        ));                 
     }
 }

@@ -67,7 +67,6 @@ form:
         description: "Description :"
         master_variant: "Master variant :"
         options: "Options :"
-        variants: "Variants :"
     option:
         name: "Name :"
         public_name: "Public name :"
