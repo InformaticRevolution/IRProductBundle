@@ -201,12 +201,12 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
         if ($this->hasVariant($variant)) {
             return $this;
         }        
-        
+        /*
         $variant->setProduct($this);
         $variant->setMaster(true);
 
         $this->variants->add($variant);
-        
+        */
         return $this;
     }    
     
