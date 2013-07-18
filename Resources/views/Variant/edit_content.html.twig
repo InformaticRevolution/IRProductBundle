@@ -4,7 +4,7 @@
     <h1>{{ 'variant.edit.title'|trans }}</h1>
 </div>
 
-<form action="{{ path('ir_product_variant_edit', {'id': variant.id} ) }}" {{ form_enctype(form) }} method="POST">
+<form action="{{ path('ir_product_variant_edit', {'id': variant.id}) }}" {{ form_enctype(form) }} method="POST">
     {% include 'IRProductBundle:Variant:form.html.twig' %}
     <div class="form-actions">
         <input type="submit" value="{{ 'variant.edit.save'|trans }}" class="btn btn-large btn-primary" />

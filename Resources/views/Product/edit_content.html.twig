@@ -4,7 +4,7 @@
     <h1>{{ 'product.edit.title'|trans }}</h1>
 </div>
 
-<form action="{{ path('ir_product_edit', {'id': product.id} ) }}" {{ form_enctype(form) }} method="POST">
+<form action="{{ path('ir_product_edit', {'id': product.id}) }}" {{ form_enctype(form) }} method="POST">
     {% include 'IRProductBundle:Product:form.html.twig' %}
     <div class="form-actions">
         <input type="submit" value="{{ 'product.edit.save'|trans }}" class="btn btn-large btn-primary" />
