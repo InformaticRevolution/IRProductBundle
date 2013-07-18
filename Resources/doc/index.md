@@ -19,7 +19,7 @@ This version of the bundle requires Symfony 2.3+.
 
 Add IRProductBundle in your composer.json:
 
-```js
+``` js
 {
     "require": {
         "informaticrevolution/product-bundle": "*"
@@ -200,7 +200,7 @@ public function registerBundles()
 }
 ```
 
-**b) Enable the slug and timestampable extensions in the config file**
+**b) Enable the slug and timestampable extensions in your `config.yml` file**
 
 ``` yaml
 # app/config/config.yml
