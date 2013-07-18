@@ -31,6 +31,8 @@ interface OptionManagerInterface
      * Updates an option.
      *
      * @param OptionInterface $option
+     * 
+     * @return void
      */
     public function updateOption(OptionInterface $option);    
          
@@ -38,6 +40,8 @@ interface OptionManagerInterface
      * Deletes an option.
      *
      * @param OptionInterface $option
+     * 
+     * @return void
      */
     public function deleteOption(OptionInterface $option);    
 

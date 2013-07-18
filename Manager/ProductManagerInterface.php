@@ -31,6 +31,8 @@ interface ProductManagerInterface
      * Updates a product.
      *
      * @param ProductInterface $product
+     * 
+     * @return void
      */
     public function updateProduct(ProductInterface $product);    
          
@@ -38,6 +40,8 @@ interface ProductManagerInterface
      * Deletes a product.
      *
      * @param ProductInterface $product
+     * 
+     * @return void
      */
     public function deleteProduct(ProductInterface $product);    
 
