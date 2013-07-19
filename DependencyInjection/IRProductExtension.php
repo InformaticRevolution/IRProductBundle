@@ -41,6 +41,7 @@ class IRProductExtension extends Extension
         $container->setParameter('ir_product.db_driver', $config['db_driver']);
         $container->setParameter('ir_product.model.product.class', $config['product_class']);
         $container->setParameter('ir_product.template.engine', $config['template']['engine']);
+        $container->setParameter('ir_product.backend_type_' . $config['db_driver'], true);
         
         $container->setAlias('ir_product.manager.product', $config['product_manager']);
         
