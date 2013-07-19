@@ -40,6 +40,6 @@ class IRProductBundle extends Bundle
             realpath(__DIR__ . '/Resources/config/doctrine/model') => 'IR\Bundle\ProductBundle\Model',
         );   
         
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('ir_product.model_manager_name'), array('ir_product.backend_type_orm')));     
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('ir_product.model_manager_name'), 'ir_product.backend_type_orm'));     
     }        
 }
