@@ -14,7 +14,7 @@ namespace IR\Bundle\ProductBundle\Manager;
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
- * Product manager interface.
+ * Product Manager Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -57,7 +57,7 @@ interface ProductManagerInterface
     /**
      * Returns a collection with all product instances.
      *
-     * @return \Traversable
+     * @return array
      */
     public function findProducts();    
     

@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Manager;
 
 /**
- * Abstract variant manager implementation.
+ * Abstract Variant Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

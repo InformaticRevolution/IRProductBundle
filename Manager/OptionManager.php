@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Manager;
 
 /**
- * Abstract option manager implementation.
+ * Abstract Option Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

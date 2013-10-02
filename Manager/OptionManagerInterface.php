@@ -14,7 +14,7 @@ namespace IR\Bundle\ProductBundle\Manager;
 use IR\Bundle\ProductBundle\Model\OptionInterface;
 
 /**
- * Option manager interface.
+ * Option Manager Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -57,7 +57,7 @@ interface OptionManagerInterface
     /**
      * Returns a collection with all option instances.
      *
-     * @return \Traversable
+     * @return array
      */
     public function findOptions();    
     

@@ -12,11 +12,13 @@
 namespace IR\Bundle\ProductBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 use IR\Bundle\ProductBundle\Manager\VariantManager as AbstractVariantManager;
 
 /**
- * Doctrine variant manager.
+ * Doctrine Variant Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -26,6 +28,11 @@ class VariantManager extends AbstractVariantManager
      * @var ObjectManager
      */          
     protected $objectManager;
+    
+    /**
+     * @var ObjectRepository
+     */           
+    protected $repository;        
     
     /**
      * @var string

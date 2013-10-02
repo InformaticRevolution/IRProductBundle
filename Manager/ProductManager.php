@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Manager;
 
 /**
- * Abstract product manager implementation.
+ * Abstract Product Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

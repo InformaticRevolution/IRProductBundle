@@ -12,11 +12,13 @@
 namespace IR\Bundle\ProductBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 use IR\Bundle\ProductBundle\Manager\ProductManager as AbstractProductManager;
 
 /**
- * Doctrine product manager.
+ * Doctrine Product Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -28,7 +30,7 @@ class ProductManager extends AbstractProductManager
     protected $objectManager;
     
     /**
-     * @var EntityRepository
+     * @var ObjectRepository
      */           
     protected $repository;    
 

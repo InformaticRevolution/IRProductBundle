@@ -12,11 +12,13 @@
 namespace IR\Bundle\ProductBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+
 use IR\Bundle\ProductBundle\Model\OptionInterface;
 use IR\Bundle\ProductBundle\Manager\OptionManager as AbstractOptionManager;
 
 /**
- * Doctrine option manager.
+ * Doctrine Option Manager.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -28,7 +30,7 @@ class OptionManager extends AbstractOptionManager
     protected $objectManager;
     
     /**
-     * @var EntityRepository
+     * @var ObjectRepository
      */           
     protected $repository;    
 

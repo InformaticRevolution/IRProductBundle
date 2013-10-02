@@ -15,7 +15,7 @@ use IR\Bundle\ProductBundle\Model\VariantInterface;
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
- * Variant manager interface.
+ * Variant Manager Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -44,7 +44,7 @@ interface VariantManagerInterface
      * 
      * @param ProductInterface $product
      * 
-     * @return \Traversable
+     * @return array
      */
     public function findVariantsByProductWithOptions(ProductInterface $product);    
     
