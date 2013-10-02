@@ -12,26 +12,26 @@
 namespace IR\Bundle\ProductBundle\Model;
 
 /**
- * Abstract option value implementation.
+ * Option Value implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class OptionValue implements OptionValueInterface
+class OptionValue implements OptionValueInterface
 {
     /**
      * @var mixed
      */
-    protected $id; 
+    private $id; 
 
     /**
      * @var OptionInterface
      */
-    protected $option;       
+    private $option;       
     
     /**
      * @var string
      */
-    protected $value;      
+    private $value;      
 
         
     /**
@@ -56,8 +56,6 @@ abstract class OptionValue implements OptionValueInterface
     public function setOption(OptionInterface $option = null)
     {
         $this->option = $option;
-        
-        return $this;
     }
     
     /**
@@ -74,12 +72,10 @@ abstract class OptionValue implements OptionValueInterface
     public function setValue($value)
     {
         $this->value = $value;
-        
-        return $this;
     }
     
     /**
-     * Returns the string representation of a valiue.
+     * Returns the value.
      *
      * @return string
      */         

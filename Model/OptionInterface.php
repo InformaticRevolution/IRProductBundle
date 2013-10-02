@@ -11,8 +11,10 @@
 
 namespace IR\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Option interface.
+ * Option Interface.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -36,8 +38,6 @@ interface OptionInterface
      * Sets the internal name.
      *
      * @param string $name
-     * 
-     * @return OptionInterface
      */
     public function setName($name);
     
@@ -52,15 +52,13 @@ interface OptionInterface
      * Sets the public name.
      *
      * @param string $publicName
-     * 
-     * @return OptionInterface
      */
     public function setPublicName($publicName);    
 
     /**
      * Returns all values.
      *
-     * @return \Traversable
+     * @return Collection
      */
     public function getValues(); 
     
@@ -68,8 +66,6 @@ interface OptionInterface
      * Adds a value.
      *
      * @param OptionValueInterface $optionValue
-     * 
-     * @return OptionInterface
      */
     public function addValue(OptionValueInterface $optionValue);
     
@@ -77,8 +73,6 @@ interface OptionInterface
      * Removes a value.
      *
      * @param OptionValueInterface $optionValue
-     * 
-     * @return OptionInterface
      */
     public function removeValue(OptionValueInterface $optionValue);
     
@@ -96,31 +90,13 @@ interface OptionInterface
      *
      * @return \Datetime
      */
-    public function getCreatedAt(); 
-    
-    /**
-     * Sets the creation time.
-     * 
-     * @param \Datetime $datetime
-     * 
-     * @return VariantInterface
-     */
-    public function setCreatedAt(\Datetime $datetime);     
+    public function getCreatedAt();   
     
     /**
      * Returns the last update time.
      *
      * @return \Datetime
      */
-    public function getUpdatedAt();    
-    
-    /**
-     * Sets the last update time.
-     * 
-     * @param \Datetime|null $datetime
-     * 
-     * @return VariantInterface
-     */
-    public function setUpdatedAt(\Datetime $datetime = null);      
+    public function getUpdatedAt();      
 }
 

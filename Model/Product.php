@@ -15,51 +15,51 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Abstract product implementation.
+ * Product implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class Product implements ProductInterface, OptionableInterface, VariableInterface
+class Product implements ProductInterface, OptionableInterface, VariableInterface
 {
     /**
      * @var mixed
      */
-    protected $id; 
+    private $id; 
 
     /**
      * @var string
      */
-    protected $name; 
+    private $name; 
     
     /**
      * @var string
      */
-    protected $slug;    
+    private $slug;    
 
     /**
      * @var string
      */
-    protected $description;
+    private $description;
    
     /**
      * @var Collection
      */
-    protected $options;    
+    private $options;    
     
     /**
      * @var Collection
      */
-    protected $variants;    
+    private $variants;    
     
     /**
      * @var \Datetime
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
      * @var \Datetime
      */
-    protected $updatedAt;     
+    private $updatedAt;     
     
         
     /**
@@ -67,8 +67,9 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */    
     public function __construct() 
     {
-        $this->options = new ArrayCollection();
-        $this->variants = new ArrayCollection();
+        $this->options = new ArrayCollection;
+        $this->variants = new ArrayCollection;
+        $this->createdAt = new \DateTime;
     }    
     
     /**
@@ -93,8 +94,6 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function setName($name)
     {
         $this->name = $name;
-        
-        return $this;
     }
     
     /**
@@ -111,8 +110,6 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function setSlug($slug)
     {
         $this->slug = $slug;
-        
-        return $this;
     }    
 
     /**
@@ -129,8 +126,6 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     public function setDescription($description)
     {
         $this->description = $description;
-        
-        return $this;
     }
     
     /**
@@ -157,8 +152,6 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
         if (!$this->hasOption($option)) {
             $this->options->add($option);
         }
-        
-        return $this;
     }
     
     /**
@@ -166,11 +159,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function removeOption(OptionInterface $option)
     {
-        if ($this->hasOption($option)) {
-            $this->options->removeElement($option);
-        }
-        
-        return $this;
+        $this->options->removeElement($option);
     }
     
     /**
@@ -229,8 +218,6 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
             $variant->setProduct($this);
             $this->variants->add($variant);
         }
-        
-        return $this;
     }
     
     /**
@@ -238,12 +225,9 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
      */
     public function removeVariant(VariantInterface $variant)
     {
-        if ($this->hasVariant($variant)) {
-            $this->variants->removeElement($variant);
+        if ($this->variants->removeElement($variant)) {
             $variant->setProduct(null);
-        }        
-        
-        return $this;
+        }
     }
     
     /**
@@ -261,17 +245,7 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     {
         return $this->createdAt;
     }    
-      
-    /**
-     * {@inheritdoc}
-     */   
-    public function setCreatedAt(\Datetime $datetime)
-    {
-        $this->createdAt = $datetime;
-        
-        return $this;
-    }    
-    
+
     /**
      * {@inheritdoc}
      */   
@@ -279,19 +253,17 @@ abstract class Product implements ProductInterface, OptionableInterface, Variabl
     {
         return $this->updatedAt;
     } 
-  
+
     /**
-     * {@inheritdoc}
-     */   
-    public function setUpdatedAt(\Datetime $datetime = null)
+     * Updates some fields before saving the product.
+     */
+    public function onPreSave()
     {
-        $this->updatedAt = $datetime;
-        
-        return $this;
-    }       
+        $this->updatedAt = new \DateTime;
+    }    
     
     /**
-     * Returns the string representation of a product.
+     * Returns the product name.
      *
      * @return string
      */         

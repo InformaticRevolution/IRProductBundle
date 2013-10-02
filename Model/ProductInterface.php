@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Model;
 
 /**
- * Product interface.
+ * Product Interface.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -36,8 +36,6 @@ interface ProductInterface
      * Sets the name.
      *
      * @param string $name
-     * 
-     * @return ProductInterface
      */
     public function setName($name);
     
@@ -52,8 +50,6 @@ interface ProductInterface
      * Sets the slug.
      *
      * @param string $slug
-     * 
-     * @return ProductInterface
      */
     public function setSlug($slug);    
 
@@ -68,8 +64,6 @@ interface ProductInterface
      * Sets the description.
      *
      * @param string $description
-     * 
-     * @return ProductInterface
      */
     public function setDescription($description);
     
@@ -79,30 +73,12 @@ interface ProductInterface
      * @return \Datetime
      */
     public function getCreatedAt(); 
-    
-    /**
-     * Sets the creation time.
-     * 
-     * @param \Datetime $datetime
-     * 
-     * @return ProductInterface
-     */
-    public function setCreatedAt(\Datetime $datetime);     
-    
+
     /**
      * Returns the last update time.
      *
      * @return \Datetime
      */
     public function getUpdatedAt();    
-    
-    /**
-     * Sets the last update time.
-     * 
-     * @param \Datetime|null $datetime
-     * 
-     * @return ProductInterface
-     */
-    public function setUpdatedAt(\Datetime $datetime = null);     
 }
 

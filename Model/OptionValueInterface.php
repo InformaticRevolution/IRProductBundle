@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Model;
 
 /**
- * Option value interface.
+ * Option Value Interface.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -36,8 +36,6 @@ interface OptionValueInterface
      * Sets the option.
      *
      * @param OptionInterface|null $option
-     * 
-     * @return OptionValueInterface
      */
     public function setOption(OptionInterface $option = null);      
     
@@ -52,8 +50,6 @@ interface OptionValueInterface
      * Sets the value.
      *
      * @param string $value
-     * 
-     * @return OptionValueInterface
      */
     public function setValue($value);
 }

@@ -15,13 +15,14 @@
                 
         <field name="description" column="description" type="text" nullable="true" /> 
         
-        <field name="createdAt" column="created_at" type="datetime">
-            <gedmo:timestampable on="create"/>
-        </field>
+        <field name="createdAt" column="created_at" type="datetime" />
         
-        <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
-            <gedmo:timestampable on="update"/>
-        </field>             
+        <field name="updatedAt" column="updated_at" type="datetime" nullable="true" />  
+        
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="onPreSave"/>
+            <lifecycle-callback type="preUpdate" method="onPreSave" />
+        </lifecycle-callbacks>                      
     </mapped-superclass>
     
 </doctrine-mapping>

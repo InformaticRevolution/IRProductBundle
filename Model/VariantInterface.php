@@ -11,8 +11,10 @@
 
 namespace IR\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Variant interface.
+ * Variant Interface.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -36,8 +38,6 @@ interface VariantInterface
      * Sets the product.
      *
      * @param ProductInterface $product
-     * 
-     * @return VariantInterface
      */
     public function setProduct(ProductInterface $product = null);    
 
@@ -52,15 +52,13 @@ interface VariantInterface
      * Sets the master status of the variant.
      *
      * @param Boolean $master
-     * 
-     * @return VariantInterface
      */
     public function setMaster($master);    
     
     /**
      * Returns all options.
      *
-     * @return \Traversable
+     * @return Collection
      */
     public function getOptions();
 
@@ -68,8 +66,6 @@ interface VariantInterface
      * Adds an option.
      *
      * @param OptionValueInterface $option
-     * 
-     * @return VariantInterface
      */
     public function addOption(OptionValueInterface $option);
 
@@ -77,8 +73,6 @@ interface VariantInterface
      * Removes an option.
      *
      * @param OptionValueInterface $option
-     * 
-     * @return VariantInterface
      */
     public function removeOption(OptionValueInterface $option);
 
@@ -86,8 +80,6 @@ interface VariantInterface
      * Checks whether variant has given option.
      *
      * @param OptionValueInterface $option
-     *
-     * @return Boolean
      */
     public function hasOption(OptionValueInterface $option);    
     
@@ -96,31 +88,13 @@ interface VariantInterface
      *
      * @return \Datetime
      */
-    public function getCreatedAt(); 
-    
-    /**
-     * Sets the creation time.
-     * 
-     * @param \Datetime $datetime
-     * 
-     * @return VariantInterface
-     */
-    public function setCreatedAt(\Datetime $datetime);     
+    public function getCreatedAt();
     
     /**
      * Returns the last update time.
      *
      * @return \Datetime
      */
-    public function getUpdatedAt();    
-    
-    /**
-     * Sets the last update time.
-     * 
-     * @param \Datetime|null $datetime
-     * 
-     * @return VariantInterface
-     */
-    public function setUpdatedAt(\Datetime $datetime = null);   
+    public function getUpdatedAt(); 
 }
 

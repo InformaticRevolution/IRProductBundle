@@ -15,41 +15,41 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Abstract option implementation.
+ * Option implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class Option implements OptionInterface
+class Option implements OptionInterface
 {
     /**
      * @var mixed
      */
-    protected $id; 
+    private $id; 
 
     /**
      * @var string
      */
-    protected $name; 
+    private $name; 
     
     /**
      * @var string
      */
-    protected $publicName;    
+    private $publicName;    
 
     /**
      * @var Collection
      */
-    protected $values;    
+    private $values;    
     
     /**
      * @var \Datetime
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
      * @var \Datetime
      */
-    protected $updatedAt;    
+    private $updatedAt;    
     
        
     /**
@@ -57,7 +57,8 @@ abstract class Option implements OptionInterface
      */    
     public function __construct() 
     {
-        $this->values = new ArrayCollection();
+        $this->values = new ArrayCollection;
+        $this->createdAt = new \DateTime;
     }        
     
     /**
@@ -82,8 +83,6 @@ abstract class Option implements OptionInterface
     public function setName($name)
     {
         $this->name = $name;
-        
-        return $this;
     }
     
     /**
@@ -100,8 +99,6 @@ abstract class Option implements OptionInterface
     public function setPublicName($publicName)
     {
         $this->publicName = $publicName;
-        
-        return $this;
     }    
     
     /**
@@ -111,7 +108,7 @@ abstract class Option implements OptionInterface
     {
         return $this->values;
     }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -121,8 +118,6 @@ abstract class Option implements OptionInterface
             $value->setOption($this);
             $this->values->add($value);
         }
-        
-        return $this;
     }
 
     /**
@@ -130,12 +125,9 @@ abstract class Option implements OptionInterface
      */
     public function removeValue(OptionValueInterface $value)
     {
-        if ($this->hasValue($value)) {
-            $this->values->removeElement($value);
+        if ($this->values->removeElement($value)) {
             $value->setOption(null);
         }
-        
-        return $this;
     }
 
     /**
@@ -153,17 +145,7 @@ abstract class Option implements OptionInterface
     {
         return $this->createdAt;
     }    
-      
-    /**
-     * {@inheritdoc}
-     */   
-    public function setCreatedAt(\Datetime $datetime)
-    {
-        $this->createdAt = $datetime;
-        
-        return $this;
-    }    
-    
+
     /**
      * {@inheritdoc}
      */   
@@ -171,24 +153,22 @@ abstract class Option implements OptionInterface
     {
         return $this->updatedAt;
     } 
-  
+
     /**
-     * {@inheritdoc}
-     */   
-    public function setUpdatedAt(\Datetime $datetime = null)
+     * Updates some fields before saving the option.
+     */
+    public function onPreSave()
     {
-        $this->updatedAt = $datetime;
-        
-        return $this;
+        $this->updatedAt = new \DateTime;
     }      
     
     /**
-     * Returns the string representation of an option.
+     * Returns the option public name.
      *
      * @return string
      */         
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string) $this->getPublicName();
     }      
 }

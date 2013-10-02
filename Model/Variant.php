@@ -15,41 +15,41 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Abstract variant model.
+ * Variant implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-abstract class Variant implements VariantInterface
+class Variant implements VariantInterface
 {
     /**
      * @var mixed
      */
-    protected $id; 
+    private $id; 
 
     /**
      * @var ProductInterface
      */
-    protected $product;    
+    private $product;    
 
     /**
      * @var Boolean
      */
-    protected $master;    
+    private $master;    
     
     /**
      * @var Collection
      */
-    protected $options;    
+    private $options;    
     
     /**
      * @var \Datetime
      */
-    protected $createdAt;
+    private $createdAt;
 
     /**
      * @var \Datetime
      */
-    protected $updatedAt;       
+    private $updatedAt;       
     
     
     /**
@@ -58,7 +58,8 @@ abstract class Variant implements VariantInterface
     public function __construct() 
     {
         $this->master = false;
-        $this->options = new ArrayCollection();
+        $this->options = new ArrayCollection;
+        $this->createdAt = new \DateTime;
     }
 
     /**
@@ -83,8 +84,6 @@ abstract class Variant implements VariantInterface
     public function setProduct(ProductInterface $product = null)
     {
         $this->product = $product;
-        
-        return $this;
     }
     
     /**
@@ -101,8 +100,6 @@ abstract class Variant implements VariantInterface
     public function setMaster($master)
     {
         $this->master = (Boolean) $master;
-
-        return $this;
     } 
     
     /**
@@ -121,8 +118,6 @@ abstract class Variant implements VariantInterface
         if (!$this->hasOption($option)) {
             $this->options->add($option);
         }
-        
-        return $this;
     }
 
     /**
@@ -130,11 +125,7 @@ abstract class Variant implements VariantInterface
      */
     public function removeOption(OptionValueInterface $option)
     {
-        if ($this->hasOption($option)) {
-            $this->options->removeElement($option);
-        }
-        
-        return $this;
+        $this->options->removeElement($option);
     }
 
     /**
@@ -152,32 +143,20 @@ abstract class Variant implements VariantInterface
     {
         return $this->createdAt;
     }    
-      
-    /**
-     * {@inheritdoc}
-     */   
-    public function setCreatedAt(\Datetime $datetime)
-    {
-        $this->createdAt = $datetime;
-        
-        return $this;
-    }    
-    
+
     /**
      * {@inheritdoc}
      */   
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    } 
-  
+    }
+    
     /**
-     * {@inheritdoc}
-     */   
-    public function setUpdatedAt(\Datetime $datetime = null)
+     * Updates some fields before saving the variant.
+     */
+    public function onPreSave()
     {
-        $this->updatedAt = $datetime;
-        
-        return $this;
+        $this->updatedAt = new \DateTime;
     }    
 }
