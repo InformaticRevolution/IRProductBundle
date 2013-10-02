@@ -3,6 +3,7 @@ IRProductBundle
 
 The IRProductBundle helps you to developp fast e-commerce application, or simple product catalog by providing the base for backend configuration.
 
+[![Build Status](https://secure.travis-ci.org/InformaticRevolution/IRProductBundle.png?branch=master)](http://travis-ci.org/InformaticRevolution/IRProductBundle) [![Total Downloads](https://poser.pugx.org/informaticrevolution/product-bundle/downloads.png)](https://packagist.org/packages/informaticrevolution/product-bundle) [![Latest Stable Version](https://poser.pugx.org/informaticrevolution/product-bundle/v/stable.png)](https://packagist.org/packages/informaticrevolution/product-bundle)
 
 Documentation
 -------------
