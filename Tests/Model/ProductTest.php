@@ -28,7 +28,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $getter = 'get'.$property;
         $setter = 'set'.$property;
         
-        $product = new Product;
+        $product = new Product();
         
         $this->assertEquals($default, $product->$getter());
         $product->$setter($value);
@@ -46,7 +46,7 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     
     public function testToString()
     {
-        $product = new Product;
+        $product = new Product();
         
         $this->assertEquals('', $product);
         $product->setName('Product 1');

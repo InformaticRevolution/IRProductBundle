@@ -11,8 +11,10 @@
 
 namespace IR\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Variable interface.
+ * Variable Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -29,15 +31,13 @@ interface VariableInterface
      * Sets the master variant.
      *
      * @param VariantInterface $variant
-     * 
-     * @return VariableProductInterface
      */
     public function setMasterVariant(VariantInterface $variant);
 
     /**
      * Returns all variants.
      *
-     * @return \Traversable
+     * @return Collection
      */
     public function getVariants(); 
     
@@ -45,8 +45,6 @@ interface VariableInterface
      * Adds a variant.
      *
      * @param VariantInterface $variant
-     * 
-     * @return VariableProductInterface
      */
     public function addVariant(VariantInterface $variant);
     
@@ -54,8 +52,6 @@ interface VariableInterface
      * Removes a variant.
      *
      * @param VariantInterface $variant
-     * 
-     * @return VariableProductInterface
      */
     public function removeVariant(VariantInterface $variant);    
     

@@ -58,8 +58,8 @@ class Variant implements VariantInterface
     public function __construct() 
     {
         $this->master = false;
-        $this->options = new ArrayCollection;
-        $this->createdAt = new \DateTime;
+        $this->options = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -157,6 +157,6 @@ class Variant implements VariantInterface
      */
     public function onPreSave()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }    
 }

@@ -11,8 +11,10 @@
 
 namespace IR\Bundle\ProductBundle\Model;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
- * Optionable interface.
+ * Optionable Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -28,7 +30,7 @@ interface OptionableInterface
     /**
      * Returns all options.
      *
-     * @return \Traversable
+     * @return Collection
      */
     public function getOptions();
     
@@ -36,8 +38,6 @@ interface OptionableInterface
      * Adds an option.
      *
      * @param OptionInterface $option
-     * 
-     * @return OptionableInterface
      */
     public function addOption(OptionInterface $option); 
     
@@ -45,8 +45,6 @@ interface OptionableInterface
      * Removes an option.
      *
      * @param OptionInterface $option
-     * 
-     * @return OptionableInterface
      */
     public function removeOption(OptionInterface $option);
     

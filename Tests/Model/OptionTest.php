@@ -24,15 +24,15 @@ class OptionTest extends \PHPUnit_Framework_TestCase
 {
     public function testValues()
     {
-        $option = new Option;
+        $option = new Option();
         
         $this->assertEquals(new ArrayCollection(), $option->getValues());
     }
     
     public function testAddValue()
     {
-        $option = new Option;
-        $optionValue = new OptionValue;
+        $option = new Option();
+        $optionValue = new OptionValue();
         
         $this->assertNotContains($optionValue, $option->getValues());
         $option->addValue($optionValue);
@@ -41,8 +41,8 @@ class OptionTest extends \PHPUnit_Framework_TestCase
     
     public function testAddValueSetOption()
     {
-        $option = new Option;
-        $optionValue = new OptionValue;
+        $option = new Option();
+        $optionValue = new OptionValue();
         
         $this->assertNull($optionValue->getOption());
         $option->addValue($optionValue);
@@ -51,8 +51,8 @@ class OptionTest extends \PHPUnit_Framework_TestCase
             
     public function testRemoveValue()
     {
-        $option = new Option;
-        $optionValue = new OptionValue;
+        $option = new Option();
+        $optionValue = new OptionValue();
         $option->addValue($optionValue);
         
         $this->assertContains($optionValue, $option->getValues());
@@ -62,8 +62,8 @@ class OptionTest extends \PHPUnit_Framework_TestCase
     
     public function testHasValue()
     {
-        $option = new Option;
-        $optionValue = new OptionValue;
+        $option = new Option();
+        $optionValue = new OptionValue();
         
         $this->assertFalse($option->hasValue($optionValue));
         $option->addValue($optionValue);
@@ -78,7 +78,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $getter = 'get'.$property;
         $setter = 'set'.$property;
         
-        $option = new Option;
+        $option = new Option();
         
         $this->assertEquals($default, $option->$getter());
         $option->$setter($value);
@@ -95,7 +95,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
     
     public function testToString()
     {
-        $option = new Option;
+        $option = new Option();
         
         $this->assertEquals('', $option);
         $option->setPublicName('Color');

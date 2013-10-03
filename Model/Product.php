@@ -67,9 +67,9 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
      */    
     public function __construct() 
     {
-        $this->options = new ArrayCollection;
-        $this->variants = new ArrayCollection;
-        $this->createdAt = new \DateTime;
+        $this->options = new ArrayCollection();
+        $this->variants = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }    
     
     /**
@@ -259,7 +259,7 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
      */
     public function onPreSave()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }    
     
     /**

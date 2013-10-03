@@ -57,8 +57,8 @@ class Option implements OptionInterface
      */    
     public function __construct() 
     {
-        $this->values = new ArrayCollection;
-        $this->createdAt = new \DateTime;
+        $this->values = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }        
     
     /**
@@ -159,7 +159,7 @@ class Option implements OptionInterface
      */
     public function onPreSave()
     {
-        $this->updatedAt = new \DateTime;
+        $this->updatedAt = new \DateTime();
     }      
     
     /**

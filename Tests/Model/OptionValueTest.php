@@ -23,8 +23,8 @@ class OptionValueTest extends \PHPUnit_Framework_TestCase
 {
     public function testOption()
     {
-        $optionValue = new OptionValue;
-        $option = new Option;
+        $optionValue = new OptionValue();
+        $option = new Option();
         
         $this->assertNull($optionValue->getOption());
         $optionValue->setOption($option);
@@ -33,7 +33,7 @@ class OptionValueTest extends \PHPUnit_Framework_TestCase
     
     public function testValue()
     {
-        $optionValue = new OptionValue;
+        $optionValue = new OptionValue();
         
         $this->assertNull($optionValue->getValue());
         $optionValue->setValue('Black');
@@ -42,7 +42,7 @@ class OptionValueTest extends \PHPUnit_Framework_TestCase
 
     public function testToString()
     {
-        $optionValue = new OptionValue;
+        $optionValue = new OptionValue();
         
         $this->assertEquals('', $optionValue);
         $optionValue->setValue('Black');
