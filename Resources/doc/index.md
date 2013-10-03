@@ -200,7 +200,7 @@ public function registerBundles()
 }
 ```
 
-**b) Enable the sluggable extension in your `config.yml` file**
+**b) Enable the sluggable and timestampable extensions in your `config.yml` file**
 
 ``` yaml
 # app/config/config.yml
@@ -208,6 +208,7 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+            timestampable: true
 ```
 
 ### Next Steps

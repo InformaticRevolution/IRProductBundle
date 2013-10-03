@@ -34,6 +34,7 @@ stof_doctrine_extensions:
     orm:
         default:
             sluggable: true
+            timestampable: true
            
 # IRProduct Configuration            
 ir_product:
