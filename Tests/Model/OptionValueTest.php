@@ -11,7 +11,6 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Model;
 
-use IR\Bundle\ProductBundle\Model\Option;
 use IR\Bundle\ProductBundle\Model\OptionValue;
 
 /**
@@ -21,16 +20,6 @@ use IR\Bundle\ProductBundle\Model\OptionValue;
  */
 class OptionValueTest extends \PHPUnit_Framework_TestCase
 {
-    public function testOption()
-    {
-        $optionValue = new OptionValue();
-        $option = new Option();
-        
-        $this->assertNull($optionValue->getOption());
-        $optionValue->setOption($option);
-        $this->assertSame($option, $optionValue->getOption());
-    }
-    
     public function testValue()
     {
         $optionValue = new OptionValue();

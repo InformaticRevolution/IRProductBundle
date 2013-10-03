@@ -67,7 +67,7 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateOption()
     {
-        $option = $this->getOptionMock();
+        $option = $this->getOption();
         
         $this->objectManager->expects($this->once())
             ->method('persist')
@@ -81,7 +81,7 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
     
     public function testDeleteOption()
     {
-        $option = $this->getOptionMock();
+        $option = $this->getOption();
         
         $this->objectManager->expects($this->once())
             ->method('remove')
@@ -119,11 +119,10 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(self::OPTION_CLASS, $this->optionManager->getClass());
     }
     
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getOptionMock()
+    protected function getOption()
     {
-        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionInterface');
-    }
+        $optionClass = self::OPTION_CLASS;
+
+        return new $optionClass();
+    }  
 }

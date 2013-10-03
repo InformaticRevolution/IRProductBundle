@@ -67,7 +67,7 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdateProduct()
     {
-        $product = $this->getProductMock();
+        $product = $this->getProduct();
         
         $this->objectManager->expects($this->once())
             ->method('persist')
@@ -81,7 +81,7 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
     
     public function testDeleteProduct()
     {
-        $product = $this->getProductMock();
+        $product = $this->getProduct();
         
         $this->objectManager->expects($this->once())
             ->method('remove')
@@ -118,12 +118,11 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(self::PRODUCT_CLASS, $this->productManager->getClass());
     }
-    
-    /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    protected function getProductMock()
+
+    protected function getProduct()
     {
-        return $this->getMock('IR\Bundle\ProductBundle\Model\ProductInterface');
-    }
+        $productClass = self::PRODUCT_CLASS;
+
+        return new $productClass();
+    }    
 }

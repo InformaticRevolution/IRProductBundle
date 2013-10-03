@@ -12,6 +12,7 @@
 namespace IR\Bundle\ProductBundle\Tests\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+
 use IR\Bundle\ProductBundle\Model\Option;
 use IR\Bundle\ProductBundle\Model\OptionValue;
 
@@ -35,20 +36,14 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $optionValue = new OptionValue();
         
         $this->assertNotContains($optionValue, $option->getValues());
-        $option->addValue($optionValue);
-        $this->assertContains($optionValue, $option->getValues());
-    }
-    
-    public function testAddValueSetOption()
-    {
-        $option = new Option();
-        $optionValue = new OptionValue();
-        
         $this->assertNull($optionValue->getOption());
+        
         $option->addValue($optionValue);
+        
+        $this->assertContains($optionValue, $option->getValues());
         $this->assertSame($option, $optionValue->getOption());
     }
-            
+      
     public function testRemoveValue()
     {
         $option = new Option();
@@ -56,8 +51,12 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $option->addValue($optionValue);
         
         $this->assertContains($optionValue, $option->getValues());
+        $this->assertSame($option, $optionValue->getOption());
+        
         $option->removeValue($optionValue);
+        
         $this->assertNotContains($optionValue, $option->getValues());
+        $this->assertNull($optionValue->getOption());
     }       
     
     public function testHasValue()
@@ -90,6 +89,8 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         return array(
             array('Name', 'T-Shirt Color', null),
             array('PublicName', 'Color', null),
+            array('createdAt', new \DateTime(), null),
+            array('updatedAt', new \DateTime(), null),
         );
     }    
     
