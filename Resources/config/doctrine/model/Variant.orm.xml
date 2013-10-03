@@ -5,7 +5,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="IR\Bundle\ProductBundle\Model\Variant" repository-class="IR\Bundle\ProductBundle\Doctrine\VariantRepository">
+    <mapped-superclass name="IR\Bundle\ProductBundle\Model\Variant" repository-class="IR\Bundle\ProductBundle\Doctrine\ORM\VariantRepository">
                         
         <field name="master" column="master" type="boolean" />
                 
