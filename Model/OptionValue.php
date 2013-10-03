@@ -21,17 +21,17 @@ class OptionValue implements OptionValueInterface
     /**
      * @var mixed
      */
-    private $id; 
+    protected $id; 
 
     /**
      * @var OptionInterface
      */
-    private $option;       
+    protected $option;       
     
     /**
      * @var string
      */
-    private $value;      
+    protected $value;      
 
         
     /**

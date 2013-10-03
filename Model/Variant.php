@@ -24,32 +24,32 @@ class Variant implements VariantInterface
     /**
      * @var mixed
      */
-    private $id; 
+    protected $id; 
 
     /**
      * @var ProductInterface
      */
-    private $product;    
+    protected $product;    
 
     /**
      * @var Boolean
      */
-    private $master;    
+    protected $master;    
     
     /**
      * @var Collection
      */
-    private $options;    
+    protected $options;    
     
     /**
      * @var \Datetime
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \Datetime
      */
-    private $updatedAt;       
+    protected $updatedAt;       
     
     
     /**

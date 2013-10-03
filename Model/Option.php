@@ -24,32 +24,32 @@ class Option implements OptionInterface
     /**
      * @var mixed
      */
-    private $id; 
+    protected $id; 
 
     /**
      * @var string
      */
-    private $name; 
+    protected $name; 
     
     /**
      * @var string
      */
-    private $publicName;    
+    protected $publicName;    
 
     /**
      * @var Collection
      */
-    private $values;    
+    protected $values;    
     
     /**
      * @var \Datetime
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \Datetime
      */
-    private $updatedAt;    
+    protected $updatedAt;    
     
        
     /**

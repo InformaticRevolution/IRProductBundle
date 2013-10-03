@@ -24,42 +24,42 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
     /**
      * @var mixed
      */
-    private $id; 
+    protected $id; 
 
     /**
      * @var string
      */
-    private $name; 
+    protected $name; 
     
     /**
      * @var string
      */
-    private $slug;    
+    protected $slug;    
 
     /**
      * @var string
      */
-    private $description;
+    protected $description;
    
     /**
      * @var Collection
      */
-    private $options;    
+    protected $options;    
     
     /**
      * @var Collection
      */
-    private $variants;    
+    protected $variants;    
     
     /**
      * @var \Datetime
      */
-    private $createdAt;
+    protected $createdAt;
 
     /**
      * @var \Datetime
      */
-    private $updatedAt;     
+    protected $updatedAt;     
     
         
     /**
