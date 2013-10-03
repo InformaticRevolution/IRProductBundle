@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 
 /**
- * Product extension.
+ * Product Extension.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
