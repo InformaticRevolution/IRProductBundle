@@ -72,13 +72,27 @@ interface ProductInterface
      *
      * @return \Datetime
      */
-    public function getCreatedAt(); 
-
+    public function getCreatedAt();   
+    
+    /**
+     * Sets the creation time.
+     * 
+     * @param \Datetime $createdAt
+     */
+    public function setCreatedAt(\Datetime $createdAt);    
+    
     /**
      * Returns the last update time.
      *
      * @return \Datetime
      */
-    public function getUpdatedAt();    
+    public function getUpdatedAt();  
+    
+    /**
+     * Sets the last update time.
+     * 
+     * @param \Datetime|null $updatedAt
+     */
+    public function setUpdatedAt(\Datetime $updatedAt = null);  
 }
 

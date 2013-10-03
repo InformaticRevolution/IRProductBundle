@@ -14,11 +14,11 @@ namespace IR\Bundle\ProductBundle\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Variable Interface.
+ * Variable Product Interface.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-interface VariableInterface
+interface VariableProductInterface extends ProductInterface
 {
     /**
      * Returns the master variant.
@@ -34,6 +34,16 @@ interface VariableInterface
      */
     public function setMasterVariant(VariantInterface $variant);
 
+    /**
+     * Checks whether product has one ore more variants.
+     * 
+     * This method is not for checking if product is simple or customizable.
+     * It should determine if any variants (other than internal master) exist.
+     *
+     * @return Boolean
+     */
+    //public function hasVariants();    
+    
     /**
      * Returns all variants.
      *

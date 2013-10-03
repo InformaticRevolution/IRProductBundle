@@ -30,16 +30,16 @@ interface VariantInterface
     /**
      * Returns the product.
      *
-     * @return ProductInterface
+     * @return VariableProductInterface
      */
     public function getProduct();
 
     /**
      * Sets the product.
      *
-     * @param ProductInterface $product
+     * @param VariableProductInterface $product
      */
-    public function setProduct(ProductInterface $product = null);    
+    public function setProduct(VariableProductInterface $product = null);    
 
     /**
      * Checks whether variant is master.
@@ -88,13 +88,27 @@ interface VariantInterface
      *
      * @return \Datetime
      */
-    public function getCreatedAt();
+    public function getCreatedAt();   
+    
+    /**
+     * Sets the creation time.
+     * 
+     * @param \Datetime $createdAt
+     */
+    public function setCreatedAt(\Datetime $createdAt);    
     
     /**
      * Returns the last update time.
      *
      * @return \Datetime
      */
-    public function getUpdatedAt(); 
+    public function getUpdatedAt();  
+    
+    /**
+     * Sets the last update time.
+     * 
+     * @param \Datetime|null $updatedAt
+     */
+    public function setUpdatedAt(\Datetime $updatedAt = null);
 }
 

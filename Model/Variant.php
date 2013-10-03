@@ -27,7 +27,7 @@ class Variant implements VariantInterface
     protected $id; 
 
     /**
-     * @var ProductInterface
+     * @var VariableProductInterface
      */
     protected $product;    
 
@@ -59,7 +59,6 @@ class Variant implements VariantInterface
     {
         $this->master = false;
         $this->options = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -81,7 +80,7 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */  
-    public function setProduct(ProductInterface $product = null)
+    public function setProduct(VariableProductInterface $product = null)
     {
         $this->product = $product;
     }
@@ -147,16 +146,24 @@ class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */   
+    public function setCreatedAt(\Datetime $createdAt)
+    {
+        $this->createdAt = $createdAt;        
+    }      
+    
+    /**
+     * {@inheritdoc}
+     */   
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-    
+    } 
+
     /**
-     * Updates some fields before saving the variant.
-     */
-    public function onPreSave()
+     * {@inheritdoc}
+     */   
+    public function setUpdatedAt(\Datetime $updatedAt = null)
     {
-        $this->updatedAt = new \DateTime();
-    }    
+        $this->updatedAt = $updatedAt;        
+    }       
 }

@@ -19,7 +19,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Product implements ProductInterface, OptionableInterface, VariableInterface
+class Product implements VariableProductInterface, OptionableInterface
 {
     /**
      * @var mixed
@@ -69,7 +69,6 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
     {
         $this->options = new ArrayCollection();
         $this->variants = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }    
     
     /**
@@ -179,7 +178,7 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
             if ($variant->isMaster()) {
                 return $variant;
             }
-        }        
+        }
     }  
     
     /**
@@ -188,15 +187,19 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
     public function setMasterVariant(VariantInterface $variant)
     {
         if ($this->hasVariant($variant)) {
-            return $this;
+            return;
         }        
+        
+        $masterVariant = $this->getMasterVariant();
+        
+        if (null !== $masterVariant) {
+            $this->variants->removeElement($masterVariant);
+        }
         
         $variant->setProduct($this);
         $variant->setMaster(true);
 
         $this->variants->add($variant);
-        
-        return $this;
     }    
     
     /**
@@ -249,17 +252,25 @@ class Product implements ProductInterface, OptionableInterface, VariableInterfac
     /**
      * {@inheritdoc}
      */   
+    public function setCreatedAt(\Datetime $createdAt)
+    {
+        $this->createdAt = $createdAt;        
+    }      
+    
+    /**
+     * {@inheritdoc}
+     */   
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     } 
 
     /**
-     * Updates some fields before saving the product.
-     */
-    public function onPreSave()
+     * {@inheritdoc}
+     */   
+    public function setUpdatedAt(\Datetime $updatedAt = null)
     {
-        $this->updatedAt = new \DateTime();
+        $this->updatedAt = $updatedAt;        
     }    
     
     /**

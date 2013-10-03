@@ -58,7 +58,6 @@ class Option implements OptionInterface
     public function __construct() 
     {
         $this->values = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }        
     
     /**
@@ -149,19 +148,27 @@ class Option implements OptionInterface
     /**
      * {@inheritdoc}
      */   
+    public function setCreatedAt(\Datetime $createdAt)
+    {
+        $this->createdAt = $createdAt;        
+    }      
+    
+    /**
+     * {@inheritdoc}
+     */   
     public function getUpdatedAt()
     {
         return $this->updatedAt;
     } 
 
     /**
-     * Updates some fields before saving the option.
-     */
-    public function onPreSave()
+     * {@inheritdoc}
+     */   
+    public function setUpdatedAt(\Datetime $updatedAt = null)
     {
-        $this->updatedAt = new \DateTime();
-    }      
-    
+        $this->updatedAt = $updatedAt;        
+    }       
+
     /**
      * Returns the option public name.
      *
