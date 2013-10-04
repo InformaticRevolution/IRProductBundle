@@ -144,6 +144,16 @@ class Product implements VariableProductInterface, OptionableInterface
     }
     
     /**
+     * 
+     */
+    public function setOptions(Collection $options)
+    {
+        foreach ($options as $option) {
+            $this->addOption($option);
+        }
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function addOption(OptionInterface $option)
