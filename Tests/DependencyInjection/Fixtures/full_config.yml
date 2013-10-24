@@ -1,0 +1,23 @@
+db_driver: orm
+product_class: Acme\ProductBundle\Entity\Product
+product_manager: acme_product.manager.product
+product:
+    form:
+        type: acme_product
+        name: acme_product_form
+        validation_groups: [acme_product]
+option:
+    option_class: Acme\ProductBundle\Entity\Option
+    option_value_class: Acme\ProductBundle\Entity\OptionValue
+    form:
+        type: acme_product_option
+        name: acme_product_option_form  
+        validation_groups: [acme_option]
+variant:
+    variant_class: Acme\ProductBundle\Entity\Variant
+    form:
+        type: acme_product_variant
+        name: acme_product_variant_form
+        validation_groups: [acme_variant]
+template:
+    engine: php

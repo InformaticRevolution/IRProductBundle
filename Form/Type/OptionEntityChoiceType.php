@@ -11,12 +11,8 @@
 
 namespace IR\Bundle\ProductBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
 /**
- * Option entity choice type.
+ * Option Entity Choice Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

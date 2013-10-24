@@ -15,9 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use IR\Bundle\ProductBundle\IRProductEvents;
 use IR\Bundle\ProductBundle\Event\VariantEvent;
+use IR\Bundle\ProductBundle\Model\ProductInterface;
+use IR\Bundle\ProductBundle\Model\VariantInterface;
 
 /**
  * Controller managing the variants.
@@ -34,13 +37,10 @@ class VariantController extends ContainerAware
         $product = $this->findProductById($productId);
         
         if (!$product->hasOptions()) {
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId()))); 
+            throw new AccessDeniedHttpException(sprintf('The product with id %s has no options', $productId));            
         }
-        
-        /* @var $variantManager \IR\Bundle\ProductBundle\Manager\VariantManagerInterface */
-        $variantManager = $this->container->get('ir_product.manager.variant');
-        $variant = $variantManager->createVariant();
-        $variant->setProduct($product);
+                
+        $variant = $this->container->get('ir_product.manager.variant')->createVariant();
         
         $form = $this->container->get('ir_product.form.variant'); 
         $form->setData($variant);
@@ -54,7 +54,7 @@ class VariantController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');                      
             $dispatcher->dispatch(IRProductEvents::VARIANT_CREATE_COMPLETED, new VariantEvent($variant));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId())));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                      
         }
         
         return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:new.html.'.$this->getEngine(), array(
@@ -81,7 +81,7 @@ class VariantController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRProductEvents::VARIANT_EDIT_COMPLETED, new VariantEvent($variant));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $variant->getProduct()->getId())));                     
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $variant->getProduct()->getId())));                     
         }        
         
         return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:edit.html.'.$this->getEngine(), array(
@@ -105,7 +105,7 @@ class VariantController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');          
         $dispatcher->dispatch(IRProductEvents::VARIANT_DELETE_COMPLETED, new VariantEvent($variant));
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId())));    
+        return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));    
     }           
     
     /**
@@ -113,7 +113,7 @@ class VariantController extends ContainerAware
      *
      * @param mixed $id
      *
-     * @return IR\Bundle\ProductBundle\Model\ProductInterface
+     * @return ProductInterface
      * 
      * @throws NotFoundHttpException When product does not exist
      */
@@ -133,7 +133,7 @@ class VariantController extends ContainerAware
      *
      * @param mixed $id
      *
-     * @return IR\Bundle\ProductBundle\Model\VariantInterface
+     * @return VariantInterface
      * 
      * @throws NotFoundHttpException When variant does not exist
      */

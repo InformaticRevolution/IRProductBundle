@@ -11,8 +11,6 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Controller;
 
-use Nelmio\Alice\Fixtures;
-use Symfony\Component\BrowserKit\Client;
 use IR\Bundle\ProductBundle\Tests\Functional\WebTestCase;
 
 /**
@@ -22,22 +20,19 @@ use IR\Bundle\ProductBundle\Tests\Functional\WebTestCase;
  */
 class OptionControllerTest extends WebTestCase
 {
-    /**
-     * @var Client 
-     */
-    private $client;
-
+    const FORM_INTENTION = 'option';
+    
 
     protected function setUp()
     {
-        $this->client = self::createClient();
-        $this->importDatabaseSchema();
-        $this->loadFixtures();
-    } 
+        parent::setUp();
+        
+        $this->loadFixtures('option');
+    }     
     
     public function testListAction()
     {
-        $crawler = $this->client->request('GET', '/options/list');
+        $crawler = $this->client->request('GET', '/options/');
 
         $this->assertResponseStatusCode(200);
         $this->assertCount(3, $crawler->filter('table tbody tr'));
@@ -57,7 +52,7 @@ class OptionControllerTest extends WebTestCase
             'ir_product_option_form' => array (
                 'name' => 'T-Shirt Color',
                 'publicName' => 'Color',
-                '_token' => $this->generateCsrfToken(),
+                '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
         
@@ -66,7 +61,7 @@ class OptionControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/options/list');
+        $this->assertCurrentUri('/options/');
         $this->assertCount(4, $crawler->filter('table tbody tr'));
         $this->assertRegExp('~T-Shirt Color~', $crawler->filter('table tbody')->text());        
     }    
@@ -85,7 +80,7 @@ class OptionControllerTest extends WebTestCase
             'ir_product_option_form' => array (
                 'name' => 'T-Shirt Color',
                 'publicName' => 'Color',
-                '_token' => $this->generateCsrfToken(),
+                '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));     
         
@@ -94,7 +89,7 @@ class OptionControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/options/list');
+        $this->assertCurrentUri('/options/');
         $this->assertCount(3, $crawler->filter('table tbody tr'));
         $this->assertRegExp('~T-Shirt Color~', $crawler->filter('table tbody')->text());      
     } 
@@ -107,58 +102,17 @@ class OptionControllerTest extends WebTestCase
         
         $crawler = $this->client->followRedirect();
         
-        $this->assertCurrentUri('/options/list');
+        $this->assertResponseStatusCode(200);
+        $this->assertCurrentUri('/options/');
         $this->assertCount(2, $crawler->filter('table tbody tr'));
-    }      
+    }   
     
-    /**
-     * @param integer $statusCode
-     */
-    protected function assertResponseStatusCode($statusCode)
+    public function testNotFoundHttpWhenOptionNotExist()
     {
-        $this->assertEquals($statusCode, $this->client->getResponse()->getStatusCode());
-    }      
-    
-    /**
-     * @param string $uri
-     */
-    protected function assertCurrentUri($uri)
-    {
-        $this->assertStringEndsWith($uri, $this->client->getHistory()->current()->getUri());
-    }
-    
-     /**
-      * Generates a CSRF token.
-      * 
-      * @return string
-      */
-    protected function generateCsrfToken()
-    {
-        return $this->client->getContainer()->get('form.csrf_provider')->generateCsrfToken('option');
-    }    
-    
-    /*
-     * Loads the test fixtures into the database.
-     */    
-    protected function loadFixtures()
-    {
-        Fixtures::load($this->getFixtures(), self::$kernel->getContainer()->get('doctrine.orm.entity_manager'));       
-    } 
-    
-    /**
-     * Returns test fixtures.
-     * 
-     * @return array
-     */    
-    protected function getFixtures()
-    {
-        return array(
-            'IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option' => array(
-                'option{1..3}' => array(
-                    'name' => '<sentence(2)>',
-                    'publicName' => '<sentence(2)>',
-                )
-            )
-        );
-    }      
+        $this->client->request('GET', '/options/4/edit');
+        $this->assertResponseStatusCode(404);
+        
+        $this->client->request('GET', '/options/4/delete');
+        $this->assertResponseStatusCode(404);        
+    }     
 }

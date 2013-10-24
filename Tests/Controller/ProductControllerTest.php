@@ -11,8 +11,6 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Controller;
 
-use Nelmio\Alice\Fixtures;
-use Symfony\Component\BrowserKit\Client;
 use IR\Bundle\ProductBundle\Tests\Functional\WebTestCase;
 
 /**
@@ -22,26 +20,30 @@ use IR\Bundle\ProductBundle\Tests\Functional\WebTestCase;
  */
 class ProductControllerTest extends WebTestCase
 {
-    /**
-     * @var Client 
-     */
-    private $client;
-
-
+    const FORM_INTENTION = 'product';
+    
+    
     protected function setUp()
     {
-        $this->client = self::createClient();
-        $this->importDatabaseSchema();
-        $this->loadFixtures();
-    } 
+        parent::setUp();
         
+        $this->loadFixtures('product');
+    } 
+    
     public function testListAction()
     {
-        $crawler = $this->client->request('GET', '/products/list');
+        $crawler = $this->client->request('GET', '/products/');
 
         $this->assertResponseStatusCode(200);
-        $this->assertCount(5, $crawler->filter('table tbody tr'));
+        $this->assertCount(3, $crawler->filter('table tbody tr'));
     }  
+    
+    public function testShowAction()
+    {
+        $this->client->request('GET', '/products/1');
+        
+        $this->assertResponseStatusCode(200);
+    }    
     
     public function testNewActionGetMethod()
     {
@@ -56,7 +58,7 @@ class ProductControllerTest extends WebTestCase
         $this->client->request('POST', '/products/new', array(
             'ir_product_form' => array (
                 'name' => 'Product 1',
-                '_token' => $this->generateCsrfToken(),
+                '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
         
@@ -65,7 +67,7 @@ class ProductControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/6/edit');
+        $this->assertCurrentUri('/products/4');
     }      
     
     public function testEditActionGetMethod()
@@ -81,7 +83,7 @@ class ProductControllerTest extends WebTestCase
         $this->client->request('POST', '/products/1/edit', array(
             'ir_product_form' => array (
                 'name' => 'Product ',
-                '_token' => $this->generateCsrfToken(),
+                '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));     
         
@@ -90,9 +92,9 @@ class ProductControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/1/edit');
+        $this->assertCurrentUri('/products/1');
     }     
-
+    
     public function testDeleteAction()
     {
         $this->client->request('GET', '/products/1/delete');
@@ -101,57 +103,20 @@ class ProductControllerTest extends WebTestCase
         
         $crawler = $this->client->followRedirect();
         
-        $this->assertCurrentUri('/products/list');
-        $this->assertCount(4, $crawler->filter('table tbody tr'));
-    }      
+        $this->assertResponseStatusCode(200);
+        $this->assertCurrentUri('/products/');
+        $this->assertCount(2, $crawler->filter('table tbody tr'));
+    }  
     
-    /**
-     * @param integer $statusCode
-     */
-    protected function assertResponseStatusCode($statusCode)
+    public function testNotFoundHttpWhenProductNotExist()
     {
-        $this->assertEquals($statusCode, $this->client->getResponse()->getStatusCode());
-    }       
-    
-    /**
-     * @param string $uri
-     */
-    protected function assertCurrentUri($uri)
-    {
-        $this->assertStringEndsWith($uri, $this->client->getHistory()->current()->getUri());
-    }
-    
-     /**
-      * Generates a CSRF token.
-      * 
-      * @return string
-      */
-    protected function generateCsrfToken()
-    {
-        return $this->client->getContainer()->get('form.csrf_provider')->generateCsrfToken('product');
-    }      
-    
-    /*
-     * Loads the test fixtures into the database.
-     */    
-    protected function loadFixtures()
-    {
-        Fixtures::load($this->getFixtures(), self::$kernel->getContainer()->get('doctrine.orm.entity_manager'));       
-    } 
-    
-    /**
-     * Returns test fixtures.
-     * 
-     * @return array
-     */    
-    protected function getFixtures()
-    {
-        return array(
-            'IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Product' => array(
-                'produdct{1..5}' => array(
-                    'name' => '<sentence(5)>',
-                )
-            )
-        );
+        $this->client->request('GET', '/products/4');
+        $this->assertResponseStatusCode(404);        
+        
+        $this->client->request('GET', '/products/4/edit');
+        $this->assertResponseStatusCode(404);
+        
+        $this->client->request('GET', '/products/4/delete');
+        $this->assertResponseStatusCode(404);        
     }    
 }

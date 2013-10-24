@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 /**
- * Validation pass.
+ * Validation Pass.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

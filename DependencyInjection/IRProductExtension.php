@@ -46,7 +46,7 @@ class IRProductExtension extends Extension
         $container->setAlias('ir_product.manager.product', $config['product_manager']);
         
         if (!empty($config['product'])) {
-            $this->loadProduct($config['product'], $container, $loader, $config['product_class']);
+            $this->loadProduct($config['product'], $container, $loader);
         }          
         
         if (!empty($config['option'])) {
@@ -58,12 +58,13 @@ class IRProductExtension extends Extension
         }
     }
     
-    private function loadProduct(array $config, ContainerBuilder $container, XmlFileLoader $loader, $productClass)
+    private function loadProduct(array $config, ContainerBuilder $container, XmlFileLoader $loader)
     {        
         $loader->load('product.xml');
         
         $container->setParameter('ir_product.form.name.product', $config['form']['name']);
-        $container->setParameter('ir_product.form.type.product', $config['form']['type']);   
+        $container->setParameter('ir_product.form.type.product', $config['form']['type']);
+        $container->setParameter('ir_product.form.validation_groups.product', $config['form']['validation_groups']);
     }      
     
     private function loadOption(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
@@ -75,6 +76,7 @@ class IRProductExtension extends Extension
         $container->setParameter('ir_product.model.option_value.class', $config['option_value_class']); 
         $container->setParameter('ir_product.form.name.option', $config['form']['name']);
         $container->setParameter('ir_product.form.type.option', $config['form']['type']);   
+        $container->setParameter('ir_product.form.validation_groups.option', $config['form']['validation_groups']);
         
         $container->setAlias('ir_product.manager.option', $config['option_manager']);
     }    
@@ -82,11 +84,13 @@ class IRProductExtension extends Extension
     private function loadVariant(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
     {        
         $loader->load('variant.xml');
+        $loader->load('validator.xml');
         $loader->load(sprintf('driver/%s/variant.xml', $dbDriver));
         
         $container->setParameter('ir_product.model.variant.class', $config['variant_class']);
         $container->setParameter('ir_product.form.name.variant', $config['form']['name']);
         $container->setParameter('ir_product.form.type.variant', $config['form']['type']);
+        $container->setParameter('ir_product.form.validation_groups.variant', $config['form']['validation_groups']);
         
         $container->setAlias('ir_product.manager.variant', $config['variant_manager']);
     }       

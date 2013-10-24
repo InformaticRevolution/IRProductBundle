@@ -25,6 +25,6 @@ abstract class ProductManager implements ProductManagerInterface
     {
         $class = $this->getClass();
 
-        return new $class;
+        return new $class();
     } 
 }

@@ -30,8 +30,8 @@ class IRProductBundle extends Bundle
     {
         parent::build($container);
         
-        $container->addCompilerPass(new ValidationPass());
         $this->addRegisterMappingsPass($container);
+        $container->addCompilerPass(new ValidationPass());
     }    
     
     private function addRegisterMappingsPass(ContainerBuilder $container)

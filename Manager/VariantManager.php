@@ -25,6 +25,6 @@ abstract class VariantManager implements VariantManagerInterface
     {
         $class = $this->getClass();
 
-        return new $class;
+        return new $class();
     } 
 }

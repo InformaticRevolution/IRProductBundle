@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Manager\VariantManager;
  */
 class VariantManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const VARIANT_CLASS = 'IR\Bundle\ProductBundle\Model\Variant';
+    const VARIANT_CLASS = 'IR\Bundle\ProductBundle\Tests\TestVariant';
  
     /**
      * @var VariantManager
@@ -34,13 +34,13 @@ class VariantManagerTest extends \PHPUnit_Framework_TestCase
         
         $this->variantManager->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue(self::VARIANT_CLASS));        
+            ->will($this->returnValue(static::VARIANT_CLASS));        
     }
     
     public function testCreateVariant()
     {        
         $variant = $this->variantManager->createVariant();
         
-        $this->assertInstanceOf(self::VARIANT_CLASS, $variant);
+        $this->assertInstanceOf(static::VARIANT_CLASS, $variant);
     }
 }

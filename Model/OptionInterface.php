@@ -56,7 +56,7 @@ interface OptionInterface
     public function setPublicName($publicName);    
 
     /**
-     * Returns all values.
+     * Returns all the values.
      *
      * @return Collection
      */

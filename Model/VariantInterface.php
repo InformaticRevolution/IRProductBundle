@@ -42,21 +42,7 @@ interface VariantInterface
     public function setProduct(VariableProductInterface $product = null);    
 
     /**
-     * Checks whether variant is master.
-     *
-     * @return Boolean
-     */
-    public function isMaster();
-
-    /**
-     * Sets the master status of the variant.
-     *
-     * @param Boolean $master
-     */
-    public function setMaster($master);    
-    
-    /**
-     * Returns all options.
+     * Returns all the options.
      *
      * @return Collection
      */

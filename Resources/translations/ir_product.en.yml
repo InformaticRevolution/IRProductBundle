@@ -1,12 +1,11 @@
 # Product
 product: 
+    name: Name
+    created_at: Creation time
+    updated_at: Last update time
+    
     list:
         title: Products
-        column:
-            name: Name
-            actions: Actions
-        button: 
-            new: Add product
         no_products: You haven't added any products yet.  
     new:
         title: Add a product
@@ -15,7 +14,9 @@ product:
     edit:
         title: Edit a product
         save: Save
-        cancel: Cancel           
+        cancel: Cancel      
+    action: 
+        new: Add a product        
     flash:
         created: The product has been successfully created
         updated: The product has been successfully updated
@@ -23,15 +24,12 @@ product:
 
 # Option
 option:
+    name: Name
+    public_name: Public name
+  
     list:
         title: Options
-        column:
-            name: Name
-            public_name: Public name
-            actions: Actions
-        button: 
-            new: Add option
-        no_options: You haven't added any options yet    
+        no_results: You haven't added any options yet    
     new:
         title: Add an option
         save: Save
@@ -40,6 +38,8 @@ option:
         title: Edit an option
         save: Save
         cancel: Cancel   
+    action:
+        new: Add an option        
     flash:
         created: The option has been successfully created
         updated: The option has been successfully updated
@@ -63,15 +63,15 @@ variant:
 # Form field labels
 form:   
     product:
-        name : "Name :"
-        description: "Description :"
-        master_variant: "Master variant :"
-        options: "Options :"
+        name : "Name:"
+        description: "Description:"
+        options: "Options:"
+        master_variant: "Master variant:"
     option:
-        name: "Name :"
-        public_name: "Public name :"
-        values: "Values :"
+        name: "Name:"
+        public_name: "Public name:"
+        values: "Values:"
     option_value:
-        value: "Value :"        
+        value: "Value:"        
     variant:
-        options: "Options :"
+        options: "Options:"

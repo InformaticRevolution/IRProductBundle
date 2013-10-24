@@ -1,0 +1,2 @@
+db_driver: orm
+product_class: Acme\ProductBundle\Entity\Product

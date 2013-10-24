@@ -12,7 +12,7 @@
         <service id="ir_product.validator.unique_variant" class="%ir_product.validator.unique_variant.class%">
             <argument type="service" id="ir_product.manager.variant" />
             <tag name="validator.constraint_validator" alias="ir_product_unique_variant" />
-        </service>
+        </service>                
     </services>
 
 </container>

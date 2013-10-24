@@ -148,6 +148,19 @@ In XML:
 
 ### Step 2: Define the Product-Variant relation
 
+**Warning:**
+
+> When working with variants, your Product class must inherit from 
+> VariableProduct instead of Product.
+
+``` php
+// Before 
+use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
+
+// After
+use IR\Bundle\ProductBundle\Model\VariableProduct as BaseProduct;
+```
+
 ##### Annotations
 
 ``` php
@@ -157,7 +170,7 @@ In XML:
 namespace Acme\ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
+use IR\Bundle\ProductBundle\Model\VariableProduct as BaseProduct;
 
 /**
  * @ORM\Entity

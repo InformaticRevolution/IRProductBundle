@@ -8,46 +8,54 @@
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">ir_product.product.name.not_blank</option>
+                <option name="groups">Product</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_product.product.name.min_length</option>
                 <option name="maxMessage">ir_product.product.name.max_length</option>
+                <option name="groups">Product</option>
             </constraint>
-        </property>   
-       
-        <getter property="masterVariant">
-            <constraint name="Valid" />
-        </getter>        
-       
-        <getter property="variants">
-            <constraint name="Valid" />
-        </getter>        
+        </property>       
     </class>
+    
+    <class name="IR\Bundle\ProductBundle\Model\VariableProduct">
+        <property name="masterVariant">
+            <constraint name="Valid" />
+        </property>        
+       
+        <property name="variants">
+            <constraint name="Valid" />
+        </property>        
+    </class>    
 
     <class name="IR\Bundle\ProductBundle\Model\Option">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">ir_product.option.name.not_blank</option>
+                <option name="groups">Option</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_product.option.name.min_length</option>
                 <option name="maxMessage">ir_product.option.name.max_length</option>
+                <option name="groups">Option</option>
             </constraint>
         </property>
         
         <property name="publicName">
             <constraint name="NotBlank">
                 <option name="message">ir_product.option.public_name.not_blank</option>
+                <option name="groups">Option</option>
             </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>
                 <option name="minMessage">ir_product.option.public_name.min_length</option>
                 <option name="maxMessage">ir_product.option.public_name.max_length</option>
+                <option name="groups">Option</option>
             </constraint>
         </property>
         
@@ -60,18 +68,21 @@
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">ir_product.option_value.value.not_blank</option>
+                <option name="groups">Option</option>
             </constraint>
             <constraint name="Length">
                 <option name="max">255</option>
                 <option name="maxMessage">ir_product.option_value.value.max_length</option>
+                <option name="groups">Option</option>
             </constraint>
         </property>      
     </class>        
-    
+ 
     <class name="IR\Bundle\ProductBundle\Model\Variant">
         <constraint name="IR\Bundle\ProductBundle\Validator\Constraints\UniqueVariant">
             <option name="message">ir_product.variant.options.not_unique</option>
+            <option name="groups">Variant</option>
         </constraint>
     </class>       
-    
+
 </constraint-mapping>        

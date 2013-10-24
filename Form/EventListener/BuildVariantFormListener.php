@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Build variant form listener.
+ * Build Variant Form Listener.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -48,7 +48,7 @@ class BuildVariantFormListener implements EventSubscriberInterface
         
         // We should only be able to select options during the creation process.
         $disabled = null !== $variant->getId();        
-        
+                
         if (null !== $product && $product->hasOptions()) {
             $form->add('options', 'ir_product_product_options', array(
                 'product' => $product,

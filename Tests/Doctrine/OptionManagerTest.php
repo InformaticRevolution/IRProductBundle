@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Doctrine\OptionManager;
  */
 class OptionManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const OPTION_CLASS = 'IR\Bundle\ProductBundle\Model\Option';
+    const OPTION_CLASS = 'IR\Bundle\ProductBundle\Tests\TestOption';
     
     /**
      * @var OptionManager
@@ -43,26 +43,26 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
         if (!interface_exists('Doctrine\Common\Persistence\ObjectManager')) {
             $this->markTestSkipped('Doctrine Common has to be installed for this test to run.');
         }  
-                
+
         $class = $this->getMock('Doctrine\Common\Persistence\Mapping\ClassMetadata');
         $this->objectManager = $this->getMock('Doctrine\Common\Persistence\ObjectManager');
         $this->repository = $this->getMock('Doctrine\Common\Persistence\ObjectRepository');
                 
         $this->objectManager->expects($this->any())
             ->method('getRepository')
-            ->with($this->equalTo(self::OPTION_CLASS))
+            ->with($this->equalTo(static::OPTION_CLASS))
             ->will($this->returnValue($this->repository));        
 
         $this->objectManager->expects($this->any())
             ->method('getClassMetadata')
-            ->with($this->equalTo(self::OPTION_CLASS))
+            ->with($this->equalTo(static::OPTION_CLASS))
             ->will($this->returnValue($class));        
         
         $class->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue(self::OPTION_CLASS));        
+            ->will($this->returnValue(static::OPTION_CLASS));        
         
-        $this->optionManager = new OptionManager($this->objectManager, self::OPTION_CLASS);
+        $this->optionManager = new OptionManager($this->objectManager, static::OPTION_CLASS);
     }    
 
     public function testUpdateOption()
@@ -116,13 +116,13 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
             
     public function testGetClass()
     {
-        $this->assertEquals(self::OPTION_CLASS, $this->optionManager->getClass());
+        $this->assertEquals(static::OPTION_CLASS, $this->optionManager->getClass());
     }
     
     protected function getOption()
     {
-        $optionClass = self::OPTION_CLASS;
+        $class = static::OPTION_CLASS;
 
-        return new $optionClass();
+        return new $class();
     }  
 }

@@ -4,47 +4,44 @@
     <h1>{{ 'option.list.title'|trans }}</h1>
 </div>
 
-<div class="well">
-    <a href="{{ path('ir_product_option_new') }}" class="btn btn-primary">
-        <i class="icon-plus icon-white"></i> {{ 'option.list.button.new'|trans }}
-    </a>
-</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href="{{ path('ir_product_option_new') }}" class="btn btn-primary">
+            <i class="glyphicon glyphicon-plus"></i> {{ 'option.action.new'|trans }}
+        </a>
+    </div>
+</div>  
 
 {% if options|length %}
-    <table class="table table-bordered">
-        <colgroup>
-            <col style="width: 45%" />
-            <col style="width: 44%" />
-            <col style="width: 1%" />
-        </colgroup>        
-        <thead>
-            <tr>
-                <th>{{ 'option.list.column.name'|trans }}</th>
-                <th>{{ 'option.list.column.public_name'|trans }}</th>
-                <th>{{ 'option.list.column.actions'|trans }}</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for option in options %}
-            <tr>
-                <td>{{ option.name }}</td>
-                <td>{{ option.publicName }}</td>
-                <td>
-                    <div class="btn-group pull-right">
-                        <a href="{{ path('ir_product_option_edit', {'id': option.id}) }}" class="btn">
-                            <i class="icon-pencil"></i>
-                        </a>
-                        <a href="{{ path('ir_product_option_delete', {'id': option.id}) }}" class="btn btn-danger" >
-                            <i class="icon-trash icon-white"></i>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+<table class="table table-striped">      
+    <thead>
+        <tr>
+            <th>{{ 'option.name'|trans }}</th>
+            <th>{{ 'option.public_name'|trans }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for option in options %}
+        <tr>
+            <td>{{ option.name }}</td>
+            <td>{{ option.publicName }}</td>
+            <td>
+                <div class="pull-right">
+                    <a href="{{ path('ir_product_option_edit', {'id': option.id}) }}" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </a>
+                    <a href="{{ path('ir_product_option_delete', {'id': option.id}) }}" class="btn btn-danger" >
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% else %}
-    <div class="well">
-        {{ 'option.list.no_options'|trans }}
-    </div>
+<div class="well">
+    {{ 'option.list.no_results'|trans }}
+</div>
 {% endif %}

@@ -15,11 +15,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Product implementation.
+ * Abstract Product implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Product implements VariableProductInterface, OptionableInterface
+abstract class Product implements ProductInterface, OptionableInterface
 {
     /**
      * @var mixed
@@ -45,12 +45,7 @@ class Product implements VariableProductInterface, OptionableInterface
      * @var Collection
      */
     protected $options;    
-    
-    /**
-     * @var Collection
-     */
-    protected $variants;    
-    
+
     /**
      * @var \Datetime
      */
@@ -68,7 +63,6 @@ class Product implements VariableProductInterface, OptionableInterface
     public function __construct() 
     {
         $this->options = new ArrayCollection();
-        $this->variants = new ArrayCollection();
     }    
     
     /**
@@ -142,17 +136,7 @@ class Product implements VariableProductInterface, OptionableInterface
     {
         return $this->options;
     }
-    
-    /**
-     * 
-     */
-    public function setOptions(Collection $options)
-    {
-        foreach ($options as $option) {
-            $this->addOption($option);
-        }
-    }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -179,78 +163,6 @@ class Product implements VariableProductInterface, OptionableInterface
         return $this->options->contains($option);
     }     
 
-    /**
-     * {@inheritdoc}
-     */  
-    public function getMasterVariant()
-    {
-        foreach ($this->variants as $variant) {
-            if ($variant->isMaster()) {
-                return $variant;
-            }
-        }
-    }  
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function setMasterVariant(VariantInterface $variant)
-    {
-        if ($this->hasVariant($variant)) {
-            return;
-        }        
-        
-        $masterVariant = $this->getMasterVariant();
-        
-        if (null !== $masterVariant) {
-            $this->variants->removeElement($masterVariant);
-        }
-        
-        $variant->setProduct($this);
-        $variant->setMaster(true);
-
-        $this->variants->add($variant);
-    }    
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getVariants()
-    {        
-        return $this->variants->filter(function (VariantInterface $variant) {
-            return !$variant->isMaster();
-        });        
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function addVariant(VariantInterface $variant)
-    {
-        if (!$this->hasVariant($variant)) {
-            $variant->setProduct($this);
-            $this->variants->add($variant);
-        }
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function removeVariant(VariantInterface $variant)
-    {
-        if ($this->variants->removeElement($variant)) {
-            $variant->setProduct(null);
-        }
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function hasVariant(VariantInterface $variant)
-    {
-        return $this->variants->contains($variant);
-    }      
-    
     /**
      * {@inheritdoc}
      */   

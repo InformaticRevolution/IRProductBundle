@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Doctrine\VariantManager;
  */
 class VariantManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const VARIANT_CLASS = 'IR\Bundle\ProductBundle\Model\Variant';
+    const VARIANT_CLASS = 'IR\Bundle\ProductBundle\Tests\TestVariant';
     
     /**
      * @var VariantManager
@@ -50,23 +50,35 @@ class VariantManagerTest extends \PHPUnit_Framework_TestCase
                 
         $this->objectManager->expects($this->any())
             ->method('getRepository')
-            ->with($this->equalTo(self::VARIANT_CLASS))
+            ->with($this->equalTo(static::VARIANT_CLASS))
             ->will($this->returnValue($this->repository));        
 
         $this->objectManager->expects($this->any())
             ->method('getClassMetadata')
-            ->with($this->equalTo(self::VARIANT_CLASS))
+            ->with($this->equalTo(static::VARIANT_CLASS))
             ->will($this->returnValue($class));        
         
         $class->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue(self::VARIANT_CLASS));        
+            ->will($this->returnValue(static::VARIANT_CLASS));        
         
-        $this->variantManager = new VariantManager($this->objectManager, self::VARIANT_CLASS);
+        $this->variantManager = new VariantManager($this->objectManager, static::VARIANT_CLASS);
     }    
    
+    public function testFindVariantBy()
+    {
+        $criteria = array("foo" => "bar");
+        
+        $this->repository->expects($this->once())
+            ->method('findOneBy')
+            ->with($this->equalTo($criteria))
+            ->will($this->returnValue(array()));
+
+        $this->variantManager->findVariantBy($criteria);
+    }    
+    
     public function testGetClass()
     {
-        $this->assertEquals(self::VARIANT_CLASS, $this->variantManager->getClass());
+        $this->assertEquals(static::VARIANT_CLASS, $this->variantManager->getClass());
     }   
 }

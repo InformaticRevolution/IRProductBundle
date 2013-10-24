@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Manager\OptionManager;
  */
 class OptionManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const OPTION_CLASS = 'IR\Bundle\ProductBundle\Model\Option';
+    const OPTION_CLASS = 'IR\Bundle\ProductBundle\Tests\TestOption';
  
     /**
      * @var OptionManager
@@ -34,13 +34,13 @@ class OptionManagerTest extends \PHPUnit_Framework_TestCase
         
         $this->optionManager->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue(self::OPTION_CLASS));        
+            ->will($this->returnValue(static::OPTION_CLASS));        
     }
     
     public function testCreateOption()
     {        
         $option = $this->optionManager->createOption();
         
-        $this->assertInstanceOf(self::OPTION_CLASS, $option);
+        $this->assertInstanceOf(static::OPTION_CLASS, $option);
     }
 }

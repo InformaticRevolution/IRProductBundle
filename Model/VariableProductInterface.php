@@ -30,22 +30,12 @@ interface VariableProductInterface extends ProductInterface
     /**
      * Sets the master variant.
      *
-     * @param VariantInterface $variant
+     * @param VariantInterface $masterVariant
      */
-    public function setMasterVariant(VariantInterface $variant);
+    public function setMasterVariant(VariantInterface $masterVariant);
 
     /**
-     * Checks whether product has one ore more variants.
-     * 
-     * This method is not for checking if product is simple or customizable.
-     * It should determine if any variants (other than internal master) exist.
-     *
-     * @return Boolean
-     */
-    //public function hasVariants();    
-    
-    /**
-     * Returns all variants.
+     * Returns all the variants.
      *
      * @return Collection
      */

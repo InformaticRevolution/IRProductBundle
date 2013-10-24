@@ -14,7 +14,7 @@ namespace IR\Bundle\ProductBundle\Doctrine\ORM;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Variant repository.
+ * Variant Repository.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -25,7 +25,7 @@ class VariantRepository extends EntityRepository
      *
      * @param mixed $product
      * 
-     * @return \Traversable
+     * @return array
      */    
     public function findByProductJoinedWithOptions($product)
     {        

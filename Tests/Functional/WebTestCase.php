@@ -11,7 +11,12 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Functional;
 
+use Nelmio\Alice\Fixtures;
+
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\ORM\EntityManagerInterface;
+
+use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 
@@ -23,11 +28,23 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase as BaseWebTestCase;
 class WebTestCase extends BaseWebTestCase
 {
     /**
+     * @var Client 
+     */
+    protected $client;
+
+
+    protected function setUp()
+    {
+        $this->client = static::createClient();
+        $this->importDatabaseSchema();
+    }     
+    
+    /**
      * Creates a fresh database.
      */
     protected final function importDatabaseSchema()
     {        
-        $em = self::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $em = $this->getEntityManager();
         $metadata = $em->getMetadataFactory()->getAllMetadata();
         
         if (!empty($metadata)) {
@@ -36,7 +53,57 @@ class WebTestCase extends BaseWebTestCase
             $schemaTool->createSchema($metadata);
         }        
     }    
-        
+    
+    /**
+     * Loads test fixtures from given file.
+     * 
+     * @param string $filename
+     * 
+     * @return array
+     */    
+    protected function loadFixtures($filename)
+    {
+        return Fixtures::load(sprintf(__DIR__.'/Fixtures/%s.yml', $filename), $this->getEntityManager());
+    }        
+    
+    /**
+     * Returns doctrine orm entity manager.
+     * 
+     * @return EntityManagerInterface
+     */
+    public function getEntityManager()
+    {        
+        return static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+    }
+    
+    /**
+     * Generates a CSRF token.
+     * 
+     * @param string $intention
+     * 
+     * @return string
+     */
+    protected function generateCsrfToken($intention)
+    {
+        return $this->client->getContainer()->get('form.csrf_provider')->generateCsrfToken($intention);
+    }       
+
+    /**
+     * @param integer $statusCode
+     */
+    protected function assertResponseStatusCode($statusCode)
+    {
+        $this->assertEquals($statusCode, $this->client->getResponse()->getStatusCode());
+    }     
+    
+    /**
+     * @param string $uri
+     */
+    protected function assertCurrentUri($uri)
+    {
+        $this->assertStringEndsWith($uri, $this->client->getHistory()->current()->getUri());
+    }    
+    
     protected function tearDown()
     {
         $fs = new Filesystem();

@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use IR\Bundle\ProductBundle\IRProductEvents;
 use IR\Bundle\ProductBundle\Event\OptionEvent;
+use IR\Bundle\ProductBundle\Model\OptionInterface;
 
 /**
  * Controller managing the options.
@@ -32,7 +33,7 @@ class OptionController extends ContainerAware
     public function listAction()
     {
         $options = $this->container->get('ir_product.manager.option')->findOptions();
-
+        
         return $this->container->get('templating')->renderResponse('IRProductBundle:Option:list.html.'.$this->getEngine(), array(
             'options' => $options,
         ));
@@ -113,7 +114,7 @@ class OptionController extends ContainerAware
      *
      * @param mixed $id
      *
-     * @return IR\Bundle\ProductBundle\Model\OptionInterface
+     * @return OptionInterface
      * 
      * @throws NotFoundHttpException When option does not exist
      */
@@ -133,8 +134,8 @@ class OptionController extends ContainerAware
      * 
      * @return string
      */    
-   protected function getEngine()
+    protected function getEngine()
     {
         return $this->container->getParameter('ir_product.template.engine');
-    }    
+    }
 }

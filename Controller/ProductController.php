@@ -18,6 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use IR\Bundle\ProductBundle\IRProductEvents;
 use IR\Bundle\ProductBundle\Event\ProductEvent;
+use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
  * Controller managing the products.
@@ -39,6 +40,18 @@ class ProductController extends ContainerAware
     }     
     
     /**
+     * Show product details.
+     */
+    public function showAction($id)
+    {
+        $product = $this->findProductById($id);
+
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Product:show.html.'.$this->getEngine(), array(
+            'product' => $product
+        ));
+    }        
+    
+    /**
      * Create a new product: show the new form.
      */
     public function newAction(Request $request)
@@ -50,7 +63,7 @@ class ProductController extends ContainerAware
         $form = $this->container->get('ir_product.form.product'); 
         $form->setData($product);
         $form->handleRequest($request);
-        
+
         if ($form->isValid()) {
             $productManager->updateProduct($product);
             
@@ -58,7 +71,7 @@ class ProductController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');                      
             $dispatcher->dispatch(IRProductEvents::PRODUCT_CREATE_COMPLETED, new ProductEvent($product));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId())));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                      
         }
         
         return $this->container->get('templating')->renderResponse('IRProductBundle:Product:new.html.'.$this->getEngine(), array(
@@ -84,7 +97,7 @@ class ProductController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRProductEvents::PRODUCT_EDIT_COMPLETED, new ProductEvent($product));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_edit', array('id' => $product->getId())));                     
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                     
         }        
         
         return $this->container->get('templating')->renderResponse('IRProductBundle:Product:edit.html.'.$this->getEngine(), array(
@@ -113,7 +126,7 @@ class ProductController extends ContainerAware
      *
      * @param mixed $id
      *
-     * @return IR\Bundle\ProductBundle\Model\ProductInterface
+     * @return ProductInterface
      * 
      * @throws NotFoundHttpException When product does not exist
      */

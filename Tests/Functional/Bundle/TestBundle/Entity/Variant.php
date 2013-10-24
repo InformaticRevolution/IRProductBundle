@@ -12,15 +12,15 @@
 namespace IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
+use IR\Bundle\ProductBundle\Model\Variant as BaseVariant;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="product")
+ * @ORM\Table(name="variant")
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Product extends BaseProduct
+class Variant extends BaseVariant
 {
     /**
      * @ORM\Id
@@ -28,4 +28,13 @@ class Product extends BaseProduct
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id; 
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="OptionValue")
+     * @ORM\JoinTable(name="variants_options",
+     *      joinColumns={@ORM\JoinColumn(name="variant_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id")}
+     * )
+     */
+    protected $options;       
 }

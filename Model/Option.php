@@ -15,11 +15,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Option implementation.
+ * Abstract Option implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Option implements OptionInterface
+abstract class Option implements OptionInterface
 {
     /**
      * @var mixed

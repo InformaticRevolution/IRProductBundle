@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\Event;
 use IR\Bundle\ProductBundle\Model\VariantInterface;
 
 /**
- * Variant event.
+ * Variant Event.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

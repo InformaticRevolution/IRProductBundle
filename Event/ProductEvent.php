@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\Event;
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
- * Product event.
+ * Product Event.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

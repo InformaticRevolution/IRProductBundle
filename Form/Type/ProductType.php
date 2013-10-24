@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Product type.
+ * Product Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -31,7 +31,7 @@ class ProductType extends AbstractType
     /**
      * Constructor.
      * 
-     * @param string  $class
+     * @param string $class
      */
     public function __construct($class)
     {

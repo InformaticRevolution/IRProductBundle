@@ -13,11 +13,10 @@ namespace IR\Bundle\ProductBundle\Form\EventListener;
 
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Build variable product form listener.
+ * Build Variable Product Form Listener.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

@@ -15,11 +15,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Variant implementation.
+ * Abstract Variant implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Variant implements VariantInterface
+abstract class Variant implements VariantInterface
 {
     /**
      * @var mixed
@@ -31,11 +31,6 @@ class Variant implements VariantInterface
      */
     protected $product;    
 
-    /**
-     * @var Boolean
-     */
-    protected $master;    
-    
     /**
      * @var Collection
      */
@@ -57,7 +52,6 @@ class Variant implements VariantInterface
      */    
     public function __construct() 
     {
-        $this->master = false;
         $this->options = new ArrayCollection();
     }
 
@@ -84,23 +78,7 @@ class Variant implements VariantInterface
     {
         $this->product = $product;
     }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function isMaster()
-    {
-        return $this->master;
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setMaster($master)
-    {
-        $this->master = (Boolean) $master;
-    } 
-    
     /**
      * {@inheritdoc}
      */

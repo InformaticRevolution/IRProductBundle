@@ -14,10 +14,9 @@ namespace IR\Bundle\ProductBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use IR\Bundle\ProductBundle\Model\OptionInterface;
 
 /**
- * Product options type.
+ * Product Options Type.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

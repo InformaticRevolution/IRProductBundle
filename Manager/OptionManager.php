@@ -25,6 +25,6 @@ abstract class OptionManager implements OptionManagerInterface
     {
         $class = $this->getClass();
         
-        return new $class;
+        return new $class();
     } 
 }

@@ -4,11 +4,10 @@
     <h1>{{ 'product.edit.title'|trans }}</h1>
 </div>
 
-<form action="{{ path('ir_product_edit', {'id': product.id}) }}" {{ form_enctype(form) }} method="POST">
+<form action="{{ path('ir_product_edit', {'id': product.id}) }}" {{ form_enctype(form) }} method="POST" novalidate>
     {% include 'IRProductBundle:Product:form.html.twig' %}
-    <div class="form-actions">
-        <input type="submit" value="{{ 'product.edit.save'|trans }}" class="btn btn-large btn-primary" />
-       &nbsp;
-       <a href="{{ path('ir_product_list') }}" class="btn btn-large">{{ 'product.edit.cancel'|trans }}</a>         
-    </div> 
+    <div>
+        <button type="submit" class="btn btn-primary">{{ 'product.edit.save'|trans }}</button>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn">{{ 'product.edit.cancel'|trans }}</a>         
+    </div>               
 </form>

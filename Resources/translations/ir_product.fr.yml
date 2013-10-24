@@ -1,13 +1,12 @@
 # Product
-product: 
+product:   
+    name: Nom
+    created_at: Date de création
+    updated_at: Date de mise à jour
+  
     list:
         title: Produits
-        column:
-            name: Nom
-            actions: Actions
-        button: 
-            new: Ajouter un produit
-        no_products: Aucun produit pour le moment.  
+        no_results: Aucun produit pour le moment.  
     new:
         title: Ajouter un produit
         save: Enregistrer
@@ -16,6 +15,8 @@ product:
         title: Modifier un produit
         save: Enregistrer
         cancel: Annuler 
+    action: 
+        new: Ajouter un produit        
     flash:
         created: Le produit a été créé
         updated: Le produit a été mis à jour
@@ -23,23 +24,22 @@ product:
         
 # Option
 option:
+    name: Nom
+    public_name: Nom public  
+  
     list:
         title: Options
-        column:
-            name: Nom
-            public_name: Nom public
-            actions: Actions
-        button: 
-            new: Ajouter une option
-        no_options: Aucune option pour le moment.   
+        no_results: Aucune option pour le moment.   
     new:
         title: Ajouter une option
         save: Enregistrer
         cancel: Annuler
     edit:
-        title: Modifier une option
+        title: Modifier l'option
         save: Enregistrer
-        cancel: Annuler 
+        cancel: Annuler
+    action:
+        new: Ajouter une option
     flash:
         created: L'option a été créée
         updated: L'option a été mise à jour
@@ -65,8 +65,8 @@ form:
     product:
         name : "Nom :"
         description: "Description :"
-        master_variant: "Variante principale :"
         options: "Options :"
+        master_variant: "Variante principale :"
     option:
         name: "Nom :"
         public_name: "Nom public :"

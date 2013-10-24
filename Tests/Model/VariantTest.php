@@ -11,10 +11,9 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-use IR\Bundle\ProductBundle\Model\Variant;
-use IR\Bundle\ProductBundle\Model\OptionValue;
+use IR\Bundle\ProductBundle\Model\VariantInterface;
+use IR\Bundle\ProductBundle\Model\OptionValueInterface;
+use IR\Bundle\ProductBundle\Model\VariableProductInterface;
 
 /**
  * Variant Test.
@@ -22,18 +21,18 @@ use IR\Bundle\ProductBundle\Model\OptionValue;
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
 class VariantTest extends \PHPUnit_Framework_TestCase
-{  
-    public function testOptions()
+{ 
+    public function testConstructor()
     {
-        $variant = new Variant();
+        $variant = $this->getVariant();
         
-        $this->assertEquals(new ArrayCollection(), $variant->getOptions());
-    }
+        $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $variant->getOptions());
+    }    
     
     public function testAddOption()
     {
-        $variant = new Variant();
-        $option = new OptionValue();
+        $variant = $this->getVariant();
+        $option = $this->getOptionValue();
         
         $this->assertNotContains($option, $variant->getOptions());
         $variant->addOption($option);
@@ -42,8 +41,8 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     
     public function testRemoveOption()
     {
-        $variant = new Variant();
-        $option = new OptionValue();
+        $variant = $this->getVariant();
+        $option = $this->getOptionValue();
         $variant->addOption($option);
         
         $this->assertContains($option, $variant->getOptions());
@@ -53,14 +52,14 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     
     public function testHasOption()
     {
-        $variant = new Variant();
-        $option = new OptionValue();
+        $variant = $this->getVariant();
+        $option = $this->getOptionValue();
         
         $this->assertFalse($variant->hasOption($option));
         $variant->addOption($option);
         $this->assertTrue($variant->hasOption($option));
     }     
-            
+           
     /**
      * @dataProvider getSimpleTestData
      */
@@ -69,7 +68,7 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $getter = 'get'.$property;
         $setter = 'set'.$property;
         
-        $variant = new Variant();
+        $variant = $this->getVariant();
         
         $this->assertEquals($default, $variant->$getter());
         $variant->$setter($value);
@@ -79,8 +78,33 @@ class VariantTest extends \PHPUnit_Framework_TestCase
     public function getSimpleTestData()
     {
         return array(
+            array('product', $this->getProduct(), null),
             array('createdAt', new \DateTime(), null),
             array('updatedAt', new \DateTime(), null),            
         );
-    }   
+    }  
+    
+    /**
+     * @return VariantInterface
+     */
+    protected function getVariant()
+    {
+        return $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\Variant');
+    } 
+    
+    /**
+     * @return VariableProductInterface
+     */
+    protected function getProduct()
+    {
+        return $this->getMock('IR\Bundle\ProductBundle\Model\VariableProductInterface');
+    }  
+    
+    /**
+     * @return OptionValueInterface
+     */
+    protected function getOptionValue()
+    {
+        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionValueInterface');
+    }      
 }

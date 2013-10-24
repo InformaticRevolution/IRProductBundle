@@ -28,7 +28,7 @@ interface OptionableInterface
     public function hasOptions();
     
     /**
-     * Returns all options.
+     * Returns all the options.
      *
      * @return Collection
      */

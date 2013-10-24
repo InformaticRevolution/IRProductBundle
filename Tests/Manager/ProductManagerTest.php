@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Manager\ProductManager;
  */
 class ProductManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const PRODUCT_CLASS = 'IR\Bundle\ProductBundle\Model\Product';
+    const PRODUCT_CLASS = 'IR\Bundle\ProductBundle\Tests\TestProduct';
  
     /**
      * @var ProductManager
@@ -34,13 +34,13 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
         
         $this->productManager->expects($this->any())
             ->method('getClass')
-            ->will($this->returnValue(self::PRODUCT_CLASS));        
+            ->will($this->returnValue(static::PRODUCT_CLASS));        
     }
     
     public function testCreateProduct()
     {        
         $product = $this->productManager->createProduct();
         
-        $this->assertInstanceOf(self::PRODUCT_CLASS, $product);
+        $this->assertInstanceOf(static::PRODUCT_CLASS, $product);
     }
 }

@@ -27,7 +27,9 @@ doctrine:
         auto_mapping: true 
       
         resolve_target_entities:
-            IR\Bundle\ProductBundle\Model\OptionInterface: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option      
+            IR\Bundle\ProductBundle\Model\ProductInterface: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Product  
+            IR\Bundle\ProductBundle\Model\OptionInterface: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option
+            IR\Bundle\ProductBundle\Model\VariantInterface: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Variant
       
 # StofDoctrineExtensions Configuration            
 stof_doctrine_extensions:
@@ -43,3 +45,5 @@ ir_product:
     option:
         option_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option 
         option_value_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue 
+    variant:
+        variant_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Variant         

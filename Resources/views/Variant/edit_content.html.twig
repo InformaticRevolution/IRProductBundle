@@ -4,11 +4,10 @@
     <h1>{{ 'variant.edit.title'|trans }}</h1>
 </div>
 
-<form action="{{ path('ir_product_variant_edit', {'id': variant.id}) }}" {{ form_enctype(form) }} method="POST">
+<form action="{{ path('ir_product_variant_edit', {'id': variant.id}) }}" {{ form_enctype(form) }} method="POST" novalidate>
     {% include 'IRProductBundle:Variant:form.html.twig' %}
-    <div class="form-actions">
-        <input type="submit" value="{{ 'variant.edit.save'|trans }}" class="btn btn-large btn-primary" />
-       &nbsp;
-       <a href="{{ path('ir_product_edit', {'id': variant.product.id} ) }}" class="btn btn-large">{{ 'variant.edit.cancel'|trans }}</a>         
-    </div> 
+    <div>
+        <button type="submit" class="btn btn-primary">{{ 'variant.edit.save'|trans }}</button>
+        <a href="{{ app.request.headers.get('referer') }}" class="btn">{{ 'variant.edit.cancel'|trans }}</a>         
+    </div>        
 </form>

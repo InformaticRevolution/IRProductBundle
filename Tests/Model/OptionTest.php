@@ -11,10 +11,8 @@
 
 namespace IR\Bundle\ProductBundle\Tests\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-use IR\Bundle\ProductBundle\Model\Option;
-use IR\Bundle\ProductBundle\Model\OptionValue;
+use IR\Bundle\ProductBundle\Model\OptionInterface;
+use IR\Bundle\ProductBundle\Model\OptionValueInterface;
 
 /**
  * Option Test.
@@ -23,17 +21,17 @@ use IR\Bundle\ProductBundle\Model\OptionValue;
  */
 class OptionTest extends \PHPUnit_Framework_TestCase
 {
-    public function testValues()
+    public function testConstructor()
     {
-        $option = new Option();
+        $option = $this->getOption();
         
-        $this->assertEquals(new ArrayCollection(), $option->getValues());
-    }
-    
+        $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $option->getValues());
+    }    
+
     public function testAddValue()
     {
-        $option = new Option();
-        $optionValue = new OptionValue();
+        $option = $this->getOption();
+        $optionValue = $this->getOptionValue();
         
         $this->assertNotContains($optionValue, $option->getValues());
         $this->assertNull($optionValue->getOption());
@@ -43,11 +41,11 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($optionValue, $option->getValues());
         $this->assertSame($option, $optionValue->getOption());
     }
-      
+    
     public function testRemoveValue()
     {
-        $option = new Option();
-        $optionValue = new OptionValue();
+        $option = $this->getOption();
+        $optionValue = $this->getOptionValue();
         $option->addValue($optionValue);
         
         $this->assertContains($optionValue, $option->getValues());
@@ -58,17 +56,17 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotContains($optionValue, $option->getValues());
         $this->assertNull($optionValue->getOption());
     }       
-    
+
     public function testHasValue()
     {
-        $option = new Option();
-        $optionValue = new OptionValue();
+        $option = $this->getOption();
+        $optionValue = $this->getOptionValue();
         
         $this->assertFalse($option->hasValue($optionValue));
         $option->addValue($optionValue);
         $this->assertTrue($option->hasValue($optionValue));
     }
-            
+       
     /**
      * @dataProvider getSimpleTestData
      */
@@ -77,7 +75,7 @@ class OptionTest extends \PHPUnit_Framework_TestCase
         $getter = 'get'.$property;
         $setter = 'set'.$property;
         
-        $option = new Option();
+        $option = $this->getOption();
         
         $this->assertEquals($default, $option->$getter());
         $option->$setter($value);
@@ -87,8 +85,8 @@ class OptionTest extends \PHPUnit_Framework_TestCase
     public function getSimpleTestData()
     {
         return array(
-            array('Name', 'T-Shirt Color', null),
-            array('PublicName', 'Color', null),
+            array('name', 'T-Shirt Color', null),
+            array('publicName', 'Color', null),
             array('createdAt', new \DateTime(), null),
             array('updatedAt', new \DateTime(), null),
         );
@@ -96,10 +94,26 @@ class OptionTest extends \PHPUnit_Framework_TestCase
     
     public function testToString()
     {
-        $option = new Option();
+        $option = $this->getOption();
         
         $this->assertEquals('', $option);
         $option->setPublicName('Color');
         $this->assertEquals('Color', $option);
     }
+    
+    /**
+     * @return OptionInterface
+     */
+    protected function getOption()
+    {
+        return $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\Option');
+    }  
+    
+    /**
+     * @return OptionValueInterface
+     */
+    protected function getOptionValue()
+    {
+        return $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\OptionValue');
+    }      
 }

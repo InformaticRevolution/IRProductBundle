@@ -12,11 +12,10 @@
 namespace IR\Bundle\ProductBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IR\Bundle\ProductBundle\Form\EventListener\BuildVariableProductFormListener;
 
 /**
- * Variable product type.
+ * Variable Product Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

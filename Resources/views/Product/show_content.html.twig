@@ -1,0 +1,38 @@
+{% trans_default_domain 'ir_product' %}
+
+<div class="page-header">
+    <h1>{{ 'product.show.title'|trans }}</h1>
+</div>  
+
+<div class="panel panel-default">
+    <div class="panel-body">     
+        <a href="{{ path('ir_product_edit', {'id': product.id}) }}" class="btn btn-primary">
+            <i class="glyphicon glyphicon-edit"></i> {{ 'product.action.edit'|trans }}
+        </a>
+        <a href="{{ path('ir_product_delete', {'id': product.id}) }}" class="btn btn-danger">
+            <i class="glyphicon glyphicon-trash"></i> {{ 'product.action.delete'|trans }}
+        </a>
+    </div>
+</div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">{{ 'product.show.general_info'|trans }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ 'product.name'|trans }}</td>
+            <td>{{ product.name|trans }}</td>        
+        </tr>  
+        <tr>
+            <td>{{ 'product.created_at'|trans }}</td>
+            <td>{{ product.createdAt|date }}</td>
+        </tr>  
+        <tr>
+            <td>{{ 'product.updated_at'|trans }}</td>
+            <td>{{ product.updatedAt|date }}</td>
+        </tr>          
+    </tbody>
+</table>

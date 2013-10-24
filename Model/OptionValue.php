@@ -12,11 +12,11 @@
 namespace IR\Bundle\ProductBundle\Model;
 
 /**
- * Option Value implementation.
+ * Abstract Option Value implementation.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class OptionValue implements OptionValueInterface
+abstract class OptionValue implements OptionValueInterface
 {
     /**
      * @var mixed

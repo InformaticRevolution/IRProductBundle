@@ -6,9 +6,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="IR\Bundle\ProductBundle\Model\Variant" repository-class="IR\Bundle\ProductBundle\Doctrine\ORM\VariantRepository">
-                        
-        <field name="master" column="master" type="boolean" />
-                
+   
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>

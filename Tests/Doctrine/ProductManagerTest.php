@@ -20,7 +20,7 @@ use IR\Bundle\ProductBundle\Doctrine\ProductManager;
  */
 class ProductManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const PRODUCT_CLASS = 'IR\Bundle\ProductBundle\Model\Product';
+    const PRODUCT_CLASS = 'IR\Bundle\ProductBundle\Tests\TestProduct';
     
     /**
      * @var ProductManager
@@ -50,19 +50,19 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
                 
         $this->objectManager->expects($this->any())
             ->method('getRepository')
-            ->with($this->equalTo(self::PRODUCT_CLASS))
+            ->with($this->equalTo(static::PRODUCT_CLASS))
             ->will($this->returnValue($this->repository));        
 
         $this->objectManager->expects($this->any())
             ->method('getClassMetadata')
-            ->with($this->equalTo(self::PRODUCT_CLASS))
+            ->with($this->equalTo(static::PRODUCT_CLASS))
             ->will($this->returnValue($class));        
         
         $class->expects($this->any())
             ->method('getName')
-            ->will($this->returnValue(self::PRODUCT_CLASS));        
+            ->will($this->returnValue(static::PRODUCT_CLASS));        
         
-        $this->productManager = new ProductManager($this->objectManager, self::PRODUCT_CLASS);
+        $this->productManager = new ProductManager($this->objectManager, static::PRODUCT_CLASS);
     }    
 
     public function testUpdateProduct()
@@ -116,13 +116,13 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
             
     public function testGetClass()
     {
-        $this->assertEquals(self::PRODUCT_CLASS, $this->productManager->getClass());
+        $this->assertEquals(static::PRODUCT_CLASS, $this->productManager->getClass());
     }
 
     protected function getProduct()
     {
-        $productClass = self::PRODUCT_CLASS;
+        $class = static::PRODUCT_CLASS;
 
-        return new $productClass();
+        return new $class();
     }    
 }

@@ -1,0 +1,4 @@
+IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option:
+    option{1..3}:
+        name: <sentence(2)>
+        publicName: <sentence(2)>

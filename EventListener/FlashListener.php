@@ -18,19 +18,19 @@ use Symfony\Component\Translation\TranslatorInterface;
 use IR\Bundle\ProductBundle\IRProductEvents;
 
 /**
- * Flash listener.
+ * Flash Listener.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
 class FlashListener implements EventSubscriberInterface
 {
-    private static $successMessages = array(        
+    private static $successMessages = array(               
         IRProductEvents::PRODUCT_CREATE_COMPLETED => 'product.flash.created',
         IRProductEvents::PRODUCT_EDIT_COMPLETED => 'product.flash.updated',
         IRProductEvents::PRODUCT_DELETE_COMPLETED => 'product.flash.deleted',
         IRProductEvents::OPTION_CREATE_COMPLETED => 'option.flash.created',
         IRProductEvents::OPTION_EDIT_COMPLETED => 'option.flash.updated',
-        IRProductEvents::OPTION_DELETE_COMPLETED => 'option.flash.deleted',         
+        IRProductEvents::OPTION_DELETE_COMPLETED => 'option.flash.deleted',          
         IRProductEvents::VARIANT_CREATE_COMPLETED => 'variant.flash.created',
         IRProductEvents::VARIANT_EDIT_COMPLETED => 'variant.flash.updated',      
         IRProductEvents::VARIANT_DELETE_COMPLETED => 'variant.flash.deleted',          
@@ -64,13 +64,13 @@ class FlashListener implements EventSubscriberInterface
      */        
     public static function getSubscribedEvents()
     {
-        return array(
+        return array(            
             IRProductEvents::PRODUCT_CREATE_COMPLETED => 'addSuccessFlash',
             IRProductEvents::PRODUCT_EDIT_COMPLETED => 'addSuccessFlash',
             IRProductEvents::PRODUCT_DELETE_COMPLETED => 'addSuccessFlash',
             IRProductEvents::OPTION_CREATE_COMPLETED => 'addSuccessFlash',
             IRProductEvents::OPTION_EDIT_COMPLETED => 'addSuccessFlash',
-            IRProductEvents::OPTION_DELETE_COMPLETED => 'addSuccessFlash',               
+            IRProductEvents::OPTION_DELETE_COMPLETED => 'addSuccessFlash',             
             IRProductEvents::VARIANT_CREATE_COMPLETED => 'addSuccessFlash',
             IRProductEvents::VARIANT_EDIT_COMPLETED => 'addSuccessFlash',  
             IRProductEvents::VARIANT_DELETE_COMPLETED => 'addSuccessFlash',         
@@ -81,8 +81,6 @@ class FlashListener implements EventSubscriberInterface
      * Adds a success flash message.
      * 
      * @param Event $event
-     * 
-     * @return void
      */            
     public function addSuccessFlash(Event $event)
     {

@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Option value type.
+ * Option Value Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

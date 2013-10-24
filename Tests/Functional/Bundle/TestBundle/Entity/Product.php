@@ -12,7 +12,7 @@
 namespace IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\ProductBundle\Model\Product as BaseProduct;
+use IR\Bundle\ProductBundle\Model\VariableProduct as BaseProduct;
 
 /**
  * @ORM\Entity
@@ -28,4 +28,18 @@ class Product extends BaseProduct
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id; 
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="Option")
+     * @ORM\JoinTable(name="products_options",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
+     * )
+     */
+    protected $options;  
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     */
+    protected $variants;  
 }

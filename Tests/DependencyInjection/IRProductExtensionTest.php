@@ -97,7 +97,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
-    public function testProductLoadThrowsExceptionUnlessOptionSetIfVariantSet()
+    public function testProductLoadThrowsExceptionUnlessOptionSetWhenVariantSet()
     {
         $loader = new IRProductExtension();
         $config = $this->getFullConfig();
@@ -113,8 +113,8 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $config['product'] = false;
         $loader->load(array($config), $this->configuration);
         $this->assertNotHasDefinition('ir_product.form.product');
-    }       
-    
+    }  
+ 
     public function testProductLoadModelClassWithDefaults()
     {
         $this->createEmptyConfiguration();
@@ -127,6 +127,8 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->createFullConfiguration();
 
         $this->assertParameter('Acme\ProductBundle\Entity\Product', 'ir_product.model.product.class');
+        $this->assertParameter('Acme\ProductBundle\Entity\Option', 'ir_product.model.option.class');
+        $this->assertParameter('Acme\ProductBundle\Entity\Variant', 'ir_product.model.variant.class');
     }      
     
     public function testProductLoadManagerClassWithDefaults()
@@ -154,8 +156,11 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->createEmptyConfiguration();
 
         $this->assertParameter('ir_product', 'ir_product.form.type.product');
-        $this->assertNotHasDefinition('ir_product_form.form.type.option');
-        $this->assertNotHasDefinition('ir_product_form.form.type.variant');        
+        $this->assertNotHasDefinition('ir_product.form.type.option');
+        $this->assertNotHasDefinition('ir_product.form.type.variant');
+        $this->assertNotHasDefinition('ir_product.form.type.option_choice');
+        $this->assertNotHasDefinition('ir_product.form.type.option_value');
+        $this->assertNotHasDefinition('ir_product.form.type.option_value_choice');        
     }      
     
     public function testProductLoadFormClass()
@@ -165,6 +170,9 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('acme_product', 'ir_product.form.type.product');
         $this->assertParameter('acme_product_option', 'ir_product.form.type.option');
         $this->assertParameter('acme_product_variant', 'ir_product.form.type.variant');
+        $this->assertHasDefinition('ir_product.form.type.option_choice');
+        $this->assertHasDefinition('ir_product.form.type.option_value');
+        $this->assertHasDefinition('ir_product.form.type.option_value_choice');
     }    
 
     public function testProductLoadFormNameWithDefaults()
@@ -201,8 +209,22 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertHasDefinition('ir_product.form.product');
         $this->assertHasDefinition('ir_product.form.option');
         $this->assertHasDefinition('ir_product.form.variant');        
-    }        
+    }     
     
+    public function testProductLoadValidatorServiceWithDefaults()
+    {
+        $this->createEmptyConfiguration();
+        
+        $this->assertNotHasDefinition('ir_product.validator.unique_variant');
+    }
+    
+    public function testProductLoadValidatorService()
+    {
+        $this->createFullConfiguration();
+        
+        $this->assertHasDefinition('ir_product.validator.unique_variant');
+    }    
+            
     public function testProductLoadTemplateConfigWithDefaults()
     {
         $this->createEmptyConfiguration();
@@ -240,13 +262,9 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
      */
     protected function getEmptyConfig()
     {
-        $yaml = <<<EOF
-db_driver: orm
-product_class: Acme\ProductBundle\Entity\Product
-EOF;
         $parser = new Parser();
-
-        return $parser->parse($yaml);
+        
+        return $parser->parse(file_get_contents(__DIR__.'/Fixtures/minimal_config.yml'));
     }    
     
     /**
@@ -254,31 +272,9 @@ EOF;
      */    
     protected function getFullConfig()
     {
-        $yaml = <<<EOF
-db_driver: orm
-product_class: Acme\ProductBundle\Entity\Product
-product_manager: acme_product.manager.product
-product:
-    form:
-        type: acme_product
-        name: acme_product_form
-option:
-    option_class: Acme\ProductBundle\Entity\Option
-    option_value_class: Acme\ProductBundle\Entity\OptionValue
-    form:
-        type: acme_product_option
-        name: acme_product_option_form  
-variant:
-    variant_class: Acme\ProductBundle\Entity\Variant
-    form:
-        type: acme_product_variant
-        name: acme_product_variant_form              
-template:
-    engine: php
-EOF;
         $parser = new Parser();
 
-        return $parser->parse($yaml);
+        return $parser->parse(file_get_contents(__DIR__.'/Fixtures/full_config.yml'));
     }     
     
     /**
@@ -313,5 +309,10 @@ EOF;
     private function assertNotHasDefinition($id)
     {
         $this->assertFalse(($this->configuration->hasDefinition($id) ?: $this->configuration->hasAlias($id)));
-    }        
+    }    
+    
+    protected function tearDown()
+    {
+        unset($this->configuration);
+    }     
 }

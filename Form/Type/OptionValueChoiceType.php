@@ -12,13 +12,12 @@
 namespace IR\Bundle\ProductBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Option value choice type.
+ * Option Value Choice Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -28,7 +27,7 @@ class OptionValueChoiceType extends AbstractType
      * {@inheritdoc}
      */       
     public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {       
+    {   
         $choiceList = function (Options $options) {
             return new ObjectChoiceList($options['option']->getValues());
         };        

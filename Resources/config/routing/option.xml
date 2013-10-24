@@ -4,19 +4,20 @@
         xsi:schemaLocation="http://symfony.com/schema/routing 
                             http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="ir_product_option_list" pattern="/list" methods="GET">
+    <route id="ir_product_option_list" pattern="/" methods="GET">
         <default key="_controller">IRProductBundle:Option:list</default>
     </route>
 
-    <route id="ir_product_option_new" pattern="/new" methods="GET|POST">
+    <route id="ir_product_option_new" pattern="/new">
         <default key="_controller">IRProductBundle:Option:new</default>
     </route>
 
-    <route id="ir_product_option_edit" pattern="/{id}/edit" methods="GET|POST">
+    <route id="ir_product_option_edit" pattern="/{id}/edit">
         <default key="_controller">IRProductBundle:Option:edit</default>
     </route>   
     
     <route id="ir_product_option_delete" pattern="/{id}/delete" methods="GET">
         <default key="_controller">IRProductBundle:Option:delete</default>
-    </route>       
+    </route>
+           
 </routes>

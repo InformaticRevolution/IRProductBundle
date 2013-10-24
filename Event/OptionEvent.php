@@ -15,7 +15,7 @@ use Symfony\Component\EventDispatcher\Event;
 use IR\Bundle\ProductBundle\Model\OptionInterface;
 
 /**
- * Option event.
+ * Option Event.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */

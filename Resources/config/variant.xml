@@ -12,6 +12,10 @@
         <service id="ir_product.form.variant" factory-service="form.factory" factory-method="createNamed" class="Symfony\Component\Form\Form">
             <argument>%ir_product.form.name.variant%</argument>
             <argument>%ir_product.form.type.variant%</argument>
+            <argument>null</argument>
+            <argument type="collection">
+                <argument key="validation_groups">%ir_product.form.validation_groups.variant%</argument>
+            </argument>              
         </service> 
         
         <service id="ir_product.form.type.variant" class="%ir_product.form.type.variant.class%">
