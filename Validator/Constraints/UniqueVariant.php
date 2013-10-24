@@ -14,14 +14,14 @@ namespace IR\Bundle\ProductBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Unique variant constraint.
+ * Unique Variant Constraint.
  * 
  * @Annotation
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
 class UniqueVariant extends Constraint
 {
-    public $message = 'This variant is already used.';
+    public $message = 'This variant is already used';
 
     
     /**
@@ -37,6 +37,6 @@ class UniqueVariant extends Constraint
      */
     public function getTargets()
     {
-        return self::CLASS_CONSTRAINT;
+        return static::CLASS_CONSTRAINT;
     }    
 }

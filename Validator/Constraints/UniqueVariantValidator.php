@@ -19,7 +19,7 @@ use IR\Bundle\ProductBundle\Model\VariantInterface;
 use IR\Bundle\ProductBundle\Manager\VariantManagerInterface;
 
 /**
- * Unique variant validator.
+ * Unique Variant Validator.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -34,7 +34,7 @@ class UniqueVariantValidator extends ConstraintValidator
    /**
     * Constructor.
     *
-    * @param VariantManagerInterface $productManager
+    * @param VariantManagerInterface $variantManager
     */        
     public function __construct(VariantManagerInterface $variantManager)
     {           
@@ -50,7 +50,9 @@ class UniqueVariantValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'IR\Bundle\ProductBundle\Model\VariantInterface');
         }
         
-        if ($value->isMaster()) {
+        $product = $value->getProduct();
+        
+        if (null === $product || $product->getMasterVariant() === $value) {
             return;
         }
         
