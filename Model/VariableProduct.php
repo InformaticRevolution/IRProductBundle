@@ -55,7 +55,11 @@ abstract class VariableProduct extends Product implements VariableProductInterfa
      */
     public function setMasterVariant(VariantInterface $masterVariant)
     {
-        $masterVariant->setProduct($this);
+        if (null !== $this->masterVariant) {
+            $this->removeVariant($this->masterVariant);
+        }
+        
+        $this->addVariant($masterVariant);
         $this->masterVariant = $masterVariant;
     }    
     

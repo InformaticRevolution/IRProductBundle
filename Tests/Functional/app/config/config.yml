@@ -42,6 +42,7 @@ stof_doctrine_extensions:
 ir_product:
     db_driver: orm 
     product_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Product  
+    use_variable_product_form_type: true
     option:
         option_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option 
         option_value_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue 

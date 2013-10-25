@@ -35,13 +35,30 @@ class VariableProductTest extends \PHPUnit_Framework_TestCase
                 
         $this->assertNull($product->getMasterVariant());
         $this->assertNull($variant->getProduct());
+        $this->assertFalse($product->hasVariant($variant));
         
         $product->setMasterVariant($variant);
         
         $this->assertSame($variant, $product->getMasterVariant());
         $this->assertSame($product, $variant->getProduct());
+        $this->assertTrue($product->hasVariant($variant));
+        
+        $product->setMasterVariant($this->getVariant());
+        
+        $this->assertFalse($product->hasVariant($variant));
+        $this->assertNull($variant->getProduct());        
     }
-
+     
+    public function testGetVariantsNotContainMasterVariant()
+    {
+        $product = $this->getProduct();
+        $variant = $this->getVariant();
+        
+        $this->assertNotContains($variant, $product->getVariants());
+        $product->setMasterVariant($variant);
+        $this->assertNotContains($variant, $product->getVariants());
+    }
+            
     public function testAddVariant()
     {
         $product = $this->getProduct();

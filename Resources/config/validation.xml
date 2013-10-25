@@ -22,6 +22,10 @@
     
     <class name="IR\Bundle\ProductBundle\Model\VariableProduct">
         <property name="masterVariant">
+            <constraint name="NotNull">
+                <option name="message">ir_product.product.master_variant.not_null</option>
+                <option name="groups">Product</option>
+            </constraint>            
             <constraint name="Valid" />
         </property>        
        
