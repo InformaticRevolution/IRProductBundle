@@ -333,6 +333,7 @@ doctrine:
         resolve_target_entities:
             IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
             IR\Bundle\ProductBundle\Model\ProductInterface: Acme\ProductBundle\Entity\Product
+            IR\Bundle\ProductBundle\Model\VariantInterface: Acme\ProductBundle\Entity\Variant
 ```    
 
 ### Step 4: Import the routing file

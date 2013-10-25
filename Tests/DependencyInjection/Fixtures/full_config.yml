@@ -1,6 +1,7 @@
 db_driver: orm
 product_class: Acme\ProductBundle\Entity\Product
 product_manager: acme_product.manager.product
+use_variable_product_form_type: true
 product:
     form:
         type: acme_product

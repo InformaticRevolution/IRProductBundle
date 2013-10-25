@@ -56,6 +56,10 @@ class IRProductExtension extends Extension
         if (!empty($config['variant'])) {
             $this->loadVariant($config['variant'], $container, $loader, $config['db_driver']);
         }
+        
+        if ($config['use_variable_product_form_type']) {
+            $this->loadVariableProduct($config['product'], $container, $loader);
+        }
     }
     
     private function loadProduct(array $config, ContainerBuilder $container, XmlFileLoader $loader)
@@ -84,7 +88,7 @@ class IRProductExtension extends Extension
     private function loadVariant(array $config, ContainerBuilder $container, XmlFileLoader $loader, $dbDriver)
     {        
         $loader->load('variant.xml');
-        $loader->load('validator.xml');
+        $loader->load('variant_validator.xml');
         $loader->load(sprintf('driver/%s/variant.xml', $dbDriver));
         
         $container->setParameter('ir_product.model.variant.class', $config['variant_class']);
@@ -93,5 +97,14 @@ class IRProductExtension extends Extension
         $container->setParameter('ir_product.form.validation_groups.variant', $config['form']['validation_groups']);
         
         $container->setAlias('ir_product.manager.variant', $config['variant_manager']);
-    }       
+    }     
+    
+    private function loadVariableProduct(array $config, ContainerBuilder $container, XmlFileLoader $loader)
+    {
+        $loader->load('variable_product.xml');
+        
+        if ('ir_product' === $config['form']['type']) {
+            $container->setParameter('ir_product.form.type.product', 'ir_product_variable_product');
+        }
+    }    
 }

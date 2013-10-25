@@ -22,6 +22,24 @@ use IR\Bundle\ProductBundle\Form\EventListener\BuildVariableProductFormListener;
 class VariableProductType extends ProductType
 {
     /**
+     * @var string
+     */         
+    protected $masterVariantFormType;
+
+    
+    /**
+     * Constructor.
+     * 
+     * @param string $class
+     * @param string $masterVariantFormType
+     */
+    public function __construct($class, $masterVariantFormType)
+    {
+        $this->class = $class;
+        $this->masterVariantFormType = $masterVariantFormType;
+    }
+    
+    /**
      * {@inheritdoc}
      */     
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -29,12 +47,20 @@ class VariableProductType extends ProductType
         parent::buildForm($builder, $options);
         
         $builder
-            ->add('masterVariant', 'ir_product_variant', array(
+            ->add('masterVariant', $this->masterVariantFormType, array(
                 'master' => true,
                 'label' => 'form.product.master_variant',
                 'translation_domain' => 'ir_product',                
             ))        
             ->addEventSubscriber(new BuildVariableProductFormListener());
         ;
-    }
+    } 
+    
+    /**
+     * {@inheritdoc}
+     */        
+    public function getName()
+    {
+        return 'ir_product_variable_product';
+    }     
 }

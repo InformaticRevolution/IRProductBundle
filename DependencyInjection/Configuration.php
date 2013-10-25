@@ -47,12 +47,17 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                 ->end()  
                 ->scalarNode('product_class')->isRequired()->cannotBeEmpty()->end()
-                ->scalarNode('product_manager')->defaultValue('ir_product.manager.product.default')->end()                
+                ->scalarNode('product_manager')->defaultValue('ir_product.manager.product.default')->end() 
+                ->booleanNode('use_variable_product_form_type')->defaultFalse()->end()
             ->end()
             ->validate()
                 ->ifTrue(function($v){ return !empty($v['variant']) && empty($v['option']); })
                 ->thenInvalid('The child node "option" must be configured when using "variants".')
             ->end()
+            ->validate()
+                ->ifTrue(function($v){ return $v['use_variable_product_form_type'] && empty($v['variant']); })
+                ->thenInvalid('The child node "variant" must be configured when activating "use_variable_product_form_type".')
+            ->end()                        
         ;            
 
         $this->addProductSection($rootNode);  
@@ -139,8 +144,8 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
-    }     
-        
+    }
+    
     private function addTemplateSection(ArrayNodeDefinition $node)
     {
         $node

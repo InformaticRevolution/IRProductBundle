@@ -103,7 +103,18 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $config = $this->getFullConfig();
         unset($config['option']);
         $loader->load(array($config), new ContainerBuilder());        
-    }    
+    }  
+    
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
+    public function testProductLoadThrowsExceptionUnlessVariantSetWhenUseVariableProductTypeSet()
+    {
+        $loader = new IRProductExtension();
+        $config = $this->getFullConfig();
+        unset($config['variant']);
+        $loader->load(array($config), new ContainerBuilder());        
+    }      
     
     public function testDisableProduct()
     {
@@ -114,7 +125,17 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $loader->load(array($config), $this->configuration);
         $this->assertNotHasDefinition('ir_product.form.product');
     }  
- 
+    
+    public function testProductLoadVariableProductFormClass()
+    {
+        $this->configuration = new ContainerBuilder();
+        $loader = new IRProductExtension();
+        $config = $this->getFullConfig();
+        unset($config['product']['form']['type']);
+        $loader->load(array($config), $this->configuration);   
+        $this->assertParameter('ir_product_variable_product', 'ir_product.form.type.product');
+    }    
+    
     public function testProductLoadModelClassWithDefaults()
     {
         $this->createEmptyConfiguration();
@@ -160,7 +181,9 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotHasDefinition('ir_product.form.type.variant');
         $this->assertNotHasDefinition('ir_product.form.type.option_choice');
         $this->assertNotHasDefinition('ir_product.form.type.option_value');
-        $this->assertNotHasDefinition('ir_product.form.type.option_value_choice');        
+        $this->assertNotHasDefinition('ir_product.form.type.option_value_choice'); 
+        $this->assertNotHasDefinition('ir_product.form.type.variable_product');
+        $this->assertNotHasDefinition('ir_product.form.type.product_options');
     }      
     
     public function testProductLoadFormClass()
@@ -173,8 +196,10 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertHasDefinition('ir_product.form.type.option_choice');
         $this->assertHasDefinition('ir_product.form.type.option_value');
         $this->assertHasDefinition('ir_product.form.type.option_value_choice');
+        $this->assertHasDefinition('ir_product.form.type.variable_product');
+        $this->assertHasDefinition('ir_product.form.type.product_options');
     }    
-
+     
     public function testProductLoadFormNameWithDefaults()
     {
         $this->createEmptyConfiguration();
