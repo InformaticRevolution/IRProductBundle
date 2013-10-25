@@ -40,7 +40,7 @@ class VariantController extends ContainerAware
             throw new AccessDeniedHttpException(sprintf('The product with id %s has no options', $productId));            
         }
                 
-        $variant = $this->container->get('ir_product.manager.variant')->createVariant();
+        $variant = $this->container->get('ir_product.manager.variant')->createVariant($product);
         
         $form = $this->container->get('ir_product.form.variant'); 
         $form->setData($variant);

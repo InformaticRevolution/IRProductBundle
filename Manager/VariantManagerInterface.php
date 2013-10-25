@@ -24,9 +24,11 @@ interface VariantManagerInterface
     /**
      * Creates an empty variant instance.
      *
+     * @param ProductInterface|null $product
+     * 
      * @return VariantInterface
      */    
-    public function createVariant();
+    public function createVariant(ProductInterface $product = null);
 
     /**
      * Finds a variant by the given criteria.

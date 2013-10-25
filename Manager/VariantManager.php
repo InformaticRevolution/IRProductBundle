@@ -11,6 +11,8 @@
 
 namespace IR\Bundle\ProductBundle\Manager;
 
+use IR\Bundle\ProductBundle\Model\ProductInterface;
+
 /**
  * Abstract Variant Manager.
  *
@@ -21,10 +23,12 @@ abstract class VariantManager implements VariantManagerInterface
     /**
      * {@inheritdoc}
      */  
-    public function createVariant()
+    public function createVariant(ProductInterface $product = null)
     {
         $class = $this->getClass();
-
-        return new $class();
+        $variant = new $class();
+        $variant->setProduct($product);
+        
+        return $variant;
     } 
 }
