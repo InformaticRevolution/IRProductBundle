@@ -6,7 +6,10 @@ product:
     
     list:
         title: Products
-        no_products: You haven't added any products yet.  
+        no_products: You haven't added any products yet.
+    show:
+        title: Product details
+        general_info: General information        
     new:
         title: Add a product
         save: Save
@@ -16,7 +19,9 @@ product:
         save: Save
         cancel: Cancel      
     action: 
-        new: Add a product        
+        new: Add a product 
+        edit: Edit
+        delete: Delete            
     flash:
         created: The product has been successfully created
         updated: The product has been successfully updated

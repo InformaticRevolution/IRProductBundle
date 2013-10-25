@@ -6,7 +6,10 @@ product:
   
     list:
         title: Produits
-        no_results: Aucun produit pour le moment.  
+        no_results: Aucun produit pour le moment. 
+    show:
+        title: Produit
+        general_info: Informations générales        
     new:
         title: Ajouter un produit
         save: Enregistrer
@@ -16,7 +19,9 @@ product:
         save: Enregistrer
         cancel: Annuler 
     action: 
-        new: Ajouter un produit        
+        new: Ajouter un produit 
+        edit: Modifier
+        delete: Supprimer        
     flash:
         created: Le produit a été créé
         updated: Le produit a été mis à jour
