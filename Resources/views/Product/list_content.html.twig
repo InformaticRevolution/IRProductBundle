@@ -26,6 +26,9 @@
             <td>{{ product.name }}</td>
             <td>
                 <div class="pull-right">
+                    <a href="{{ path('ir_product_show', {'id': product.id}) }}" class="btn btn-default">
+                        <i class="glyphicon glyphicon-list"></i>
+                    </a>                     
                     <a href="{{ path('ir_product_edit', {'id': product.id}) }}" class="btn btn-primary">
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
