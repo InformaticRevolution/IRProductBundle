@@ -4,12 +4,10 @@
     <h1>{{ 'option.list.title'|trans }}</h1>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <a href="{{ path('ir_product_option_new') }}" class="btn btn-primary">
-            <i class="glyphicon glyphicon-plus"></i> {{ 'option.action.new'|trans }}
-        </a>
-    </div>
+<div class="well well-sm">
+    <a href="{{ path('ir_product_option_new') }}" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus"></i> {{ 'option.action.new'|trans }}
+    </a>
 </div>  
 
 {% if options|length %}

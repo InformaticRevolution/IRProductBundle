@@ -48,7 +48,7 @@ class Variant extends BaseVariant
      * @ORM\ManyToMany(targetEntity="OptionValue")
      * @ORM\JoinTable(name="acme_product_variants_options",
      *      joinColumns={@ORM\JoinColumn(name="variant_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
     protected $options;
@@ -111,6 +111,7 @@ Acme\ProductBundle\Entity\Variant:
           joinColumns:
             variant_id:
               referencedColumnName: id
+              onDelete: CASCADE
           inverseJoinColumns:
             option_value_id:
               referencedColumnName: id 
@@ -134,7 +135,7 @@ In XML:
         <many-to-many field="options" target-entity="OptionValue">
             <join-table name="acme_product_variants_options">
                 <join-columns>
-                    <join-column name="variant_id" referenced-column-name="id" />
+                    <join-column name="variant_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="option_value_id" referenced-column-name="id" />
