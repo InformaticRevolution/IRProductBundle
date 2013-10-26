@@ -64,7 +64,7 @@ class ProductManager extends AbstractProductManager
     public function updateProduct(ProductInterface $product, $andFlush = true)
     {  
         $this->objectManager->persist($product);
-        
+
         if ($andFlush) {
             $this->objectManager->flush();
         }   

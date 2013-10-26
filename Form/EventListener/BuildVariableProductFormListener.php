@@ -49,6 +49,7 @@ class BuildVariableProductFormListener implements EventSubscriberInterface
             'required' => false,
             'multiple' => true,
             'by_reference' => false,
+            'property' => 'name',
             'label' => 'form.product.options',
             'translation_domain' => 'ir_product',
         ));                 
