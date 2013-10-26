@@ -4,10 +4,10 @@
     <h1>{{ 'variant.new.title'|trans }}</h1>
 </div>
 
-<form action="{{ path('ir_product_variant_new', {'productId': product.id} ) }}" {{ form_enctype(form) }} method="POST" novalidate>
+<form action="{{ path('ir_product_variant_new', {'productId': product.id} ) }}" {{ form_enctype(form) }} method="POST" class="form-horizontal" novalidate>
     {% include 'IRProductBundle:Variant:form.html.twig' %}
     <div>
         <button type="submit" class="btn btn-primary">{{ 'variant.new.save'|trans }}</button>
-        <a href="{{ app.request.headers.get('referer') }}" class="btn">{{ 'variant.new.cancel'|trans }}</a>        
+        <a href="{{ path('ir_product_show', {'id' : product.id}) }}" class="btn">{{ 'variant.new.cancel'|trans }}</a>        
     </div>        
 </form>
