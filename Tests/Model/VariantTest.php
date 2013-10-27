@@ -29,6 +29,18 @@ class VariantTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Doctrine\Common\Collections\Collection', $variant->getOptions());
     }    
     
+    public function testIsMasterVariant()
+    {
+        $variant = $this->getVariant();
+        $product = $this->getProduct();
+        
+        $this->assertFalse($variant->isMasterVariant());
+        $variant->setProduct($product);
+        $this->assertFalse($variant->isMasterVariant());
+        $product->setMasterVariant($variant);
+        $this->assertTrue($variant->isMasterVariant());
+    }
+            
     public function testAddOption()
     {
         $variant = $this->getVariant();
@@ -97,7 +109,7 @@ class VariantTest extends \PHPUnit_Framework_TestCase
      */
     protected function getProduct()
     {
-        return $this->getMock('IR\Bundle\ProductBundle\Model\VariableProductInterface');
+        return $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\VariableProduct');
     }  
     
     /**

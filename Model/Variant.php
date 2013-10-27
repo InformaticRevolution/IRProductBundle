@@ -82,6 +82,15 @@ abstract class Variant implements VariantInterface
     /**
      * {@inheritdoc}
      */
+    public function isMasterVariant()
+    {
+        return null !== $this->product && 
+               $this === $this->product->getMasterVariant();
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
     public function getOptions()
     {
         return $this->options;
