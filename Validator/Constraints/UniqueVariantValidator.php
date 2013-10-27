@@ -64,8 +64,10 @@ class UniqueVariantValidator extends ConstraintValidator
             }
             
             if (!count(array_diff($variant->getOptions()->toArray(), $value->getOptions()->toArray()))) {
-                $this->context->addViolationAt('options', $constraint->message);
-                
+                for ($i=0; $i < count($value->getOptions()); $i++) {
+                   $this->context->addViolationAt('options['.$i.']', $constraint->message); 
+                }
+
                 return;
             }
         }
