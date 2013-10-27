@@ -87,6 +87,17 @@
             <option name="message">ir_product.variant.options.not_unique</option>
             <option name="groups">Variant</option>
         </constraint>
+        
+        <property name="options">
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="NotNull">
+                        <option name="message">ir_product.variant.options.not_null</option>
+                        <option name="groups">Variant</option>                        
+                    </constraint>
+                </option>
+            </constraint>
+        </property>            
     </class>       
 
 </constraint-mapping>        

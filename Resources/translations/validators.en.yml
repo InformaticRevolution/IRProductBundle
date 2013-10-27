@@ -27,4 +27,5 @@ ir_product:
             
     variant:
         options: 
-            not_unique: This variant already exists            
+            not_unique: This variant already exists
+            not_null: Please select a value for each option
