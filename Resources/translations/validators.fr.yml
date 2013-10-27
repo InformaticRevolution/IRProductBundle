@@ -28,4 +28,4 @@ ir_product:
     variant:
         options: 
             not_unique: Cette variante existe déjà  
-            not_null: Veuillez sélectionner une valeur pour chaque option
+            not_null: Veuillez sélectionner une valeur
