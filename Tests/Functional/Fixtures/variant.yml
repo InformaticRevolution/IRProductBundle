@@ -2,22 +2,21 @@ IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Product:
     product1:
         name: <sentence(5)>
         options: ["@option"]
-        masterVariant: "@variant1"
+        variants: ["@variant1", "@variant2"]
         
     product2:
         name: <sentence(5)>
         
-IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Variant:
-    variant{1..3}:
-        product: "@product1"
-        options: ["@optionValue"]
+IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Variant (local):
+    variant{1..2}:
+        options: ["@optionValue<current()>"]
         
 IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option:
     option:
         name: <sentence(2)>
         publicName: <sentence(2)>
-        values: ["@optionValue"]
+        values: ["@optionValue1", "@optionValue2", "@optionValue3"]
         
-IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue:
-    optionValue:
+IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue (local):
+    optionValue{1..3}:
         value: <sentence(2)>

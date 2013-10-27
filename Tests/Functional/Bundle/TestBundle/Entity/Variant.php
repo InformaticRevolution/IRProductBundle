@@ -33,7 +33,7 @@ class Variant extends BaseVariant
      * @ORM\ManyToMany(targetEntity="OptionValue")
      * @ORM\JoinTable(name="variants_options",
      *      joinColumns={@ORM\JoinColumn(name="variant_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id")}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="option_value_id", referencedColumnName="id", onDelete="CASCADE")}
      * )
      */
     protected $options;       

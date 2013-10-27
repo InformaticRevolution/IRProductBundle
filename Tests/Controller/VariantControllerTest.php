@@ -36,12 +36,15 @@ class VariantControllerTest extends WebTestCase
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
-    }  
+    } 
     
     public function testNewActionPostMethod()
     {        
         $this->client->request('POST', '/variants/new/1', array(
             'ir_product_variant_form' => array (
+                'options' => array(
+                    0 => 2,
+                ),
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
@@ -60,7 +63,7 @@ class VariantControllerTest extends WebTestCase
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
-    }      
+    }   
     
     public function testEditActionPostMethod()
     {        
@@ -104,13 +107,13 @@ class VariantControllerTest extends WebTestCase
     
     public function testNotFoundHttpWhenVariantNotExist()
     {
-        $this->client->request('GET', '/variants/4');
+        $this->client->request('GET', '/variants/3');
         $this->assertResponseStatusCode(404);        
         
-        $this->client->request('GET', '/variants/4/edit');
+        $this->client->request('GET', '/variants/3/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/variants/4/delete');
+        $this->client->request('GET', '/variants/3/delete');
         $this->assertResponseStatusCode(404);        
-    }       
+    }
 }
