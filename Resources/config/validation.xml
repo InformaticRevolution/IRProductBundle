@@ -85,7 +85,7 @@
     <class name="IR\Bundle\ProductBundle\Model\Variant">
         <constraint name="IR\Bundle\ProductBundle\Validator\Constraints\UniqueVariant">
             <option name="message">ir_product.variant.options.not_unique</option>
-            <option name="groups">Variant</option>
+            <option name="groups">Product</option>
         </constraint>
         
         <property name="options">
@@ -93,7 +93,7 @@
                 <option name="constraints">
                     <constraint name="NotNull">
                         <option name="message">ir_product.variant.options.not_null</option>
-                        <option name="groups">Variant</option>                        
+                        <option name="groups">Product</option>                        
                     </constraint>
                 </option>
             </constraint>
