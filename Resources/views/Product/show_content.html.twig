@@ -13,24 +13,25 @@
     </a>
 </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th colspan="2">{{ 'product.show.general_info'|trans }}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>{{ 'product.name'|trans }}</td>
-            <td>{{ product.name }}</td>        
-        </tr>  
-        <tr>
-            <td>{{ 'product.created_at'|trans }}</td>
-            <td>{{ product.createdAt|date }}</td>
-        </tr>  
-        <tr>
-            <td>{{ 'product.updated_at'|trans }}</td>
-            <td>{{ product.updatedAt|date }}</td>
-        </tr>          
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        {{ 'product.show.general_info'|trans }}
+    </div>
+
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <td>{{ 'product.name'|trans }}</td>
+                <td>{{ product.name }}</td>        
+            </tr>  
+            <tr>
+                <td>{{ 'product.created_at'|trans }}</td>
+                <td>{{ product.createdAt|date }}</td>
+            </tr>  
+            <tr>
+                <td>{{ 'product.updated_at'|trans }}</td>
+                <td>{{ product.updatedAt|date }}</td>
+            </tr>          
+        </tbody>
+    </table>
+</div>
