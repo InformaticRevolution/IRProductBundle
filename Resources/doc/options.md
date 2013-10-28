@@ -237,7 +237,7 @@ class Product extends BaseProduct
     /**
      * @ORM\ManyToMany(targetEntity="Option")
      * @ORM\JoinTable(name="acme_product_products_options",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
      * )
      */
@@ -301,6 +301,7 @@ Acme\ProductBundle\Entity\Product:
                 joinColumns:
                     product_id:
                         referencedColumnName: id
+                        onDelete: CASCADE
                 inverseJoinColumns:
                     option_id:
                         referencedColumnName: id
@@ -324,7 +325,7 @@ In XML:
         <many-to-many field="options" target-entity="Option">
             <join-table name="acme_product_products_options">
                 <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" />
+                    <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="option_id" referenced-column-name="id" />
