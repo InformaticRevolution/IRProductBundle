@@ -12,16 +12,14 @@
 namespace IR\Bundle\ProductBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use IR\Bundle\ProductBundle\Form\EventListener\BuildVariantFormListener;
 
 /**
  * Master Variant Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class VariantType extends AbstractType
+class MasterVariantType extends AbstractType
 {
     /**
      * @var string
@@ -41,23 +39,12 @@ class VariantType extends AbstractType
 
     /**
      * {@inheritdoc}
-     */     
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {   
-        if (!$options['master']) {
-            $builder->addEventSubscriber(new BuildVariantFormListener());
-        }        
-    }
-
-    /**
-     * {@inheritdoc}
      */       
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => $this->class,
-            'intention' => 'variant', 
-            'master' => false,
+            'intention' => 'master_variant', 
         ));        
     }    
     
@@ -66,6 +53,6 @@ class VariantType extends AbstractType
      */        
     public function getName()
     {
-        return 'ir_product_variant';
+        return 'ir_product_master_variant';
     }
 }

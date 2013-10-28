@@ -24,19 +24,17 @@ class VariableProductType extends ProductType
     /**
      * @var string
      */         
-    protected $masterVariantFormType;
+    protected $class;
 
     
     /**
      * Constructor.
      * 
      * @param string $class
-     * @param string $masterVariantFormType
      */
-    public function __construct($class, $masterVariantFormType)
+    public function __construct($class)
     {
         $this->class = $class;
-        $this->masterVariantFormType = $masterVariantFormType;
     }
     
     /**
@@ -47,8 +45,7 @@ class VariableProductType extends ProductType
         parent::buildForm($builder, $options);
         
         $builder
-            ->add('masterVariant', $this->masterVariantFormType, array(
-                'master' => true,
+            ->add('masterVariant', 'ir_product_master_variant', array(
                 'label' => 'form.product.master_variant',
                 'translation_domain' => 'ir_product',                
             ))        

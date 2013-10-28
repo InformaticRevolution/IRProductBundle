@@ -179,6 +179,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('ir_product', 'ir_product.form.type.product');
         $this->assertNotHasDefinition('ir_product.form.type.option');
         $this->assertNotHasDefinition('ir_product.form.type.variant');
+        $this->assertNotHasDefinition('ir_product.form.type.master_variant');
         $this->assertNotHasDefinition('ir_product.form.type.option_choice');
         $this->assertNotHasDefinition('ir_product.form.type.option_value');
         $this->assertNotHasDefinition('ir_product.form.type.option_value_choice'); 
@@ -193,6 +194,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('acme_product', 'ir_product.form.type.product');
         $this->assertParameter('acme_product_option', 'ir_product.form.type.option');
         $this->assertParameter('acme_product_variant', 'ir_product.form.type.variant');
+        $this->assertParameter('acme_product_master_variant', 'ir_product.form.type.master_variant');
         $this->assertHasDefinition('ir_product.form.type.option_choice');
         $this->assertHasDefinition('ir_product.form.type.option_value');
         $this->assertHasDefinition('ir_product.form.type.option_value_choice');
@@ -207,6 +209,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('ir_product_form', 'ir_product.form.name.product');
         $this->assertNotHasDefinition('ir_product_form.form.name.option');
         $this->assertNotHasDefinition('ir_product_form.form.name.variant');
+        $this->assertNotHasDefinition('ir_product_form.form.name.master_variant');
     }    
     
     public function testProductLoadFormName()
@@ -216,6 +219,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertParameter('acme_product_form', 'ir_product.form.name.product');
         $this->assertParameter('acme_product_option_form', 'ir_product.form.name.option');
         $this->assertParameter('acme_product_variant_form', 'ir_product.form.name.variant');
+        $this->assertParameter('acme_product_master_variant_form', 'ir_product.form.name.master_variant');
     }    
     
     public function testProductLoadFormServiceWithDefaults()
@@ -233,7 +237,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertHasDefinition('ir_product.form.product');
         $this->assertHasDefinition('ir_product.form.option');
-        $this->assertHasDefinition('ir_product.form.variant');        
+        $this->assertHasDefinition('ir_product.form.variant'); 
     }     
     
     public function testProductLoadValidatorServiceWithDefaults()

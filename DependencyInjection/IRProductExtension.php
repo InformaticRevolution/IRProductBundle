@@ -92,9 +92,12 @@ class IRProductExtension extends Extension
         $loader->load(sprintf('driver/%s/variant.xml', $dbDriver));
         
         $container->setParameter('ir_product.model.variant.class', $config['variant_class']);
-        $container->setParameter('ir_product.form.name.variant', $config['form']['name']);
-        $container->setParameter('ir_product.form.type.variant', $config['form']['type']);
+        
+        $container->setParameter('ir_product.form.name.variant', $config['form']['name']['variant']);
+        $container->setParameter('ir_product.form.type.variant', $config['form']['type']['variant']);
         $container->setParameter('ir_product.form.validation_groups.variant', $config['form']['validation_groups']);
+        $container->setParameter('ir_product.form.name.master_variant', $config['form']['name']['master_variant']);
+        $container->setParameter('ir_product.form.type.master_variant', $config['form']['type']['master_variant']);
         
         $container->setAlias('ir_product.manager.variant', $config['variant_manager']);
     }     

@@ -17,8 +17,12 @@ option:
 variant:
     variant_class: Acme\ProductBundle\Entity\Variant
     form:
-        type: acme_product_variant
-        name: acme_product_variant_form
-        validation_groups: [acme_variant]
+        type:
+            variant: acme_product_variant
+            master_variant: acme_product_master_variant
+        name: 
+            variant: acme_product_variant_form
+            master_variant: acme_product_master_variant_form
+        validation_groups: [acme_variant]           
 template:
     engine: php

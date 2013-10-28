@@ -17,7 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use IR\Bundle\ProductBundle\Form\EventListener\BuildVariantFormListener;
 
 /**
- * Master Variant Type.
+ * Variant Type.
  * 
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -44,9 +44,7 @@ class VariantType extends AbstractType
      */     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {   
-        if (!$options['master']) {
-            $builder->addEventSubscriber(new BuildVariantFormListener());
-        }        
+        $builder->addEventSubscriber(new BuildVariantFormListener());
     }
 
     /**
@@ -57,7 +55,6 @@ class VariantType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => $this->class,
             'intention' => 'variant', 
-            'master' => false,
         ));        
     }    
     

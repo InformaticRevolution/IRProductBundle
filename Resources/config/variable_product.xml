@@ -11,7 +11,6 @@
     <services>
         <service id="ir_product.form.type.variable_product" class="%ir_product.form.type.variable_product.class%">
             <argument>%ir_product.model.product.class%</argument>
-            <argument>%ir_product.form.type.variant%</argument>
             <tag name="form.type" alias="ir_product_variable_product" />
         </service>                      
     </services>
