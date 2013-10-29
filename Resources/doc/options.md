@@ -226,7 +226,7 @@ use IR\Bundle\ProductBundle\Model\ProductOption as BaseProductOption;
  * @ORM\Entity
  * @ORM\Table(
  *     name="acme_product_products_options", 
- *     uniqueConstraints={@UniqueConstraint(name="product_option_idx", columns={"product_id", "option_id"})}
+ *     uniqueConstraints={@ORM\UniqueConstraint(name="product_option_idx", columns={"product_id", "option_id"})}
  * )
  */
 class ProductOption extends BaseProductOption
