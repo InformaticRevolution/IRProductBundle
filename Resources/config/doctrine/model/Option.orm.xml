@@ -7,7 +7,7 @@
 
     <mapped-superclass name="IR\Bundle\ProductBundle\Model\Option">
         
-        <field name="name" column="name" type="string" length="255" />
+        <field name="name" column="name" type="string" length="255" unique="true" />
 
         <field name="publicName" column="public_name" type="string" length="255" />  
         
