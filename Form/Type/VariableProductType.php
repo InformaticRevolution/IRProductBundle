@@ -29,11 +29,6 @@ class VariableProductType extends ProductType
     /**
      * @var string
      */         
-    protected $variantType;     
-    
-    /**
-     * @var string
-     */         
     protected $masterVariantType;    
 
     
@@ -42,13 +37,11 @@ class VariableProductType extends ProductType
      * 
      * @param string $class
      * @param string $variantType
-     * @param string $masterVariantType
      */
-    public function __construct($class, $variantType, $masterVariantType)
+    public function __construct($class, $variantType)
     {
         $this->class = $class;
         $this->variantType = $variantType;
-        $this->masterVariantType = $masterVariantType;
     }
     
     /**
@@ -63,7 +56,7 @@ class VariableProductType extends ProductType
                 'label' => 'form.product.master_variant',
                 'translation_domain' => 'ir_product',                
             ))        
-            ->addEventSubscriber(new BuildVariableProductFormListener($this->variantType));
+            ->addEventSubscriber(new BuildVariableProductFormListener());
         ;
     } 
     
