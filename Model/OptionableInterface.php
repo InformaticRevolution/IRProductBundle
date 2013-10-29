@@ -37,23 +37,23 @@ interface OptionableInterface
     /**
      * Adds an option.
      *
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      */
-    public function addOption(OptionInterface $option); 
+    public function addOption(ProductOptionInterface $option); 
     
     /**
      * Removes an option.
      *
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      */
-    public function removeOption(OptionInterface $option);
+    public function removeOption(ProductOptionInterface $option);
     
     /**
      * Checks whether product has given option.
      *
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      *
      * @return Boolean
      */
-    public function hasOption(OptionInterface $option);    
+    public function hasOption(ProductOptionInterface $option);    
 }

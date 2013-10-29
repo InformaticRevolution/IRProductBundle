@@ -12,30 +12,20 @@
 namespace IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use IR\Bundle\ProductBundle\Model\VariableProduct as BaseProduct;
+use IR\Bundle\ProductBundle\Model\ProductOption as BaseProductOption;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="product")
+ * @ORM\Table(name="products_options")
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class Product extends BaseProduct
+class ProductOption extends BaseProductOption
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id; 
-    
-    /**
-     * @ORM\OneToMany(targetEntity="ProductOption", mappedBy="product", cascade={"all"}, orphanRemoval=true)
-     */
-    protected $options; 
-    
-    /**
-     * @ORM\OneToMany(targetEntity="Variant", mappedBy="product", cascade={"all"}, orphanRemoval=true)
-     */
-    protected $variants;  
+    protected $id;
 }

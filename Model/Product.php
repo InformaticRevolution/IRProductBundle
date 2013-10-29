@@ -140,9 +140,10 @@ abstract class Product implements ProductInterface, OptionableInterface
     /**
      * {@inheritdoc}
      */
-    public function addOption(OptionInterface $option)
+    public function addOption(ProductOptionInterface $option)
     {
         if (!$this->hasOption($option)) {
+            $option->setProduct($this);
             $this->options->add($option);
         }
     }
@@ -150,15 +151,17 @@ abstract class Product implements ProductInterface, OptionableInterface
     /**
      * {@inheritdoc}
      */
-    public function removeOption(OptionInterface $option)
+    public function removeOption(ProductOptionInterface $option)
     {
-        $this->options->removeElement($option);
+        if ($this->options->removeElement($option)) {
+            $option->setProduct(null);
+        }
     }
     
     /**
      * {@inheritdoc}
      */
-    public function hasOption(OptionInterface $option)
+    public function hasOption(ProductOptionInterface $option)
     {
         return $this->options->contains($option);
     }     

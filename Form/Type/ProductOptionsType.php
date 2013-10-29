@@ -29,7 +29,7 @@ class ProductOptionsType extends AbstractType
     {           
         foreach ($options['product']->getOptions() as $i => $option) {
             $builder->add($i, 'ir_product_option_value_choice', array(
-                'option' => $option,
+                'option' => $option->getOption(),
                 'label' => $option->getName().' :',
             ));
         }

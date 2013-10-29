@@ -44,8 +44,12 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $option = $this->getOption();
         
         $this->assertNotContains($option, $product->getOptions());
+        $this->assertNull($option->getProduct());
+        
         $product->addOption($option);
+        
         $this->assertContains($option, $product->getOptions());
+        $this->assertSame($product, $option->getProduct());
     }
     
     public function testRemoveOption()
@@ -55,8 +59,12 @@ class ProductTest extends \PHPUnit_Framework_TestCase
         $product->addOption($option);
         
         $this->assertContains($option, $product->getOptions());
+        $this->assertSame($product, $option->getProduct());
+        
         $product->removeOption($option);
-        $this->assertNotContains($option, $product->getOptions());      
+        
+        $this->assertNotContains($option, $product->getOptions());
+        $this->assertNull($option->getProduct());     
     }       
     
     public function testHasOption()
@@ -113,10 +121,10 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     }      
     
     /**
-     * @return OptionInterface
+     * @return ProductOptionInterface
      */
     protected function getOption()
     {
-        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionInterface');
+        return $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\ProductOption');
     }      
 }

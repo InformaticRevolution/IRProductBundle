@@ -1,7 +1,7 @@
 IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Product:
     product1:
         name: <sentence(5)>
-        options: ["@option"]
+        options: ["@productOption"]
         variants: ["@variant1"]
         masterVariant: "@variant2"
         
@@ -21,3 +21,7 @@ IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option:
 IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue (local):
     optionValue{1..3}:
         value: <sentence(2)>
+        
+IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\ProductOption (local):
+    productOption:
+        option: "@option"       

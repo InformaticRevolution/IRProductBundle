@@ -35,6 +35,7 @@ doctrine:
 stof_doctrine_extensions:
     orm:
         default:
+            sortable: true
             sluggable: true
             timestampable: true
            
