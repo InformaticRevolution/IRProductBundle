@@ -86,6 +86,17 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
      */
+    public function testProductLoadThrowsExceptionUnlessProductOptionModelClassSet()
+    {
+        $loader = new IRProductExtension();
+        $config = $this->getFullConfig();
+        unset($config['option']['product_option_class']);
+        $loader->load(array($config), new ContainerBuilder());
+    }     
+    
+    /**
+     * @expectedException \Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+     */
     public function testProductLoadThrowsExceptionUnlessVariantModelClassSet()
     {
         $loader = new IRProductExtension();
@@ -149,6 +160,8 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertParameter('Acme\ProductBundle\Entity\Product', 'ir_product.model.product.class');
         $this->assertParameter('Acme\ProductBundle\Entity\Option', 'ir_product.model.option.class');
+        $this->assertParameter('Acme\ProductBundle\Entity\OptionValue', 'ir_product.model.option_value.class');
+        $this->assertParameter('Acme\ProductBundle\Entity\ProductOption', 'ir_product.model.product_option.class');
         $this->assertParameter('Acme\ProductBundle\Entity\Variant', 'ir_product.model.variant.class');
     }      
     
@@ -184,6 +197,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotHasDefinition('ir_product.form.type.option_value');
         $this->assertNotHasDefinition('ir_product.form.type.option_value_choice'); 
         $this->assertNotHasDefinition('ir_product.form.type.variable_product');
+        $this->assertNotHasDefinition('ir_product.form.type.product_option');
         $this->assertNotHasDefinition('ir_product.form.type.product_options');
     }      
     
@@ -199,6 +213,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertHasDefinition('ir_product.form.type.option_value');
         $this->assertHasDefinition('ir_product.form.type.option_value_choice');
         $this->assertHasDefinition('ir_product.form.type.variable_product');
+        $this->assertHasDefinition('ir_product.form.type.product_option');
         $this->assertHasDefinition('ir_product.form.type.product_options');
     }    
      

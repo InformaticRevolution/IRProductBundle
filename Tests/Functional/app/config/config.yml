@@ -46,6 +46,7 @@ ir_product:
     use_variable_product_form_type: true
     option:
         option_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Option 
-        option_value_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue 
+        option_value_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\OptionValue
+        product_option_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\ProductOption
     variant:
         variant_class: IR\Bundle\ProductBundle\Tests\Functional\Bundle\TestBundle\Entity\Variant         

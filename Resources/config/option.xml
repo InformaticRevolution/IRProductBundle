@@ -8,6 +8,7 @@
         <parameter key="ir_product.form.type.option.class">IR\Bundle\ProductBundle\Form\Type\OptionType</parameter>
         <parameter key="ir_product.form.type.option_value.class">IR\Bundle\ProductBundle\Form\Type\OptionValueType</parameter>
         <parameter key="ir_product.form.type.option_value_choice.class">IR\Bundle\ProductBundle\Form\Type\OptionValueChoiceType</parameter>
+        <parameter key="ir_product.form.type.product_option.class">IR\Bundle\ProductBundle\Form\Type\ProductOptionType</parameter>
         <parameter key="ir_product.form.type.product_options.class">IR\Bundle\ProductBundle\Form\Type\ProductOptionsType</parameter>
     </parameters>
 
@@ -45,7 +46,14 @@
         <service id="ir_product.form.type.option_value_choice" class="%ir_product.form.type.option_value_choice.class%">
             <tag name="form.type" alias="ir_product_option_value_choice" />
         </service>
+
+        <!-- Product Option Type -->
         
+        <service id="ir_product.form.type.product_option" class="%ir_product.form.type.product_option.class%">
+            <argument>%ir_product.model.product_option.class%</argument>
+            <tag name="form.type" alias="ir_product_product_option" />
+        </service>  
+                
         <!-- Product Options Type -->
         
         <service id="ir_product.form.type.product_options" class="%ir_product.form.type.product_options.class%">

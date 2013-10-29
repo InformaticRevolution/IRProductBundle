@@ -10,6 +10,7 @@ product:
 option:
     option_class: Acme\ProductBundle\Entity\Option
     option_value_class: Acme\ProductBundle\Entity\OptionValue
+    product_option_class: Acme\ProductBundle\Entity\ProductOption
     form:
         type: acme_product_option
         name: acme_product_option_form  

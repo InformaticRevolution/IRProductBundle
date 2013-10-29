@@ -102,6 +102,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('option_class')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('option_value_class')->isRequired()->cannotBeEmpty()->end()
+                        ->scalarNode('product_option_class')->isRequired()->cannotBeEmpty()->end()
                         ->scalarNode('option_manager')->defaultValue('ir_product.manager.option.default')->end()
                         ->arrayNode('form')
                             ->addDefaultsIfNotSet()

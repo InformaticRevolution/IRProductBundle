@@ -58,6 +58,9 @@ class ProductControllerTest extends WebTestCase
         $this->client->request('POST', '/products/new', array(
             'ir_product_form' => array (
                 'name' => 'Product 1',
+                'options' => array(
+                    array('option' => 1)
+                ),
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));  
@@ -82,7 +85,7 @@ class ProductControllerTest extends WebTestCase
     {        
         $this->client->request('POST', '/products/1/edit', array(
             'ir_product_form' => array (
-                'name' => 'Product ',
+                'name' => 'Product ',              
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
         ));     

@@ -45,11 +45,11 @@ class BuildVariableProductFormListener implements EventSubscriberInterface
         }
         
         // We should only be able to select options during the creation process.
-        $form->add('options', 'ir_product_option_choice', array(
-            'required' => false,
-            'multiple' => true,
+        $form->add('options', 'collection', array(
+            'type' => 'ir_product_product_option',
+            'allow_add' => true,
+            'allow_delete' => true,
             'by_reference' => false,
-            'property' => 'name',
             'label' => 'form.product.options',
             'translation_domain' => 'ir_product',
         ));        

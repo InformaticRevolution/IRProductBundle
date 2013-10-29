@@ -78,6 +78,7 @@ class IRProductExtension extends Extension
  
         $container->setParameter('ir_product.model.option.class', $config['option_class']);
         $container->setParameter('ir_product.model.option_value.class', $config['option_value_class']); 
+        $container->setParameter('ir_product.model.product_option.class', $config['product_option_class']); 
         $container->setParameter('ir_product.form.name.option', $config['form']['name']);
         $container->setParameter('ir_product.form.type.option', $config['form']['type']);   
         $container->setParameter('ir_product.form.validation_groups.option', $config['form']['validation_groups']);
