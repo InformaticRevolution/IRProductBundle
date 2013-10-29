@@ -30,6 +30,18 @@ use IR\Bundle\ProductBundle\Model\VariantInterface;
 class VariantController extends ContainerAware
 {
     /**
+     * Show variant details.
+     */
+    public function showAction($id)
+    {
+        $variant = $this->findVariantById($id);
+
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:show.html.'.$this->getEngine(), array(
+            'variant' => $variant
+        ));
+    }       
+    
+    /**
      * Create a new variant: show the new form.
      */
     public function newAction(Request $request, $productId)
@@ -143,6 +155,10 @@ class VariantController extends ContainerAware
 
         if (null === $variant) {
             throw new NotFoundHttpException(sprintf('The variant with id %s does not exist', $id));
+        }
+        
+        if ($variant->isMasterVariant()) {
+            throw new AccessDeniedHttpException(sprintf('The variant with id %s is a master variant', $id)); 
         }
 
         return $variant;

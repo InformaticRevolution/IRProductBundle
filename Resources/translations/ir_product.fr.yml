@@ -52,6 +52,12 @@ option:
         
 # Variant
 variant:
+    created_at: Date de création
+    updated_at: Date de mise à jour
+    
+    show:
+        title: Variante
+        general_info: Informations générales     
     new:
         title: Ajouter une variante
         save: Enregistrer
@@ -60,6 +66,9 @@ variant:
         title: Modifier une variante
         save: Enregistrer
         cancel: Annuler   
+    action:
+        edit: Modifier
+        delete: Supprimer      
     flash:
         created: La variante a été créée
         updated: La variante a été mise à jour

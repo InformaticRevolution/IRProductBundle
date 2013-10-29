@@ -30,6 +30,13 @@ class VariantControllerTest extends WebTestCase
         $this->loadFixtures('variant');
     } 
     
+    public function testShowAction()
+    {
+        $this->client->request('GET', '/variants/1');
+        
+        $this->assertResponseStatusCode(200);
+    }        
+    
     public function testNewActionGetMethod()
     {
         $crawler = $this->client->request('GET', '/variants/new/1');
@@ -95,10 +102,19 @@ class VariantControllerTest extends WebTestCase
     
     public function testAccessDeniedHttpException()
     {
+        $this->client->request('GET', '/variants/2');
+        $this->assertResponseStatusCode(403);  
+        
         $this->client->request('GET', '/variants/new/2');
-        $this->assertResponseStatusCode(403);         
+        $this->assertResponseStatusCode(403);  
+        
+        $this->client->request('GET', '/variants/2/edit');
+        $this->assertResponseStatusCode(403);  
+        
+        $this->client->request('GET', '/variants/2/delete');
+        $this->assertResponseStatusCode(403);          
     }
-            
+    
     public function testNotFoundHttpWhenProductNotExist()
     {
         $this->client->request('GET', '/variants/new/3');
