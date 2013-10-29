@@ -323,7 +323,7 @@ ir_product:
         variant_class: Acme\ProductBundle\Entity\Variant
 ```
 
-**b) Add the ProductInterface path to the RTEL**
+**b) Add the VariantInterface path to the RTEL**
 
 ``` yaml
 # app/config/config.yml
@@ -332,8 +332,8 @@ doctrine:
     orm:
         # ....
         resolve_target_entities:
-            IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
             IR\Bundle\ProductBundle\Model\ProductInterface: Acme\ProductBundle\Entity\Product
+            IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
             IR\Bundle\ProductBundle\Model\VariantInterface: Acme\ProductBundle\Entity\Variant
 ```    
 

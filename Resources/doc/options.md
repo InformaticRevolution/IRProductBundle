@@ -210,6 +210,95 @@ In XML:
 
 ### Step 2: Define the Product-Option relation
 
+**a) Create your ProductOption class**
+
+##### Annotations
+``` php
+<?php
+// src/Acme/ProductBundle/Entity/ProductOption.php
+
+namespace Acme\ProductBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use IR\Bundle\ProductBundle\Model\ProductOption as BaseProductOption;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(
+ *     name="acme_product_products_options", 
+ *     uniqueConstraints={@UniqueConstraint(name="product_option_idx", columns={"product_id", "option_id"})}
+ * )
+ */
+class ProductOption extends BaseProductOption
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+     protected $id;
+}
+```
+
+##### Yaml or Xml
+
+``` php
+<?php
+// src/Acme/ProductBundle/Entity/ProductOption.php
+
+namespace Acme\ProductBundle\Entity;
+
+use IR\Bundle\ProductBundle\Model\ProductOption as BaseProductOption;
+
+/**
+ * ProductOption
+ */
+class ProductOption extends BaseProductOption
+{
+}
+```
+
+In YAML:
+
+``` yaml
+# src/Acme/ProductBundle/Resources/config/doctrine/ProductOption.orm.yml
+Acme\ProductBundle\Entity\ProductOption:
+    type:  entity
+    table: acme_product_products_options
+    uniqueConstraints:
+            product_option_idx:
+                columns: product_id, option_id
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+```
+
+In XML:
+
+``` xml
+<!-- src/Acme/ProductBundle/Resources/config/doctrine/ProductOption.orm.xml -->
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Acme\ProductBundle\Entity\ProductOption" table="acme_product_products_options">
+        <unique-constraints>
+            <unique-constraint columns="product_id,option_id" name="product_option_idx" />
+        </unique-constraints>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id> 
+    </entity>
+    
+</doctrine-mapping>
+
+**b) Update the Product class**
+
 ##### Annotations
 
 ``` php
@@ -235,11 +324,7 @@ class Product extends BaseProduct
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Option")
-     * @ORM\JoinTable(name="acme_product_products_options",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="ProductOption", mappedBy="product", cascade={"all"}, orphanRemoval=true)
      */
     protected $options;
 
@@ -293,18 +378,12 @@ Acme\ProductBundle\Entity\Product:
             type: integer
             generator:
                 strategy: AUTO
-    manyToMany:
+    oneToMany:
         options:
-            targetEntity: Option
-            joinTable:
-                name: acme_product_products_options
-                joinColumns:
-                    product_id:
-                        referencedColumnName: id
-                        onDelete: CASCADE
-                inverseJoinColumns:
-                    option_id:
-                        referencedColumnName: id
+            targetEntity: ProductOption
+            mappedBy: product
+            cascade: [ all ]
+            orphanRemoval: true
 ```
 
 In XML:
@@ -322,16 +401,11 @@ In XML:
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-many field="options" target-entity="Option">
-            <join-table name="acme_product_products_options">
-                <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="option_id" referenced-column-name="id" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
+        <one-to-many field="options" target-entity="ProductOption" mapped-by="product" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>            
+        </one-to-many>
     </entity>
     
 </doctrine-mapping>
@@ -351,9 +425,10 @@ ir_product:
     option:
         option_class: Acme\ProductBundle\Entity\Option
         option_value_class: Acme\ProductBundle\Entity\OptionValue
+        product_option_class: Acme\ProductBundle\Entity\ProductOption
 ```
 
-**b) Add the OptionInterface path to the RTEL**
+**b) Add the ProductInterface and OptionInterface paths to the RTEL**
 
 ``` yaml
 # app/config/config.yml
@@ -362,7 +437,20 @@ doctrine:
     orm:
         # ....
         resolve_target_entities:
+            IR\Bundle\ProductBundle\Model\ProductInterface: Acme\ProductBundle\Entity\Product
             IR\Bundle\ProductBundle\Model\OptionInterface: Acme\ProductBundle\Entity\Option
+```
+
+**c) Enable the sortable extension in your `config.yml` file**
+
+``` yaml
+# app/config/config.yml
+stof_doctrine_extensions:
+    orm:
+        default:
+            sortable:true
+            sluggable: true
+            timestampable: true
 ```
 
 ### Step 4: Import the routing file
