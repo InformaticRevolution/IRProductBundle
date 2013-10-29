@@ -83,7 +83,7 @@ class Configuration implements ConfigurationInterface
                                 ->scalarNode('name')->defaultValue('ir_product_form')->end()  
                                 ->arrayNode('validation_groups')
                                     ->prototype('scalar')->end()
-                                    ->defaultValue(array('Product'))
+                                    ->defaultValue(array('Product', 'Variant'))
                                 ->end()                  
                             ->end()
                         ->end()
