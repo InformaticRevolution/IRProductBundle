@@ -23,22 +23,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class BuildVariableProductFormListener implements EventSubscriberInterface
 {
     /**
-     * @var string
-     */
-    protected $variantType;
-
-    
-    /**
-     * Constructor.
-     * 
-     * @param string $variantType
-     */
-    public function __construct($variantType) 
-    {
-        $this->variantType = $variantType;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function getSubscribedEvents()
