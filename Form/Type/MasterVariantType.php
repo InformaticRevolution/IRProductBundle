@@ -43,6 +43,7 @@ class MasterVariantType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
+            'data' => new $this->class(),
             'data_class' => $this->class,
             'intention' => 'master_variant', 
         ));        
