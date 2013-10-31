@@ -144,6 +144,7 @@ abstract class Product implements ProductInterface, OptionableInterface
     {
         if (!$this->hasOption($option)) {
             $option->setProduct($this);
+            $option->setPosition($this->options->count());
             $this->options->add($option);
         }
     }
