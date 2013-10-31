@@ -49,33 +49,42 @@ interface VariantInterface
     public function isMasterVariant();
     
     /**
-     * Returns all the options.
+     * Returns all the option values.
      *
      * @return Collection
      */
     public function getOptions();
 
     /**
-     * Adds an option.
+     * Adds an option value.
      *
      * @param OptionValueInterface $option
      */
     public function addOption(OptionValueInterface $option);
 
     /**
-     * Removes an option.
+     * Removes an option value.
      *
      * @param OptionValueInterface $option
      */
     public function removeOption(OptionValueInterface $option);
 
     /**
-     * Checks whether variant has given option.
+     * Checks whether variant has given option value.
      *
      * @param OptionValueInterface $option
      */
     public function hasOption(OptionValueInterface $option);    
-    
+
+    /**
+     * Returns the option value of given option.
+     * 
+     * @param OptionInterface $option
+     * 
+     * @return OptionInterface|null
+     */
+    public function getOption(OptionInterface $option);
+        
     /**
      * Returns the creation time.
      *

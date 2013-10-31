@@ -124,6 +124,20 @@ abstract class Variant implements VariantInterface
     
     /**
      * {@inheritdoc}
+     */
+    public function getOption(OptionInterface $option)
+    {
+        foreach ($this->options as $optionValue) {
+            if ($option === $optionValue->getOption()) {
+                return $optionValue;
+            }
+        }
+        
+        return null;
+    }    
+    
+    /**
+     * {@inheritdoc}
      */   
     public function getCreatedAt()
     {
