@@ -326,6 +326,7 @@ class Product extends BaseProduct
 
     /**
      * @ORM\OneToMany(targetEntity="ProductOption", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $options;
 
@@ -385,6 +386,7 @@ Acme\ProductBundle\Entity\Product:
             mappedBy: product
             cascade: [ all ]
             orphanRemoval: true
+            orderBy: { position: ASC }
 ```
 
 In XML:
@@ -405,7 +407,10 @@ In XML:
         <one-to-many field="options" target-entity="ProductOption" mapped-by="product" orphan-removal="true">
             <cascade>
                 <cascade-all />
-            </cascade>            
+            </cascade>   
+            <order-by>
+                <order-by-field name="position" direction="ASC" />
+            </order-by>         
         </one-to-many>
     </entity>
     

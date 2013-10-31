@@ -31,6 +31,7 @@ class Product extends BaseProduct
     
     /**
      * @ORM\OneToMany(targetEntity="ProductOption", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $options; 
     
