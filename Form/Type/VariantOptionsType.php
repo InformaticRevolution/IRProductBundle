@@ -16,21 +16,30 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Product Options Type.
+ * Variant Options Type.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class ProductOptionsType extends AbstractType
+class VariantOptionsType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {           
-        foreach ($options['product']->getOptions() as $i => $option) {
+    {   
+        $product = $options['variant']->getProduct();
+        
+        if (null === $product) {
+            return;
+        }
+        
+        foreach ($product->getOptions() as $i => $option) {
+            $option = $option->getOption();
+            
             $builder->add($i, 'ir_product_option_value_choice', array(
-                'option' => $option->getOption(),
+                'option' => $option,
                 'label' => $option->getName().' :',
+                'data' => $options['variant']->getOption($option),
             ));
         }
     }
@@ -42,10 +51,10 @@ class ProductOptionsType extends AbstractType
     {
         $resolver
             ->setRequired(array(
-                'product'
+                'variant'
             ))
             ->addAllowedTypes(array(
-                'product' => 'IR\Bundle\ProductBundle\Model\ProductInterface'
+                'variant' => 'IR\Bundle\ProductBundle\Model\VariantInterface'
             ))
         ; 
     }
@@ -55,6 +64,6 @@ class ProductOptionsType extends AbstractType
      */
     public function getName()
     {
-        return 'ir_product_product_options';
+        return 'ir_product_variant_options';
     }
 }

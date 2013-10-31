@@ -198,7 +198,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotHasDefinition('ir_product.form.type.option_value_choice'); 
         $this->assertNotHasDefinition('ir_product.form.type.variable_product');
         $this->assertNotHasDefinition('ir_product.form.type.product_option');
-        $this->assertNotHasDefinition('ir_product.form.type.product_options');
+        $this->assertNotHasDefinition('ir_product.form.type.variant_options');
     }      
     
     public function testProductLoadFormClass()
@@ -214,7 +214,7 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertHasDefinition('ir_product.form.type.option_value_choice');
         $this->assertHasDefinition('ir_product.form.type.variable_product');
         $this->assertHasDefinition('ir_product.form.type.product_option');
-        $this->assertHasDefinition('ir_product.form.type.product_options');
+        $this->assertHasDefinition('ir_product.form.type.variant_options');
     }    
      
     public function testProductLoadFormNameWithDefaults()

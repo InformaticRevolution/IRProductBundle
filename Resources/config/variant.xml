@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="ir_product.form.type.variant.class">IR\Bundle\ProductBundle\Form\Type\VariantType</parameter>
         <parameter key="ir_product.form.type.master_variant.class">IR\Bundle\ProductBundle\Form\Type\MasterVariantType</parameter>
+        <parameter key="ir_product.form.type.variant_options.class">IR\Bundle\ProductBundle\Form\Type\VariantOptionsType</parameter>
     </parameters>
 
     <services>
@@ -29,7 +30,13 @@
         <service id="ir_product.form.type.master_variant" class="%ir_product.form.type.master_variant.class%">
             <argument>%ir_product.model.variant.class%</argument>
             <tag name="form.type" alias="ir_product_master_variant" />
-        </service>              
+        </service>  
+        
+        <!-- Variant Options Type -->
+        
+        <service id="ir_product.form.type.variant_options" class="%ir_product.form.type.variant_options.class%">
+            <tag name="form.type" alias="ir_product_variant_options" />
+        </service>                                  
     </services>
 
 </container>
