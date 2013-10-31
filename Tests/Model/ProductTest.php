@@ -42,14 +42,17 @@ class ProductTest extends \PHPUnit_Framework_TestCase
     {
         $product = $this->getProduct();
         $option = $this->getOption();
+        $nextPosition = $product->getOptions()->count();
         
         $this->assertNotContains($option, $product->getOptions());
         $this->assertNull($option->getProduct());
+        $this->assertNull($option->getPosition());
         
         $product->addOption($option);
         
         $this->assertContains($option, $product->getOptions());
         $this->assertSame($product, $option->getProduct());
+        $this->assertEquals($nextPosition, $option->getPosition());
     }
     
     public function testRemoveOption()
