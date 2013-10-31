@@ -296,6 +296,7 @@ In XML:
     </entity>
     
 </doctrine-mapping>
+```
 
 **b) Update the Product class**
 
