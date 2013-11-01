@@ -5,6 +5,9 @@ ir_product:
             min_length: Le nom doit comporter au moins {{ limit }} caractères
             max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
             
+        options:
+            not_unique: La liste des options doit être unique
+            
         master_variant:
             not_null: Veuillez définir une variante principale
             

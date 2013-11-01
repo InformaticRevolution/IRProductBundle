@@ -18,6 +18,13 @@
                 <option name="groups">Product</option>
             </constraint>
         </property>       
+        
+        <property name="options">
+            <constraint name="IR\Bundle\ProductBundle\Validator\Constraints\UniqueProductOptionCollection">
+                <option name="message">ir_product.product.options.unique</option>
+                <option name="groups">Product</option>
+            </constraint>
+        </property>         
     </class>
     
     <class name="IR\Bundle\ProductBundle\Model\VariableProduct">
