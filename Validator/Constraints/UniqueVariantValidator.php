@@ -56,8 +56,8 @@ class UniqueVariantValidator extends ConstraintValidator
             return;
         }
         
-        $variants = $this->variantManager->findVariantsByProductWithOptions($value->getProduct());
-            
+        $variants = $this->variantManager->findVariantsByProductWithOptions($product);
+
         foreach ($variants as $variant) {
             if ($variant === $value) {
                 continue;
