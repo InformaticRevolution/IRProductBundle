@@ -59,30 +59,41 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
         $this->validator->validate($collection, new UniqueProductOptionCollection());
     }    
   
-    public function testValidCollection() 
+    /**
+     * @dataProvider getValidCollection
+     */      
+    public function testValidCollection($collection) 
     {        
-        $collection = new ArrayCollection(array(
-            $this->getProductOption(), 
-            $this->getProductOption(), 
-            $this->getProductOption()
-        ));
-        
         $this->context->expects($this->never())
             ->method('addViolation');        
         
         $this->validator->validate($collection, new UniqueProductOptionCollection());        
     }
     
-    public function testInvalidCollection() 
+    public function getValidCollection()
     {
-        $option = $this->getOption();
-        
-        $collection = new ArrayCollection(array(
-            $this->getProductOption(), 
-            $this->getProductOption($option), 
-            $this->getProductOption($option)
-        ));
-
+        return array(
+            array(
+                new ArrayCollection(array(
+                    $this->getProductOption(),
+                    $this->getProductOption(),
+                ))
+            ),
+            array(
+                new ArrayCollection(array(
+                    $this->getProductOption(),
+                    $this->getProductOption(),
+                    $this->getProductOption(),
+                ))
+            ),
+        );
+    }    
+    
+    /**
+     * @dataProvider getInvalidCollection
+     */        
+    public function testInvalidCollection($collection) 
+    {
         $this->context->expects($this->once())
             ->method('addViolation')
             ->with('myMessage');        
@@ -90,6 +101,27 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
         $this->validator->validate($collection, new UniqueProductOptionCollection(array('message' => 'myMessage')));        
     }    
 
+    public function getInvalidCollection()
+    {
+        $option = $this->getOption();
+        
+        return array(
+            array(
+                new ArrayCollection(array(
+                    $this->getProductOption($option),
+                    $this->getProductOption($option),
+                ))
+            ),
+            array(
+                new ArrayCollection(array(
+                    $this->getProductOption($option),
+                    $this->getProductOption(),
+                    $this->getProductOption($option),
+                ))
+            ),
+        );
+    }       
+    
     protected function getProductOption($option = null)
     {
         $productOption = $this->getMock('IR\Bundle\ProductBundle\Model\ProductOptionInterface');
