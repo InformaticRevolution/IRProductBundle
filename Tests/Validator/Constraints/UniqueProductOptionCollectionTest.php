@@ -12,7 +12,6 @@
 namespace IR\Bundle\ProductBundle\Tests\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use IR\Bundle\ProductBundle\Model\ProductOptionInterface;
 use IR\Bundle\ProductBundle\Validator\Constraints\UniqueProductOptionCollection;
 use IR\Bundle\ProductBundle\Validator\Constraints\UniqueProductOptionCollectionValidator;
 
@@ -44,15 +43,15 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
      */
-    public function testValidateThrowsExceptionUnlessCollectionGiven()
+    public function testExpectsCollectionCompatibleType()
     {
         $this->validator->validate(new \stdClass(), new UniqueProductOptionCollection());
     }
    
     /**
-     * @expectedException \Symfony\Component\Validator\Exception\InvalidArgumentException
+     * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
      */    
-    public function testValidateThrowsExceptionUnlessCollectionObjectOfTypeProductOption()
+    public function testExpectsCollectionOfProductOptionInterfaceCompatibleType()
     {
         $collection = new ArrayCollection();
         $collection->add(new \stdClass());
@@ -61,11 +60,12 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     }    
   
     public function testValidCollection() 
-    {
-        $productOption1 = $this->getProductOption('T-Shirt Size', 'Size');
-        $productOption2 = $this->getProductOption('T-Shirt Color', 'Color');
-        $productOption3 = $this->getProductOption('T-Shirt Color', 'Color');
-        $collection = new ArrayCollection(array($productOption1, $productOption2, $productOption3));
+    {        
+        $collection = new ArrayCollection(array(
+            $this->getProductOption(), 
+            $this->getProductOption(), 
+            $this->getProductOption()
+        ));
         
         $this->context->expects($this->never())
             ->method('addViolation');        
@@ -75,9 +75,13 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     
     public function testInvalidCollection() 
     {
-        $productOption1 = $this->getProductOption('T-Shirt Size', 'Size');
-        $productOption2 = $this->getProductOption('T-Shirt Color', 'Color');
-        $collection = new ArrayCollection(array($productOption1, $productOption2, $productOption1));
+        $option = $this->getOption();
+        
+        $collection = new ArrayCollection(array(
+            $this->getProductOption(), 
+            $this->getProductOption($option), 
+            $this->getProductOption($option)
+        ));
 
         $this->context->expects($this->once())
             ->method('addViolation')
@@ -85,22 +89,27 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
         
         $this->validator->validate($collection, new UniqueProductOptionCollection(array('message' => 'myMessage')));        
     }    
-    
-    /**
-     * @return ProductOptionInterface
-     */
-    protected function getProductOption($name, $publicName)
+
+    protected function getProductOption($option = null)
     {
-        $option = $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\Option');
-        $productOption = $this->getMockForAbstractClass('IR\Bundle\ProductBundle\Model\ProductOption');
+        $productOption = $this->getMock('IR\Bundle\ProductBundle\Model\ProductOptionInterface');
+     
+        if (null === $option) {
+            $option = $this->getOption();
+        }
         
-        $option->setName($name);
-        $option->setPublicName($publicName);
-        $productOption->setOption($option);
+        $productOption->expects($this->any())
+            ->method('getOption')
+            ->will($this->returnValue($option));
         
         return $productOption;
     }   
-    
+
+    protected function getOption()
+    {
+        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionInterface');
+    }
+
     protected function tearDown()
     {
         $this->context = null;

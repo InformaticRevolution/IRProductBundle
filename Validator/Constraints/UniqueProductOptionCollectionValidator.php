@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use Symfony\Component\Validator\Exception\InvalidArgumentException;
 use IR\Bundle\ProductBundle\Model\ProductOptionInterface;
 
 /**
@@ -38,7 +37,7 @@ class UniqueProductOptionCollectionValidator extends ConstraintValidator
         
         foreach ($value as $productOption) {    
             if (!$productOption instanceof ProductOptionInterface) {
-               throw new InvalidArgumentException('Each object in the collection must be of type "IR\Bundle\ProductBundle\Model\ProductOptionInterface"'); 
+               throw new UnexpectedTypeException($productOption, 'Doctrine\Common\Collections\Collection<IR\Bundle\ProductBundle\Model\ProductOptionInterface>'); 
             }
             
             foreach ($options as $option) {
