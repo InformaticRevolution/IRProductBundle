@@ -7,6 +7,7 @@ ir_product:
             
         options:
             not_unique: The list of options must be unique
+            not_null: Please select an option
             
         master_variant:
             not_null: Please define a master variant           

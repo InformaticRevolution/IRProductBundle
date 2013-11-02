@@ -24,7 +24,16 @@
                 <option name="message">ir_product.product.options.unique</option>
                 <option name="groups">Product</option>
             </constraint>
-        </property>         
+            
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="NotNull">
+                        <option name="message">ir_product.product.options.not_null</option>
+                        <option name="groups">Product</option>                        
+                    </constraint>
+                </option>
+            </constraint>            
+        </property>                          
     </class>
     
     <class name="IR\Bundle\ProductBundle\Model\VariableProduct">
