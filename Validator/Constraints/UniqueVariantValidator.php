@@ -62,8 +62,8 @@ class UniqueVariantValidator extends ConstraintValidator
             if ($variant === $value) {
                 continue;
             }
-            
-            if (!count(array_diff($variant->getOptions()->toArray(), $value->getOptions()->toArray()))) {
+
+            if (!count(array_udiff($variant->getOptions()->toArray(), $value->getOptions()->toArray(), 'static::compareOption'))) {
                 for ($i=0; $i < count($value->getOptions()); $i++) {
                    $this->context->addViolationAt('options['.$i.']', $constraint->message); 
                 }
@@ -71,5 +71,10 @@ class UniqueVariantValidator extends ConstraintValidator
                 return;
             }
         }
+    }
+    
+    private function compareOption($o1, $o2)
+    {
+        return $o1 !== $o2; 
     }
 }
