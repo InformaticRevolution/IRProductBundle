@@ -12,15 +12,15 @@
 namespace IR\Bundle\ProductBundle\Tests\Validator\Constraints;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use IR\Bundle\ProductBundle\Validator\Constraints\UniqueProductOptionCollection;
-use IR\Bundle\ProductBundle\Validator\Constraints\UniqueProductOptionCollectionValidator;
+use IR\Bundle\ProductBundle\Validator\Constraints\UniqueVariant;
+use IR\Bundle\ProductBundle\Validator\Constraints\UniqueVariantValidator;
 
 /**
- * Unique Product Option Collection Test.
+ * Unique Variant Test.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
-class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
+class UniqueVariantTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
@@ -28,7 +28,12 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     protected $context;
     
     /**
-     * @var UniqueProductOptionCollectionValidator 
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $variantManager;    
+    
+    /**
+     * @var UniqueVariantValidator 
      */
     protected $validator;
     
@@ -36,80 +41,119 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContext', array(), array(), '', false);
-        $this->validator = new UniqueProductOptionCollectionValidator();
+        $this->variantManager = $this->getMock('IR\Bundle\ProductBundle\Manager\VariantManagerInterface');
+        
+        $this->validator = new UniqueVariantValidator($this->variantManager);
         $this->validator->initialize($this->context);
     }
     
     /**
      * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
      */
-    public function testExpectsCollectionCompatibleType()
+    public function testExpectsVariantInterfaceCompatibleType()
     {
-        $this->validator->validate(new \stdClass(), new UniqueProductOptionCollection());
+        $this->validator->validate(new \stdClass(), new UniqueVariant());
     }
    
     /**
-     * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
+     * @dataProvider getValidVariants
      */    
-    public function testExpectsCollectionOfProductOptionInterfaceCompatibleType()
-    {
-        $collection = new ArrayCollection();
-        $collection->add(new \stdClass());
-        
-        $this->validator->validate($collection, new UniqueProductOptionCollection());
-    }    
-  
-    public function testValidCollection() 
-    {        
-        $collection = new ArrayCollection(array(
-            $this->getProductOption(), 
-            $this->getProductOption(), 
-            $this->getProductOption()
-        ));
+    public function testValidVariant($variant, $variants)
+    {     
+        $this->variantManager->expects($this->any())
+            ->method('findVariantsByProductWithOptions')
+            ->will($this->returnValue($variants));
         
         $this->context->expects($this->never())
-            ->method('addViolation');        
+            ->method('addViolationAt');        
         
-        $this->validator->validate($collection, new UniqueProductOptionCollection());        
+        $this->validator->validate($variant, new UniqueVariant());        
     }
     
-    public function testInvalidCollection() 
+    public function getValidVariants()
     {
-        $option = $this->getOption();
-        
-        $collection = new ArrayCollection(array(
-            $this->getProductOption(), 
-            $this->getProductOption($option), 
-            $this->getProductOption($option)
-        ));
-
-        $this->context->expects($this->once())
-            ->method('addViolation')
-            ->with('myMessage');        
-        
-        $this->validator->validate($collection, new UniqueProductOptionCollection(array('message' => 'myMessage')));        
+        return array(
+            array(
+                $this->getVariant(array($this->getOptionValue())),
+                array(
+                    $this->getVariant(array($this->getOptionValue())),
+                    $this->getVariant(array($this->getOptionValue())),
+                    $this->getVariant(array($this->getOptionValue())),
+                )
+            ),
+            array(
+                $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                array(
+                    $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                    $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                    $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                )
+            ),
+        );
     }    
-
-    protected function getProductOption($option = null)
+    
+    /**
+     * @dataProvider getInvalidVariants
+     */        
+    public function testInvalidVariant($variant, $variants)
     {
-        $productOption = $this->getMock('IR\Bundle\ProductBundle\Model\ProductOptionInterface');
-     
-        if (null === $option) {
-            $option = $this->getOption();
-        }
+        $this->variantManager->expects($this->any())
+            ->method('findVariantsByProductWithOptions')
+            ->will($this->returnValue($variants));    
         
-        $productOption->expects($this->any())
-            ->method('getOption')
-            ->will($this->returnValue($option));
+        $this->context->expects($this->atLeastOnce())
+            ->method('addViolationAt')
+            ->with($this->matchesRegularExpression('/^options\[\d\]$/'), $this->equalTo('myMessage'));        
         
-        return $productOption;
-    }   
-
-    protected function getOption()
-    {
-        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionInterface');
+        $this->validator->validate($variant, new UniqueVariant(array('message' => 'myMessage')));          
     }
+    
+    public function getInvalidVariants()
+    {
+        $optionValue1 = $this->getOptionValue();
+        $optionValue2 = $this->getOptionValue();
+        
+        return array(
+            array(
+                $this->getVariant(array($optionValue1)),
+                array(
+                    $this->getVariant(array($this->getOptionValue())),
+                    $this->getVariant(array($this->getOptionValue())),
+                    $this->getVariant(array($optionValue1)),
+                )
+            ),
+            array(
+                $this->getVariant(array($optionValue1, $optionValue2)),
+                array(
+                    $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                    $this->getVariant(array($optionValue1, $optionValue2)),
+                    $this->getVariant(array($this->getOptionValue(), $this->getOptionValue())),
+                )
+            ),
+        );
+    }      
+    
+    public function getVariant(array $options)
+    {
+        $variant = $this->getMock('IR\Bundle\ProductBundle\Model\VariantInterface');
+        $product = $this->getMock('IR\Bundle\ProductBundle\Model\VariableProductInterface');
 
+        $variant->expects($this->any())
+            ->method('getProduct')
+            ->will($this->returnValue($product));
+        
+        $variant->expects($this->any())
+            ->method('getOptions')
+            ->will($this->returnValue(new ArrayCollection($options)));
+        
+        return $variant;
+    }
+    
+    public function getOptionValue()
+    {
+        return $this->getMock('IR\Bundle\ProductBundle\Model\OptionValueInterface');
+    }
+            
     protected function tearDown()
     {
         $this->context = null;
