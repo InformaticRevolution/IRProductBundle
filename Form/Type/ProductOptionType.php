@@ -44,7 +44,8 @@ class ProductOptionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('option', 'ir_product_option_choice', array(
-            'property' => 'name',           
+            'property' => 'name', 
+            'empty_value' => '',
         ));             
     }
    
