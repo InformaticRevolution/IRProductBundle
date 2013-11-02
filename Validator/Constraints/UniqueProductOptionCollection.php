@@ -21,14 +21,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class UniqueProductOptionCollection extends Constraint
 {
-    public $message = 'The collection of options must be unique';
-
-    
-    /**
-     * {@inheritDoc}
-     */
-    public function getTargets()
-    {
-        return static::PROPERTY_CONSTRAINT;
-    }    
+    public $message = 'The collection of options must be unique';  
 }

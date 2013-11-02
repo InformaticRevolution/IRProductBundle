@@ -41,12 +41,6 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
         $this->validator->initialize($this->context);
     }
     
-    protected function tearDown()
-    {
-        $this->context = null;
-        $this->validator = null;
-    }    
-    
     /**
      * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
      */
@@ -56,7 +50,7 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
     }
    
     /**
-     * @expectedException \Symfony\Component\Validator\Exception\ValidatorException
+     * @expectedException \Symfony\Component\Validator\Exception\InvalidArgumentException
      */    
     public function testValidateThrowsExceptionUnlessCollectionObjectOfTypeProductOption()
     {
@@ -106,4 +100,10 @@ class UniqueProductOptionCollectionTest extends \PHPUnit_Framework_TestCase
         
         return $productOption;
     }   
+    
+    protected function tearDown()
+    {
+        $this->context = null;
+        $this->validator = null;
+    }        
 }

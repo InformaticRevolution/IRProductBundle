@@ -38,7 +38,7 @@ class WebTestCase extends BaseWebTestCase
         $this->client = static::createClient();
         $this->importDatabaseSchema();
     }     
-    
+        
     /**
      * Creates a fresh database.
      */
@@ -102,11 +102,11 @@ class WebTestCase extends BaseWebTestCase
     protected function assertCurrentUri($uri)
     {
         $this->assertStringEndsWith($uri, $this->client->getHistory()->current()->getUri());
-    }    
-    
+    }   
+
     protected function tearDown()
     {
         $fs = new Filesystem();
         $fs->remove(sys_get_temp_dir().'/IRProductBundle/');
-    }     
+    }
 }

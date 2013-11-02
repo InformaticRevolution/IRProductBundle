@@ -6,7 +6,7 @@ ir_product:
             max_length: The name cannot be longer than {{ limit }} characters
             
         options:
-            not_unique: The collection of options must be unique
+            not_unique: The list of options must be unique
             
         master_variant:
             not_null: Please define a master variant           
