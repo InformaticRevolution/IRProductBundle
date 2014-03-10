@@ -171,7 +171,7 @@ Add the following configuration to your `routing.yml` file:
 ``` yaml
 # app/config/routing.yml
 ir_product:
-    resource: "@IRProductBundle/Resources/config/routing/product.xml"
+    resource: "@IRProductBundle/Resources/config/routing/admin/product.xml"
     prefix: /admin/products
 ```
 

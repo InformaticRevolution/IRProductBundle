@@ -32,7 +32,7 @@ class OptionControllerTest extends WebTestCase
     
     public function testListAction()
     {
-        $crawler = $this->client->request('GET', '/options/');
+        $crawler = $this->client->request('GET', '/admin/options/');
 
         $this->assertResponseStatusCode(200);
         $this->assertCount(3, $crawler->filter('table tbody tr'));
@@ -40,7 +40,7 @@ class OptionControllerTest extends WebTestCase
     
     public function testNewActionGetMethod()
     {
-        $crawler = $this->client->request('GET', '/options/new');
+        $crawler = $this->client->request('GET', '/admin/options/new');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
@@ -48,7 +48,7 @@ class OptionControllerTest extends WebTestCase
     
     public function testNewActionPostMethod()
     {        
-        $this->client->request('POST', '/options/new', array(
+        $this->client->request('POST', '/admin/options/new', array(
             'ir_product_option_form' => array (
                 'name' => 'T-Shirt Color',
                 'publicName' => 'Color',
@@ -61,14 +61,14 @@ class OptionControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/options/');
+        $this->assertCurrentUri('/admin/options/');
         $this->assertCount(4, $crawler->filter('table tbody tr'));
         $this->assertRegExp('~T-Shirt Color~', $crawler->filter('table tbody')->text());        
     }    
     
     public function testEditActionGetMethod()
     {   
-        $crawler = $this->client->request('GET', '/options/1/edit');
+        $crawler = $this->client->request('GET', '/admin/options/1/edit');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
@@ -76,7 +76,7 @@ class OptionControllerTest extends WebTestCase
     
     public function testEditActionPostMethod()
     {        
-        $this->client->request('POST', '/options/1/edit', array(
+        $this->client->request('POST', '/admin/options/1/edit', array(
             'ir_product_option_form' => array (
                 'name' => 'T-Shirt Color',
                 'publicName' => 'Color',
@@ -89,30 +89,30 @@ class OptionControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/options/');
+        $this->assertCurrentUri('/admin/options/');
         $this->assertCount(3, $crawler->filter('table tbody tr'));
         $this->assertRegExp('~T-Shirt Color~', $crawler->filter('table tbody')->text());      
     } 
     
     public function testDeleteAction()
     {
-        $this->client->request('GET', '/options/1/delete');
+        $this->client->request('GET', '/admin/options/1/delete');
         
         $this->assertResponseStatusCode(302);
         
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/options/');
+        $this->assertCurrentUri('/admin/options/');
         $this->assertCount(2, $crawler->filter('table tbody tr'));
     }   
     
     public function testNotFoundHttpWhenOptionNotExist()
     {
-        $this->client->request('GET', '/options/4/edit');
+        $this->client->request('GET', '/admin/options/4/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/options/4/delete');
+        $this->client->request('GET', '/admin/options/4/delete');
         $this->assertResponseStatusCode(404);        
     }     
 }

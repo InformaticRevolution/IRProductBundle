@@ -222,9 +222,9 @@ class IRProductExtensionTest extends \PHPUnit_Framework_TestCase
         $this->createEmptyConfiguration();
 
         $this->assertParameter('ir_product_form', 'ir_product.form.name.product');
-        $this->assertNotHasDefinition('ir_product_form.form.name.option');
-        $this->assertNotHasDefinition('ir_product_form.form.name.variant');
-        $this->assertNotHasDefinition('ir_product_form.form.name.master_variant');
+        $this->assertNotHasDefinition('ir_product.form.name.option');
+        $this->assertNotHasDefinition('ir_product.form.name.variant');
+        $this->assertNotHasDefinition('ir_product.form.name.master_variant');
     }    
     
     public function testProductLoadFormName()

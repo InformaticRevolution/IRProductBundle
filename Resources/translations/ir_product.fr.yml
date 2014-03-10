@@ -1,78 +1,80 @@
-# Product
-product:   
-    name: Nom
-    created_at: Date de création
-    updated_at: Date de mise à jour
-  
-    list:
-        title: Produits
-        no_results: Aucun produit pour le moment. 
-    show:
-        title: Produit
-        general_info: Informations générales        
-    new:
-        title: Ajouter un produit
-        save: Enregistrer
-        cancel: Annuler
-    edit:
-        title: Modifier un produit
-        save: Enregistrer
-        cancel: Annuler 
-    action: 
-        new: Ajouter un produit 
-        edit: Modifier
-        delete: Supprimer        
-    flash:
-        created: Le produit a été créé
-        updated: Le produit a été mis à jour
-        deleted: Le produit a été supprimé
-        
-# Option
-option:
-    name: Nom
-    public_name: Nom public  
-  
-    list:
-        title: Options
-        no_results: Aucune option pour le moment.   
-    new:
-        title: Ajouter une option
-        save: Enregistrer
-        cancel: Annuler
-    edit:
-        title: Modifier l'option
-        save: Enregistrer
-        cancel: Annuler
-    action:
-        new: Ajouter une option
-    flash:
-        created: L'option a été créée
-        updated: L'option a été mise à jour
-        deleted: L'option a été supprimée         
-        
-# Variant
-variant:
-    created_at: Date de création
-    updated_at: Date de mise à jour
-    
-    show:
-        title: Variante
-        general_info: Informations générales     
-    new:
-        title: Ajouter une variante
-        save: Enregistrer
-        cancel: Annuler
-    edit:
-        title: Modifier une variante
-        save: Enregistrer
-        cancel: Annuler   
-    action:
-        edit: Modifier
-        delete: Supprimer      
-    flash:
-        created: La variante a été créée
-        updated: La variante a été mise à jour
-        deleted: La variante a été supprimée
+# Administration
+admin:
+    # Product
+    product:   
+        name: Nom
+        created_at: Date de création
+        updated_at: Date de mise à jour
+
+        list:
+            title: Produits
+            no_results: Aucun produit pour le moment. 
+        show:
+            title: Produit
+            general_info: Informations générales        
+        new:
+            title: Ajouter un produit
+            save: Enregistrer
+            cancel: Annuler
+        edit:
+            title: Modifier un produit
+            save: Enregistrer
+            cancel: Annuler 
+        action: 
+            new: Ajouter un produit 
+            edit: Modifier
+            delete: Supprimer        
+        flash:
+            created: Le produit a été créé
+            updated: Le produit a été mis à jour
+            deleted: Le produit a été supprimé
+
+    # Option
+    option:
+        name: Nom
+        public_name: Nom public  
+
+        list:
+            title: Options
+            no_results: Aucune option pour le moment.   
+        new:
+            title: Ajouter une option
+            save: Enregistrer
+            cancel: Annuler
+        edit:
+            title: Modifier l'option
+            save: Enregistrer
+            cancel: Annuler
+        action:
+            new: Ajouter une option
+        flash:
+            created: L'option a été créée
+            updated: L'option a été mise à jour
+            deleted: L'option a été supprimée         
+
+    # Variant
+    variant:
+        created_at: Date de création
+        updated_at: Date de mise à jour
+
+        show:
+            title: Variante
+            general_info: Informations générales     
+        new:
+            title: Ajouter une variante
+            save: Enregistrer
+            cancel: Annuler
+        edit:
+            title: Modifier une variante
+            save: Enregistrer
+            cancel: Annuler   
+        action:
+            edit: Modifier
+            delete: Supprimer      
+        flash:
+            created: La variante a été créée
+            updated: La variante a été mise à jour
+            deleted: La variante a été supprimée
 
 # Form field labels
 form:  

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace IR\Bundle\ProductBundle\Controller;
+namespace IR\Bundle\ProductBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,7 +23,7 @@ use IR\Bundle\ProductBundle\Model\ProductInterface;
 use IR\Bundle\ProductBundle\Model\VariantInterface;
 
 /**
- * Controller managing the variants.
+ * Admin controller managing the variants.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -36,7 +36,7 @@ class VariantController extends ContainerAware
     {
         $variant = $this->findVariantById($id);
 
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:show.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Variant:show.html.'.$this->getEngine(), array(
             'variant' => $variant
         ));
     }       
@@ -66,10 +66,10 @@ class VariantController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');                      
             $dispatcher->dispatch(IRProductEvents::VARIANT_CREATE_COMPLETED, new VariantEvent($variant));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_show', array('id' => $product->getId())));                      
         }
         
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Variant:new.html.'.$this->getEngine(), array(
             'product' => $product,
             'form' => $form->createView(),
         ));          
@@ -93,10 +93,10 @@ class VariantController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRProductEvents::VARIANT_EDIT_COMPLETED, new VariantEvent($variant));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $variant->getProduct()->getId())));                     
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_show', array('id' => $variant->getProduct()->getId())));                     
         }        
         
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Variant:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Variant:edit.html.'.$this->getEngine(), array(
             'variant' => $variant,
             'form' => $form->createView(),
         ));          
@@ -117,7 +117,7 @@ class VariantController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');          
         $dispatcher->dispatch(IRProductEvents::VARIANT_DELETE_COMPLETED, new VariantEvent($variant));
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));    
+        return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_show', array('id' => $product->getId())));    
     }           
     
     /**

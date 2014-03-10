@@ -32,14 +32,14 @@ class VariantControllerTest extends WebTestCase
     
     public function testShowAction()
     {
-        $this->client->request('GET', '/variants/1');
+        $this->client->request('GET', '/admin/variants/1');
         
         $this->assertResponseStatusCode(200);
     }        
     
     public function testNewActionGetMethod()
     {
-        $crawler = $this->client->request('GET', '/variants/new/1');
+        $crawler = $this->client->request('GET', '/admin/variants/new/1');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
@@ -47,7 +47,7 @@ class VariantControllerTest extends WebTestCase
     
     public function testNewActionPostMethod()
     {        
-        $this->client->request('POST', '/variants/new/1', array(
+        $this->client->request('POST', '/admin/variants/new/1', array(
             'ir_product_variant_form' => array (
                 'options' => array(
                     0 => 2,
@@ -61,12 +61,12 @@ class VariantControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/1');
+        $this->assertCurrentUri('/admin/products/1');
     }      
     
     public function testEditActionGetMethod()
     {   
-        $crawler = $this->client->request('GET', '/variants/1/edit');
+        $crawler = $this->client->request('GET', '/admin/variants/1/edit');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
@@ -74,7 +74,7 @@ class VariantControllerTest extends WebTestCase
     
     public function testEditActionPostMethod()
     {        
-        $this->client->request('POST', '/variants/1/edit', array(
+        $this->client->request('POST', '/admin/variants/1/edit', array(
             'ir_product_variant_form' => array (
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
             ) 
@@ -85,51 +85,51 @@ class VariantControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/1');
+        $this->assertCurrentUri('/admin/products/1');
     }    
     
     public function testDeleteAction()
     {
-        $this->client->request('GET', '/variants/1/delete');
+        $this->client->request('GET', '/admin/variants/1/delete');
         
         $this->assertResponseStatusCode(302);
         
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/1');
+        $this->assertCurrentUri('/admin/products/1');
     }  
     
     public function testAccessDeniedHttpException()
     {
-        $this->client->request('GET', '/variants/2');
+        $this->client->request('GET', '/admin/variants/2');
         $this->assertResponseStatusCode(403);  
         
-        $this->client->request('GET', '/variants/new/2');
+        $this->client->request('GET', '/admin/variants/new/2');
         $this->assertResponseStatusCode(403);  
         
-        $this->client->request('GET', '/variants/2/edit');
+        $this->client->request('GET', '/admin/variants/2/edit');
         $this->assertResponseStatusCode(403);  
         
-        $this->client->request('GET', '/variants/2/delete');
+        $this->client->request('GET', '/admin/variants/2/delete');
         $this->assertResponseStatusCode(403);          
     }
     
     public function testNotFoundHttpWhenProductNotExist()
     {
-        $this->client->request('GET', '/variants/new/3');
+        $this->client->request('GET', '/admin/variants/new/3');
         $this->assertResponseStatusCode(404);       
     }    
     
     public function testNotFoundHttpWhenVariantNotExist()
     {
-        $this->client->request('GET', '/variants/3');
+        $this->client->request('GET', '/admin/variants/3');
         $this->assertResponseStatusCode(404);        
         
-        $this->client->request('GET', '/variants/3/edit');
+        $this->client->request('GET', '/admin/variants/3/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/variants/3/delete');
+        $this->client->request('GET', '/admin/variants/3/delete');
         $this->assertResponseStatusCode(404);        
     }
 }

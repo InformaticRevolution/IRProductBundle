@@ -32,7 +32,7 @@ class ProductControllerTest extends WebTestCase
     
     public function testListAction()
     {
-        $crawler = $this->client->request('GET', '/products/');
+        $crawler = $this->client->request('GET', '/admin/products/');
 
         $this->assertResponseStatusCode(200);
         $this->assertCount(3, $crawler->filter('table tbody tr'));
@@ -40,14 +40,14 @@ class ProductControllerTest extends WebTestCase
     
     public function testShowAction()
     {
-        $this->client->request('GET', '/products/1');
+        $this->client->request('GET', '/admin/products/1');
         
         $this->assertResponseStatusCode(200);
     }    
     
     public function testNewActionGetMethod()
     {
-        $crawler = $this->client->request('GET', '/products/new');
+        $crawler = $this->client->request('GET', '/admin/products/new');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));
@@ -55,7 +55,7 @@ class ProductControllerTest extends WebTestCase
     
     public function testNewActionPostMethod()
     {        
-        $this->client->request('POST', '/products/new', array(
+        $this->client->request('POST', '/admin/products/new', array(
             'ir_product_form' => array (
                 'name' => 'Product 1',
                 'options' => array(
@@ -70,12 +70,12 @@ class ProductControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/4');
+        $this->assertCurrentUri('/admin/products/4');
     }      
     
     public function testEditActionGetMethod()
     {   
-        $crawler = $this->client->request('GET', '/products/1/edit');
+        $crawler = $this->client->request('GET', '/admin/products/1/edit');
         
         $this->assertResponseStatusCode(200);
         $this->assertCount(1, $crawler->filter('form'));        
@@ -83,7 +83,7 @@ class ProductControllerTest extends WebTestCase
     
     public function testEditActionPostMethod()
     {        
-        $this->client->request('POST', '/products/1/edit', array(
+        $this->client->request('POST', '/admin/products/1/edit', array(
             'ir_product_form' => array (
                 'name' => 'Product ',              
                 '_token' => $this->generateCsrfToken(static::FORM_INTENTION),
@@ -95,31 +95,31 @@ class ProductControllerTest extends WebTestCase
         $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/1');
+        $this->assertCurrentUri('/admin/products/1');
     }     
     
     public function testDeleteAction()
     {
-        $this->client->request('GET', '/products/1/delete');
+        $this->client->request('GET', '/admin/products/1/delete');
         
         $this->assertResponseStatusCode(302);
         
         $crawler = $this->client->followRedirect();
         
         $this->assertResponseStatusCode(200);
-        $this->assertCurrentUri('/products/');
+        $this->assertCurrentUri('/admin/products/');
         $this->assertCount(2, $crawler->filter('table tbody tr'));
     }  
     
     public function testNotFoundHttpWhenProductNotExist()
     {
-        $this->client->request('GET', '/products/4');
+        $this->client->request('GET', '/admin/products/4');
         $this->assertResponseStatusCode(404);        
         
-        $this->client->request('GET', '/products/4/edit');
+        $this->client->request('GET', '/admin/products/4/edit');
         $this->assertResponseStatusCode(404);
         
-        $this->client->request('GET', '/products/4/delete');
+        $this->client->request('GET', '/admin/products/4/delete');
         $this->assertResponseStatusCode(404);        
     }    
 }

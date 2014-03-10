@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace IR\Bundle\ProductBundle\Controller;
+namespace IR\Bundle\ProductBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +21,7 @@ use IR\Bundle\ProductBundle\Event\ProductEvent;
 use IR\Bundle\ProductBundle\Model\ProductInterface;
 
 /**
- * Controller managing the products.
+ * Admin controller managing the products.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -34,7 +34,7 @@ class ProductController extends ContainerAware
     {
         $products = $this->container->get('ir_product.manager.product')->findProducts();
 
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Product:list.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Product:list.html.'.$this->getEngine(), array(
             'products' => $products,
         ));
     }     
@@ -46,7 +46,7 @@ class ProductController extends ContainerAware
     {
         $product = $this->findProductById($id);
 
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Product:show.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Product:show.html.'.$this->getEngine(), array(
             'product' => $product
         ));
     }        
@@ -71,10 +71,10 @@ class ProductController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');                      
             $dispatcher->dispatch(IRProductEvents::PRODUCT_CREATE_COMPLETED, new ProductEvent($product));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_show', array('id' => $product->getId())));                      
         }
         
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Product:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Product:new.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
         ));          
     }
@@ -97,10 +97,10 @@ class ProductController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRProductEvents::PRODUCT_EDIT_COMPLETED, new ProductEvent($product));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_show', array('id' => $product->getId())));                     
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_show', array('id' => $product->getId())));                     
         }        
         
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Product:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Product:edit.html.'.$this->getEngine(), array(
             'product' => $product,
             'form' => $form->createView(),
         ));          
@@ -118,7 +118,7 @@ class ProductController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');          
         $dispatcher->dispatch(IRProductEvents::PRODUCT_DELETE_COMPLETED, new ProductEvent($product));
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_product_list'));   
+        return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_product_list'));   
     }       
     
     /**

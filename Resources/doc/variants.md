@@ -344,7 +344,7 @@ Add the following configuration to your `routing.yml` file:
 ``` yaml
 # app/config/routing.yml
 ir_product_variant:
-    resource: "@IRProductBundle/Resources/config/routing/variant.xml"
+    resource: "@IRProductBundle/Resources/config/routing/admin/variant.xml"
     prefix: /admin/products/variants
 
 ```

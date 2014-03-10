@@ -1,79 +1,81 @@
-# Product
-product: 
-    name: Name
-    created_at: Creation time
-    updated_at: Last update time
-    
-    list:
-        title: Products
-        no_products: You haven't added any products yet.
-    show:
-        title: Product details
-        general_info: General information        
-    new:
-        title: Add a product
-        save: Save
-        cancel: Cancel
-    edit:
-        title: Edit a product
-        save: Save
-        cancel: Cancel      
-    action: 
-        new: Add a product 
-        edit: Edit
-        delete: Delete            
-    flash:
-        created: The product has been successfully created
-        updated: The product has been successfully updated
-        deleted: The product has been successfully deleted
+# Administration
+admin:
+    # Product
+    product: 
+        name: Name
+        created_at: Creation time
+        updated_at: Last update time
 
-# Option
-option:
-    name: Name
-    public_name: Public name
-  
-    list:
-        title: Options
-        no_results: You haven't added any options yet    
-    new:
-        title: Add an option
-        save: Save
-        cancel: Cancel
-    edit:
-        title: Edit an option
-        save: Save
-        cancel: Cancel   
-    action:
-        new: Add an option        
-    flash:
-        created: The option has been successfully created
-        updated: The option has been successfully updated
-        deleted: The option has been successfully deleted 
+        list:
+            title: Products
+            no_results: You haven't added any products yet.
+        show:
+            title: Product details
+            general_info: General information        
+        new:
+            title: Add a product
+            save: Save
+            cancel: Cancel
+        edit:
+            title: Edit a product
+            save: Save
+            cancel: Cancel      
+        action: 
+            new: Add a product 
+            edit: Edit
+            delete: Delete            
+        flash:
+            created: The product has been successfully created
+            updated: The product has been successfully updated
+            deleted: The product has been successfully deleted
 
-# Variant
-variant:
-    created_at: Creation time
-    updated_at: Last update time
-    
-    show:
-        title: Variant details
-        general_info: General information   
-    new:
-        title: Add a variant
-        save: Save
-        cancel: Cancel
-    edit:
-        title: Modify a variant
-        save: Save
-        cancel: Cancel  
-    action:
-        edit: Edit
-        delete: Delete      
-    flash:
-        created: The variant has been successfully created
-        updated: The variant has been successfully updated
-        deleted: The variant has been successfully deleted
-        
+    # Option
+    option:
+        name: Name
+        public_name: Public name
+
+        list:
+            title: Options
+            no_results: You haven't added any options yet    
+        new:
+            title: Add an option
+            save: Save
+            cancel: Cancel
+        edit:
+            title: Edit an option
+            save: Save
+            cancel: Cancel   
+        action:
+            new: Add an option        
+        flash:
+            created: The option has been successfully created
+            updated: The option has been successfully updated
+            deleted: The option has been successfully deleted 
+
+    # Variant
+    variant:
+        created_at: Creation time
+        updated_at: Last update time
+
+        show:
+            title: Variant details
+            general_info: General information   
+        new:
+            title: Add a variant
+            save: Save
+            cancel: Cancel
+        edit:
+            title: Modify a variant
+            save: Save
+            cancel: Cancel  
+        action:
+            edit: Edit
+            delete: Delete      
+        flash:
+            created: The variant has been successfully created
+            updated: The variant has been successfully updated
+            deleted: The variant has been successfully deleted
+
 # Form field labels
 form:   
     product:

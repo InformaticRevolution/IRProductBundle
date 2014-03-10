@@ -466,7 +466,7 @@ Add the following configuration to your `routing.yml` file:
 ``` yaml
 # app/config/routing.yml
 ir_product_option:
-    resource: "@IRProductBundle/Resources/config/routing/option.xml"
+    resource: "@IRProductBundle/Resources/config/routing/admin/option.xml"
     prefix: /admin/products/options
 
 ```

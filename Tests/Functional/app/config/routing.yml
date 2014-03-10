@@ -1,11 +1,11 @@
 ir_product:
-    resource: "@IRProductBundle/Resources/config/routing/product.xml" 
-    prefix: /products
+    resource: "@IRProductBundle/Resources/config/routing/admin/product.xml" 
+    prefix: /admin/products
     
 ir_product_option:
-    resource: "@IRProductBundle/Resources/config/routing/option.xml" 
-    prefix: /options    
+    resource: "@IRProductBundle/Resources/config/routing/admin/option.xml" 
+    prefix: /admin/options    
     
 ir_product_variant:
-    resource: "@IRProductBundle/Resources/config/routing/variant.xml"
-    prefix: /variants    
+    resource: "@IRProductBundle/Resources/config/routing/admin/variant.xml"
+    prefix: /admin/variants    

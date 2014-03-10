@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace IR\Bundle\ProductBundle\Controller;
+namespace IR\Bundle\ProductBundle\Controller\Admin;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +21,7 @@ use IR\Bundle\ProductBundle\Event\OptionEvent;
 use IR\Bundle\ProductBundle\Model\OptionInterface;
 
 /**
- * Controller managing the options.
+ * Admin controller managing the options.
  *
  * @author Julien Kirsch <informatic.revolution@gmail.com>
  */
@@ -34,7 +34,7 @@ class OptionController extends ContainerAware
     {
         $options = $this->container->get('ir_product.manager.option')->findOptions();
         
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Option:list.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Option:list.html.'.$this->getEngine(), array(
             'options' => $options,
         ));
     }     
@@ -59,10 +59,10 @@ class OptionController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');            
             $dispatcher->dispatch(IRProductEvents::OPTION_CREATE_COMPLETED, new OptionEvent($option));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_option_list'));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_option_list'));                      
         }        
 
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Option:new.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Option:new.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
         ));          
     }
@@ -85,10 +85,10 @@ class OptionController extends ContainerAware
             $dispatcher = $this->container->get('event_dispatcher');               
             $dispatcher->dispatch(IRProductEvents::OPTION_EDIT_COMPLETED, new OptionEvent($option));
                 
-            return new RedirectResponse($this->container->get('router')->generate('ir_product_option_list'));                      
+            return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_option_list'));                      
         }          
 
-        return $this->container->get('templating')->renderResponse('IRProductBundle:Option:edit.html.'.$this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Option:edit.html.'.$this->getEngine(), array(
             'option' => $option,
             'form' => $form->createView(),
         ));          
@@ -106,7 +106,7 @@ class OptionController extends ContainerAware
         $dispatcher = $this->container->get('event_dispatcher');              
         $dispatcher->dispatch(IRProductEvents::OPTION_DELETE_COMPLETED, new OptionEvent($option));
         
-        return new RedirectResponse($this->container->get('router')->generate('ir_product_option_list'));
+        return new RedirectResponse($this->container->get('router')->generate('ir_product_admin_option_list'));
     }       
     
     /**

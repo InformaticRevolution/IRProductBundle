@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<routes xmlns="http://symfony.com/schema/routing"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/routing 
+                            http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="ir_product_admin_product_list" pattern="/" methods="GET">
+        <default key="_controller">IRProductBundle:Admin/Product:list</default>
+    </route>
+
+    <route id="ir_product_admin_product_new" pattern="/new">
+        <default key="_controller">IRProductBundle:Admin/Product:new</default>
+    </route>
+
+    <route id="ir_product_admin_product_show" pattern="/{id}" methods="GET">
+        <default key="_controller">IRProductBundle:Admin/Product:show</default>
+    </route>
+
+    <route id="ir_product_admin_product_edit" pattern="/{id}/edit">
+        <default key="_controller">IRProductBundle:Admin/Product:edit</default>
+    </route>   
+    
+    <route id="ir_product_admin_product_delete" pattern="/{id}/delete" methods="GET">
+        <default key="_controller">IRProductBundle:Admin/Product:delete</default>
+    </route>   
+        
+</routes>

@@ -25,15 +25,15 @@ use IR\Bundle\ProductBundle\IRProductEvents;
 class FlashListener implements EventSubscriberInterface
 {
     private static $successMessages = array(               
-        IRProductEvents::PRODUCT_CREATE_COMPLETED => 'product.flash.created',
-        IRProductEvents::PRODUCT_EDIT_COMPLETED => 'product.flash.updated',
-        IRProductEvents::PRODUCT_DELETE_COMPLETED => 'product.flash.deleted',
-        IRProductEvents::OPTION_CREATE_COMPLETED => 'option.flash.created',
-        IRProductEvents::OPTION_EDIT_COMPLETED => 'option.flash.updated',
-        IRProductEvents::OPTION_DELETE_COMPLETED => 'option.flash.deleted',          
-        IRProductEvents::VARIANT_CREATE_COMPLETED => 'variant.flash.created',
-        IRProductEvents::VARIANT_EDIT_COMPLETED => 'variant.flash.updated',      
-        IRProductEvents::VARIANT_DELETE_COMPLETED => 'variant.flash.deleted',          
+        IRProductEvents::PRODUCT_CREATE_COMPLETED => 'admin.product.flash.created',
+        IRProductEvents::PRODUCT_EDIT_COMPLETED => 'admin.product.flash.updated',
+        IRProductEvents::PRODUCT_DELETE_COMPLETED => 'admin.product.flash.deleted',
+        IRProductEvents::OPTION_CREATE_COMPLETED => 'admin.option.flash.created',
+        IRProductEvents::OPTION_EDIT_COMPLETED => 'admin.option.flash.updated',
+        IRProductEvents::OPTION_DELETE_COMPLETED => 'admin.option.flash.deleted',          
+        IRProductEvents::VARIANT_CREATE_COMPLETED => 'admin.variant.flash.created',
+        IRProductEvents::VARIANT_EDIT_COMPLETED => 'admin.variant.flash.updated',      
+        IRProductEvents::VARIANT_DELETE_COMPLETED => 'admin.variant.flash.deleted',          
     );
 
     /**
