@@ -187,11 +187,8 @@ class Product extends BaseProduct
     protected $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Option")
-     * @ORM\JoinTable(name="acme_product_products_options",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="option_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="ProductOption", mappedBy="product", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     protected $options;
 
@@ -250,18 +247,15 @@ Acme\ProductBundle\Entity\Product:
             type: integer
             generator:
                 strategy: AUTO
-    manyToMany:
-        options:
-            targetEntity: Option
-            joinTable:
-                name: acme_product_products_options
-                joinColumns:
-                    product_id:
-                        referencedColumnName: id
-                inverseJoinColumns:
-                    option_id:
-                        referencedColumnName: id
+
     oneToMany:
+        options:
+            targetEntity: ProductOption
+            mappedBy: product
+            cascade: [ all ]
+            orphanRemoval: true
+            orderBy: { position: ASC }
+
         variants:
             targetEntity: Variant
             mappedBy: product
@@ -284,16 +278,14 @@ In XML:
             <generator strategy="AUTO" />
         </id>
 
-        <many-to-many field="options" target-entity="Option">
-            <join-table name="acme_product_products_options">
-                <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="option_id" referenced-column-name="id" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
+        <one-to-many field="options" target-entity="ProductOption" mapped-by="product" orphan-removal="true">
+            <cascade>
+                <cascade-all />
+            </cascade>   
+            <order-by>
+                <order-by-field name="position" direction="ASC" />
+            </order-by>         
+        </one-to-many>
 
         <one-to-many field="variants" target-entity="Variant" mapped-by="product" orphan-removal="true">
             <cascade>
