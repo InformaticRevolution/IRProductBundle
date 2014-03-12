@@ -57,7 +57,6 @@ class VariableProductType extends ProductType
                 'translation_domain' => 'ir_product',                
             ))        
             ->addEventSubscriber(new BuildVariableProductFormListener());
-        ;
     } 
     
     /**

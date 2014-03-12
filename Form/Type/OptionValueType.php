@@ -47,8 +47,7 @@ class OptionValueType extends AbstractType
             ->add('value', null, array(                 
                 'label' => 'form.option_value.value',
                 'translation_domain' => 'ir_product',
-            ))         
-        ;
+            ));
     }
 
     /**

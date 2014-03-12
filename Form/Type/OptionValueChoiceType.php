@@ -41,8 +41,7 @@ class OptionValueChoiceType extends AbstractType
             ))
             ->addAllowedTypes(array(
                 'option' => 'IR\Bundle\ProductBundle\Model\OptionInterface'
-            ))
-        ; 
+            )); 
     }    
     
     /**

@@ -57,8 +57,7 @@ class Configuration implements ConfigurationInterface
             ->validate()
                 ->ifTrue(function($v){ return $v['use_variable_product_form_type'] && empty($v['variant']); })
                 ->thenInvalid('The child node "variant" must be configured when activating "use_variable_product_form_type".')
-            ->end()                        
-        ;            
+            ->end();            
 
         $this->addProductSection($rootNode);  
         $this->addOptionSection($rootNode);
@@ -89,8 +88,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }     
     
     private function addOptionSection(ArrayNodeDefinition $node)
@@ -117,8 +115,7 @@ class Configuration implements ConfigurationInterface
                         ->end()                
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }  
     
     private function addVariantSection(ArrayNodeDefinition $node)
@@ -155,8 +152,7 @@ class Configuration implements ConfigurationInterface
                         ->end()                   
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }
     
     private function addTemplateSection(ArrayNodeDefinition $node)
@@ -169,7 +165,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('engine')->defaultValue('twig')->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
     }      
 }

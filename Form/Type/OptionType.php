@@ -59,8 +59,7 @@ class OptionType extends AbstractType
                 'by_reference' => false,
                 'label' => 'form.option.values',
                 'translation_domain' => 'ir_product',
-            ))                
-        ;
+            ));
     }
 
     /**
