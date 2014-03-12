@@ -1,35 +1,35 @@
 ir_product:
     product:
         name:
-            not_blank: Veuillez entrer un nom
-            min_length: Le nom doit comporter au moins {{ limit }} caractères
-            max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
+            blank: Veuillez entrer un nom
+            short: Le nom doit comporter au moins {{ limit }} caractères
+            long: Le nom ne doit pas comporter plus de {{ limit }} caractères
             
         options:
             not_unique: La liste des options doit être unique
-            not_null: Veuillez sélectionner une option
+            unset: Veuillez sélectionner une option
             
         master_variant:
-            not_null: Veuillez définir une variante principale
+            unset: Veuillez définir une variante principale
             
     option:
         name:
-            not_blank: Veuillez entrer un nom
-            min_length: Le nom doit comporter au moins {{ limit }} caractères
-            max_length: Le nom ne doit pas comporter plus de {{ limit }} caractères
+            blank: Veuillez entrer un nom
+            short: Le nom doit comporter au moins {{ limit }} caractères
+            long: Le nom ne doit pas comporter plus de {{ limit }} caractères
             not_unique: Cette option existe déjà
             
         public_name:
-            not_blank: Veuillez entrer un nom public
-            min_length: Le nom public doit comporter au moins {{ limit }} caractères
-            max_length: Le nom public ne doit pas comporter plus de {{ limit }} caractères  
+            blank: Veuillez entrer un nom public
+            short: Le nom public doit comporter au moins {{ limit }} caractères
+            long: Le nom public ne doit pas comporter plus de {{ limit }} caractères  
             
     option_value:
         value:
-            not_blank: Veuillez entrer une valeur
-            max_length: La valeur ne doit pas comporter plus de {{ limit }} caractères        
+            blank: Veuillez entrer une valeur
+            long: La valeur ne doit pas comporter plus de {{ limit }} caractères        
             
     variant:
         options: 
             not_unique: Cette combinaison existe déjà  
-            not_null: Veuillez sélectionner une valeur
+            unset: Veuillez sélectionner une valeur

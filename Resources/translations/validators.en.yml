@@ -1,35 +1,35 @@
 ir_product:
     product:
         name:
-            not_blank: Please enter a name
-            min_length: The name must be at least {{ limit }} characters long
-            max_length: The name cannot be longer than {{ limit }} characters
+            blank: Please enter a name
+            short: The name must be at least {{ limit }} characters long
+            long: The name cannot be longer than {{ limit }} characters
             
         options:
             not_unique: The list of options must be unique
-            not_null: Please select an option
+            unset: Please select an option
             
         master_variant:
-            not_null: Please define a master variant           
+            unset: Please define a master variant           
             
     option:
         name:
-            not_blank: Please enter a name 
-            min_length: The name must be at least {{ limit }} characters long
-            max_length: The name cannot be longer than {{ limit }} characters
+            blank: Please enter a name 
+            short: The name must be at least {{ limit }} characters long
+            long: The name cannot be longer than {{ limit }} characters
             not_unique: This option already exists
             
         public_name:
-            not_blank: Please enter a public name 
-            min_length: The public name must be at least {{ limit }} characters long
-            max_length: The public name cannot be longer than {{ limit }} characters
+            blank: Please enter a public name 
+            short: The public name must be at least {{ limit }} characters long
+            long: The public name cannot be longer than {{ limit }} characters
             
     option_value:
         value:
-            not_blank: Please enter a value
-            max_length: The value cannot be longer than {{ limit }} characters  
+            blank: Please enter a value
+            long: The value cannot be longer than {{ limit }} characters  
             
     variant:
         options: 
             not_unique: This combination already exists
-            not_null: Please select a value
+            unset: Please select a value
