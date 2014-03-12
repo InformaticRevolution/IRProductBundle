@@ -31,7 +31,12 @@ abstract class OptionValue implements OptionValueInterface
     /**
      * @var string
      */
-    protected $value;      
+    protected $value;
+    
+    /**
+     * @var integer
+     */
+    protected $position;    
 
         
     /**
@@ -72,6 +77,22 @@ abstract class OptionValue implements OptionValueInterface
     public function setValue($value)
     {
         $this->value = $value;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
     
     /**

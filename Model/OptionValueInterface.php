@@ -52,5 +52,19 @@ interface OptionValueInterface
      * @param string $value
      */
     public function setValue($value);
+    
+    /**
+     * Returns the position.
+     *
+     * @return integer
+     */
+    public function getPosition();    
+    
+    /**
+     * Sets the position.
+     *
+     * @param string $position
+     */
+    public function setPosition($position);    
 }
 

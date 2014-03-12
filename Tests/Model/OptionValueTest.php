@@ -41,6 +41,7 @@ class OptionValueTest extends \PHPUnit_Framework_TestCase
         return array(
             array('option', $this->getOption(), null),
             array('value', 'Black', null),
+            array('position', 2, null),
         );
     } 
 
