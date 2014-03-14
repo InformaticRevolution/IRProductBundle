@@ -126,6 +126,16 @@ abstract class ProductOption implements ProductOptionInterface
     }
     
     /**
+     * Returns the option public name.
+     *
+     * @return string
+     */         
+    public function __toString()
+    {
+        return (string) $this->getPublicName();
+    }       
+    
+    /**
      * @throws \BadMethodCallException When option is not set
      */
     protected function assertOptionIsSet()
