@@ -49,13 +49,18 @@ interface ProductManagerInterface
      * @return ProductInterface|null
      */
     public function findProductBy(array $criteria);    
-    
+
     /**
-     * Returns a collection with all product instances.
-     *
+     * Finds products by given criteria.
+     * 
+     * @param array        $criteria
+     * @param array|null   $orderBy
+     * @param integer|null $limite
+     * @param integer|null $offset
+     * 
      * @return array
      */
-    public function findProducts();    
+    public function findProductsBy(array $criteria, array $orderBy = null, $limite = null, $offset = null);    
     
     /**
      * Returns the product's fully qualified class name.

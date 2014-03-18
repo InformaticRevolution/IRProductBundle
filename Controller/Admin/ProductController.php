@@ -32,7 +32,7 @@ class ProductController extends ContainerAware
      */
     public function listAction()
     {
-        $products = $this->container->get('ir_product.manager.product')->findProducts();
+        $products = $this->container->get('ir_product.manager.product')->findProductsBy(array(), array('createdAt' => 'desc'));
 
         return $this->container->get('templating')->renderResponse('IRProductBundle:Admin/Product:list.html.'.$this->getEngine(), array(
             'products' => $products,

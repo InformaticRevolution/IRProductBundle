@@ -104,16 +104,27 @@ class ProductManagerTest extends \PHPUnit_Framework_TestCase
 
         $this->productManager->findProductBy($criteria);
     }
-    
-    public function testFindProducts()
+
+    public function testFindArticlesBy()
     {
-        $this->repository->expects($this->once())
-            ->method('findAll')
-            ->will($this->returnValue(array())); 
+        $criteria = array("foo" => "bar");
+        $orderBy = array("foo" => "asc");
+        $limit = 3;
+        $offset = 0;
         
-        $this->productManager->findProducts();
-    }
-            
+        $this->repository->expects($this->once())
+            ->method('findBy')
+            ->with(
+                $this->equalTo($criteria), 
+                $this->equalTo($orderBy), 
+                $this->equalTo($limit), 
+                $this->equalTo($offset)
+            )
+            ->will($this->returnValue(array()));
+
+        $this->productManager->findProductsBy($criteria, $orderBy, $limit, $offset);
+    }     
+    
     public function testGetClass()
     {
         $this->assertEquals(static::PRODUCT_CLASS, $this->productManager->getClass());

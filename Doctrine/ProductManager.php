@@ -85,16 +85,16 @@ class ProductManager extends AbstractProductManager
     public function findProductBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
-    }    
+    }   
     
     /**
-     * {@inheritDoc}
-     */
-    public function findProducts()
+     * {@inheritdoc}
+     */    
+    public function findProductsBy(array $criteria, array $orderBy = null, $limite = null, $offset = null) 
     {
-        return $this->repository->findAll();
+        return $this->repository->findBy($criteria, $orderBy, $limite, $offset);
     }    
-    
+
     /**
      * {@inheritDoc}
      */    
