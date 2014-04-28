@@ -4,7 +4,7 @@
         xsi:schemaLocation="http://symfony.com/schema/routing 
                             http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <route id="ir_product_admin_product_list" pattern="/" methods="GET">
+    <route id="ir_product_admin_product_list" pattern="/">
         <default key="_controller">IRProductBundle:Admin/Product:list</default>
     </route>
 
